@@ -1,4 +1,4 @@
-# **Project Title:** My Cookie Jar
+# **My Cookie Jar**
 
 ### **Description:** 
 My Cookie Jar is a tool designed to help GS troops manage their cookie seasons. From scheduling cookie booths, tracking cookie intentory, placing order fufullment requests, and everything in between, this app helps troops organize it all in one central location.
