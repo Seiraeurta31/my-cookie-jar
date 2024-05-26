@@ -11,7 +11,7 @@
       "build": "next build",
       "start": "next start",
       "lint": "next lint",
-      "mongoDB": "npm run mongoDB_Docker_Refresh && npm run mongoDB_confirm",
+      "mongoDB": "npm run mongoDB_Docker_Refresh && npm run mongoDB_Confirm",
       "mongoDB_Docker_Refresh": "npm run mongoDB_Docker_Shutdown; npm run mongoDB_Docker_Start",
       "mongoDB_Docker_Confirm": "until docker exec MY-COOKIE-JAR mongosh --eval \"use $npm_package_config_DB_NAME;\"; do echo ...; sleep 1; done",
       "mongoDB_Docker_Start": "docker run --rm -d -p 27017:27017 --name=MY-COOKIE-JAR -e MONGO_INITDB_DATABASE=$npm_package_config_DB_NAME mongo:5",
