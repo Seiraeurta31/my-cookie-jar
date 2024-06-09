@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getIronSession } from 'iron-session';
+import { getIronSession } from "iron-session/edge";
 import sessionOptions from './config/session'
 
 export async function middleware(req) {
@@ -16,5 +16,5 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: ["/group/[id]"]
+  matcher: ["/dashboard"]
 }

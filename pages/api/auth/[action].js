@@ -1,7 +1,10 @@
 
+import { withIronSessionApiRoute } from "iron-session/next";
+import sessionOptions from "../../../config/session"
 import db from '../../../db'
 
-export default function handler(req, res) {
+export default withIronSessionApiRoute(
+  function handler(req, res) {
     if (req.method !== 'POST')
       return res.status(404).end()
     switch(req.query.action) {
@@ -14,8 +17,9 @@ export default function handler(req, res) {
       default:
         return res.status(404).end()
     }
-  }
-
+  },
+  sessionOptions
+)
 
 
 async function login(req, res) {
@@ -45,7 +49,7 @@ async function signup(req, res) {
     } = await db.user.create(username, password)
     req.session.user = otherFields
     await req.session.save()
-    res.redirect('/favorites')
+    res.redirect('/')
   } catch(err) {
     res.status(400).json({error: err.message})
   }
