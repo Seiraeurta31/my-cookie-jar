@@ -3,34 +3,31 @@
     "version": "0.1.0",
     "private": true,
     "config": {
-      "DB_NAME": "mongo_my_cookie_jar_db"
+        "DB_NAME": "mongo_my_cookie_jar_db"
     },
-  
     "scripts": {
-      "dev": "npm run mongoDB && next dev",
-      "build": "next build",
-      "start": "next start",
-      "lint": "next lint",
-      "mongoDB": "npm run mongoDB_Docker_Refresh && npm run mongoDB_Docker_Confirm",
-      "mongoDB_Docker_Refresh": "npm run mongoDB_Docker_Shutdown; npm run mongoDB_Docker_Start",
-      "mongoDB_Docker_Confirm": "until docker exec MY-COOKIE-JAR mongosh --eval \"use $npm_package_config_DB_NAME;\"; do echo ...; sleep 1; done",
-      "mongoDB_Docker_Start": "docker run --rm -d -p 27017:27017 --name=MY-COOKIE-JAR -e MONGO_INITDB_DATABASE=$npm_package_config_DB_NAME mongo:5",
-      "mongoDB_Docker_Shutdown": "docker container stop MY-COOKIE-JAR"
-    
+        "dev": "npm run mongoDB && next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "mongoDB": "npm run mongoDB_Docker_Refresh && npm run mongoDB_Docker_Confirm",
+        "mongoDB_Docker_Refresh": "npm run mongoDB_Docker_Shutdown; npm run mongoDB_Docker_Start",
+        "mongoDB_Docker_Confirm": "until docker exec MY-COOKIE-JAR mongosh --eval \"use $npm_package_config_DB_NAME;\"; do echo ...; sleep 1; done",
+        "mongoDB_Docker_Start": "docker run --rm -d -p 27017:27017 --name=MY-COOKIE-JAR -e MONGO_INITDB_DATABASE=$npm_package_config_DB_NAME mongo:5",
+        "mongoDB_Docker_Shutdown": "docker container stop MY-COOKIE-JAR"
     },
-    
     "dependencies": {
-      "bcrypt": "^5.1.1",
-      "iron-session": "^8.0.1",
-      "mongodb": "^6.6.2",
-      "mongoose": "^8.4.0",
-      "next": "14.2.3",
-      "react": "^18",
-      "react-dom": "^18"
+        "bcrypt": "^5.1.1",
+        "iron-session": "^8.0.1",
+        "mongodb": "^6.6.2",
+        "mongoose": "^8.4.0",
+        "next": "14.2.3",
+        "next-auth": "^4.24.7",
+        "react": "^18",
+        "react-dom": "^18"
     },
     "devDependencies": {
-      "eslint": "^8",
-      "eslint-config-next": "14.2.3"
+        "eslint": "^8",
+        "eslint-config-next": "14.2.3"
     }
-  }
-  
+}
