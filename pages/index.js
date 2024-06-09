@@ -9,7 +9,6 @@ import Footer from "../components/footer";
 
 export default function Home(props) {
   const router = useRouter();
-  const randomDrink = props.randomDrink //an array of drinks
 
   return (
     <div >
@@ -23,31 +22,31 @@ export default function Home(props) {
 
       <main >
         
-        <div className={styles.container}>
+        <div>
           {props.isLoggedIn ? (
             <>
-              <h1 className={styles.drinkSpecialTitle}>
+              <h1 >
                 You Are Logged In
               </h1>
                 
             </>
           ) : (
             <>
-              <div className={styles.welcomeTitleContainer}>
-                <h2 className={styles.subWelcomeTitle}>
-                  Welcome to
-                </h2>
-                <h2 className={styles.welcomeTitle}>
-                  Tipsy Spirits
+              <div>
+                <h1>
+                  Welcome to My Cookie Jar
+                </h1>
+                <h2>
+                  Log in or Sign up!
                 </h2>
               </div>
               
-              <div className={styles.welcomeButtonContainer}>
-                  <Link href="/login" className={styles.welcomeButton}>
+              <div>
+                  <Link href="/login">
                     <h2>Login </h2>
                   </Link>
 
-                  <Link href="/signup" className={styles.welcomeButton }>
+                  <Link href="/signup">
                     <h2>Sign Up </h2>
                   </Link>
               </div>

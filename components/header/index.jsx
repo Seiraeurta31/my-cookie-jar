@@ -7,10 +7,10 @@ import useLogout from "../../hooks/useLogout";
 export default function Header(props) {
   const logout = useLogout();
   return (
-    <header className={styles.headerContainer}>
+    <header>
       {props.isLoggedIn ? (
         <>
-          <div className={styles.navLinkContainer}>
+          <div >
             <Link href="/">Home</Link>
             <Link href="/favorites">Favorites</Link>
             <Link href="/search">Search</Link>
@@ -20,7 +20,7 @@ export default function Header(props) {
           
         </>
       ) : ( 
-          <div className={styles.headerImage}>
+          <div>
             
           </div>
       )}

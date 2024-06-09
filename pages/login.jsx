@@ -1,8 +1,7 @@
 import Head from "next/head";
-import styles from "../styles/login.module.css";
-
 import Header from "../components/header";
 import Footer from "../components/footer";
+import Link from "next/link";
 
 
 export default function Login(props) {
@@ -17,10 +16,13 @@ export default function Login(props) {
 
       <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} />
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
+      <main>
+        <h1>
           LogIn Page
         </h1>
+        <Link href="/signup">
+          <p>Signup instead?</p>
+        </Link>
 
     
       </main>

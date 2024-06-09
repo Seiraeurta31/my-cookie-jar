@@ -1,11 +1,9 @@
-import styles from "./style.module.css";
 
 export default function Footer(props) {
   return (
-    <footer className={styles.container}>
+    <footer>
         <p>
-          Developed by: Ashley Frank
-          
+          Developed by: Ashley Frank 
         </p>
       </footer>
   );
