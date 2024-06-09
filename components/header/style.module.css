@@ -1,0 +1,26 @@
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  height: 500px;
+}
+
+.headerImage {
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.navLinkContainer {
+  display: flex;
+  justify-content:space-around;
+  align-items: flex-start;
+  justify-content: space-around;
+  color: white;
+  padding: 20px;
+}
+
+
+
+
