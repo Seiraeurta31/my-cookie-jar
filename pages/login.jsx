@@ -2,9 +2,43 @@ import Head from "next/head";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function Login(props) {
+
+  const router = useRouter();
+  const [{ username, password }, setForm] = useState({
+    username: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+
+
+  function handleChange(e) {
+    setForm({ username, password, ...{ [e.target.name]: e.target.value } });
+  }
+
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      if (res.status === 200) return router.push("/");
+      const { error: message } = await res.json();
+      setError(message);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
   
   return (
     <div>
@@ -20,11 +54,38 @@ export default function Login(props) {
         <h1>
           LogIn Page
         </h1>
+
+        <form
+          onSubmit={handleLogin}
+        >
+          <label htmlFor="username">Username: </label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            onChange={handleChange}
+            value={username}
+          />
+          <label htmlFor="password">Password: </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            onChange={handleChange}
+            value={password}
+          />
+          <button>Login</button>
+          {error && <p>{error}</p>}
+        </form>
+
+
+
+
+
         <Link href="/signup">
           <p>Signup instead?</p>
         </Link>
 
-    
       </main>
 
       <Footer/>
