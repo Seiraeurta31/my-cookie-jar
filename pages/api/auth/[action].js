@@ -36,10 +36,15 @@ async function login(req, res) {
     res.status(400).json({error: err.message})
   }
 }
+
+
 async function logout(req, res) {
   await req.session.destroy()
   res.status(200).end()
 }
+
+
+
 async function signup(req, res) {
   try {
     const {username, password} = req.body

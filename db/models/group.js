@@ -1,11 +1,13 @@
 import { Schema, model, models } from 'mongoose'
+import boothSchema from './booth'
+import memberSchema from './member'
 
 
 const GroupSchema = new Schema({
-  groupId: String,
+  groupNumber: String,
   groupName: String,
-  groupMembers: [String],
-  groupBooths: [String]
+  groupMembers: [memberSchema],
+  groupBooths: [boothSchema]
 })
 
 

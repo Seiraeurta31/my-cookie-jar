@@ -10,14 +10,20 @@ import sessionOptions from "../config/session";
 
 export const getServerSideProps = withIronSessionSsr (
   async function getServerSideProps({ req }) {
-    const user = req.session.user;
+
     const props = {};
+
+    //Get user session information
+    const user = req.session.user;
     if (user) {
       props.user = req.session.user;
       props.isLoggedIn = true;
     } else {
       props.isLoggedIn = false;
     }
+
+    //TO DO: Get user groups
+
 
     return { props };
   },
