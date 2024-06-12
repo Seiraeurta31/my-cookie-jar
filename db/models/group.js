@@ -4,7 +4,7 @@ import memberSchema from './member'
 
 
 const GroupSchema = new Schema({
-  groupNumber: String,
+  groupCode: String,
   groupName: String,
   groupMembers: [memberSchema],
   groupBooths: [boothSchema]

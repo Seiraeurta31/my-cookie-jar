@@ -7,6 +7,8 @@ import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../config/session";
 
 
+//TO DO: Build user dashboard
+
 
 export const getServerSideProps = withIronSessionSsr (
   async function getServerSideProps({ req }) {

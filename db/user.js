@@ -35,16 +35,23 @@ export async function getUserGroups(userId) {
 }
 
 //POST: Add user to group 
-export async function joinGroup(userId, name, email, groupNumber) {
+export async function joinGroup(userId, gCode, gName) {
 
   await dbConnect()
+
+  //Find group in group database
+  const groupFound = await Group.find({"groupCode": gCode, "groupName": gName})
+  if (!groupFound) return null
+
+  //Identify group id
+  const groupId = groupFound.id
 
   //Add group id to the users list of groups
   const user = await User.findByIdAndUpdate(
     userId,
     { $addToSet: 
       { 
-        userGroups: groupNumber 
+        userGroups: groupCode 
       } 
     },   
     { new: true } 
@@ -53,7 +60,7 @@ export async function joinGroup(userId, name, email, groupNumber) {
 
   //Add user information to member list in group
   const group = await Group.findByIdAndUpdate(
-    groupNumber,
+    groupId,
     { $addToSet: 
       { groupMembers: 
         {
@@ -72,7 +79,7 @@ export async function joinGroup(userId, name, email, groupNumber) {
 }
 
 //DELETE: Remove user from group
-export async function leaveGroup(userId, id) {
+export async function leaveGroup(userId, groupId) {
 
   //Start up database connection
   await dbConnect()
@@ -91,7 +98,7 @@ export async function leaveGroup(userId, id) {
 
   //Add user information to member list in group
   const group = await Group.findByIdAndUpdate(
-    groupNumber,
+    groupId,
     { $pull: 
       { groupMembers: 
         {
@@ -104,4 +111,13 @@ export async function leaveGroup(userId, id) {
   if (!group) return null
 
   return true
+}
+
+
+
+
+//Format data
+export function convertIdToString({ _id, ...otherProperties }) {
+  const id = _id.toString()
+  return { ...otherProperties, id }
 }

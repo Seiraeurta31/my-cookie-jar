@@ -8,17 +8,17 @@ export default withIronSessionApiRoute(
     if(!req.session.user)
       return res.status(401).end()
 
-    const {_id: userId} = req.session.user
+    const user = req.session.user
 
 
-  //API for group database requests
+  //API Routes/SECRETARY to handle requests to DB  
     switch(req.method) {
       
-    //Create new group    
+      //Create new group
       case 'POST': 
         try{
-          const drinkToAdd = req.body
-          const addedDrink= await db.drink.addFavoriteDrink(userId, drinkToAdd)
+          const {groupCode, groupName} = req.body
+          const addedDrink= await db.group.createNewGroup(user, groupCode, groupName)
           if(addedDrink == null){
             req.session.destroy()  
             return res.status(401)
@@ -27,15 +27,17 @@ export default withIronSessionApiRoute(
         }catch(error){
           return res.status(400).json({error: error.message})
         }
+
+      //Delete group
       case 'DELETE': 
       try{
-        const drinkToRemove = req.body
-        const deletedDrink = await db.drink.removeFavoriteDrink(userId, drinkToRemove.id)
-        if(deletedDrink == null){
+        const groupToRemove = req.body
+        const deletedGroup = await db.drink.deleteGroup(groupToRemove.id)
+        if(deletedGroup == null){
           req.session.destroy()
           return res.status(401)
         }
-        return res.status(200).json(deletedDrink)
+        return res.status(200).json(deletedGroup)
       }catch(error){
         return res.status(400).json({error: error.message})
       }

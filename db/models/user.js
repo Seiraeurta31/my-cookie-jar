@@ -13,6 +13,8 @@ const UserSchema = new Schema({
     minLength: 5,
     maxLength: 200
   },
+  userName: String,
+  userEmail: String,
   userGroups: [String]
 })
 
