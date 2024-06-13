@@ -4,13 +4,13 @@ import dbConnect from './connection'
 import { getGroupById,  } from './group'
 
 //POST: Create new user
-export async function create(username, password) {
+export async function create(username, password, name, email) {
   if (!(username && password))
     throw new Error('Must include username and password')
 
   await dbConnect()
 
-  const user = await User.create({username, password})
+  const user = await User.create({username, password, name, email})
 
   if (!user)
     throw new Error('Error creating user')
@@ -28,7 +28,7 @@ export async function getUserGroups(userId) {
   if (!user) return null
 
   //Use user group list to GET group info by group Id's
-  const userGroups = user.userGroups.map(group => getGroupById(userId, group))
+  const userGroups = user.userGroupIDs.map(group => getGroupById(userId, group))
 
   return userGroups
 
@@ -39,7 +39,7 @@ export async function joinGroup(userId, gCode, gName) {
 
   await dbConnect()
 
-  //Find group in group database
+  //Find group in group database with group code and name from search
   const groupFound = await Group.find({"groupCode": gCode, "groupName": gName})
   if (!groupFound) return null
 
@@ -51,7 +51,7 @@ export async function joinGroup(userId, gCode, gName) {
     userId,
     { $addToSet: 
       { 
-        userGroups: groupCode 
+        "userGroupIDs": groupId 
       } 
     },   
     { new: true } 
@@ -65,8 +65,6 @@ export async function joinGroup(userId, gCode, gName) {
       { groupMembers: 
         {
           memberId: userId, 
-          memberName: name, 
-          memberEmail: email,
           memberRole: 'member'
         } 
       } 
@@ -89,7 +87,7 @@ export async function leaveGroup(userId, groupId) {
     userId,
     { $pull: 
       { 
-        userGroups: {_id: id} 
+        userGroupIDs: {_id: id} 
       } 
     },   
     { new: true } 
@@ -112,8 +110,6 @@ export async function leaveGroup(userId, groupId) {
 
   return true
 }
-
-
 
 
 //Format data

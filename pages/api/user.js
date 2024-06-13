@@ -28,13 +28,11 @@ export default withIronSessionApiRoute(
           return res.status(400).json({error: error.message})
         }
 
-      //TO DO: Update user role in group  
-
       //Leave a group
       case 'DELETE': 
       try{
         const groupToLeave = req.body
-        const memberRemoved = await db.drink.deleteGroup(userId, groupToLeave.id)
+        const memberRemoved = await db.group.deleteGroup(userId, groupToLeave.id)
         if(memberRemoved == null){
           req.session.destroy()
           return res.status(401)

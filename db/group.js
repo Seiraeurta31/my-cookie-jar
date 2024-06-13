@@ -22,8 +22,6 @@ export async function createNewGroup(user, groupCode, groupName) {
       { groupMembers: 
         {
           memberId: user._id, 
-          memberName: user.userName, 
-          memberEmail: user.userEmail,
           memberRole: 'admin'
         } 
       } 
@@ -66,6 +64,30 @@ export async function getGroupMembers(groupId) {
 
   return group.groupMembers.map(member => convertIdToString(member))
 }
+
+//TO DO: Update member role
+export async function updateMemberRole(memberId, newMemberRole, group) {
+
+  await dbConnect()
+
+  //Update sepecific member role in group using member id
+  const memberUpdated = await group.update(
+    {"groupMembers.memberId": memberId},
+    { $set: 
+      { 
+        "groupMembers.$.memberRole": newMemberRole
+      }
+    },   
+    { new: true } 
+  )
+  if (!memberUpdated) return null
+
+  return memberUpdated
+}
+
+
+
+
 
 //Delete a group
 export async function deleteGroup(groupId) {

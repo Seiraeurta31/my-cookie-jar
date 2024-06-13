@@ -13,9 +13,9 @@ const UserSchema = new Schema({
     minLength: 5,
     maxLength: 200
   },
-  userName: String,
-  userEmail: String,
-  userGroups: [String]
+  name: String,
+  email: String,
+  userGroupIDs: [String]
 })
 
 // hashes the password before it's stored in mongo

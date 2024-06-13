@@ -64,6 +64,24 @@ export default function Signup(props) {
         <form
           onSubmit={handleCreateAccount}
         >
+          <label htmlFor="fullName">First and Last Name: </label>
+          <input
+            type="text"
+            name="fullName"
+            id="fullName"
+            onChange={handleChange}
+            value={fullName}
+          />
+
+          <label htmlFor="email">Email: </label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            onChange={handleChange}
+            value={email}
+          />
+
           <label htmlFor="username">Username: </label>
           <input
             type="text"
@@ -72,6 +90,7 @@ export default function Signup(props) {
             onChange={handleChange}
             value={username}
           />
+
           <label htmlFor="password">Password: </label>
           <input
             type="password"
@@ -80,6 +99,7 @@ export default function Signup(props) {
             onChange={handleChange}
             value={password}
           />
+
           <label htmlFor="confirm-password">Confirm Password: </label>
           <input
             type="password"
@@ -88,6 +108,7 @@ export default function Signup(props) {
             onChange={handleChange}
             value={confirmPassword}
           />
+
           <button>Submit</button>
           {error && <p>{error}</p>}
         </form>
