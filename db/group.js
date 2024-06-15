@@ -32,6 +32,18 @@ export async function createNewGroup(user, groupCode, groupName) {
   )
   if (!member) return null
 
+
+  const userGroup = await User.findByIdAndUpdate(
+    user._id,
+    { $addToSet: 
+      { 
+        "userGroupIDs": groupId 
+      } 
+    },   
+    { new: true } 
+  )
+  if (!userGroup) return null
+
   return group.toJSON()
 }
 
