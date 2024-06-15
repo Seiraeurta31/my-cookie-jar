@@ -14,11 +14,11 @@ export default withIronSessionApiRoute(
   //API Routes/SECRETARY to handle requests to DB  
     switch(req.method) {
       
-      //Join a group
-      case 'POST': 
+      //Update member role
+      case 'PUT': 
         try{
-          const {groupCode, groupName} = req.body
-          const addedGroup= await db.group.joinGroup(userId, groupCode, groupName)
+          const {memberId, newMemberRole, groupId} = req.body
+          const addedGroup= await db.group.updateMemberRole(memberId, newMemberRole, groupId)
           if(addedGroup == null){
             req.session.destroy()  
             return res.status(401)

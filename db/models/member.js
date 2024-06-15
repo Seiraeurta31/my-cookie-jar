@@ -2,7 +2,7 @@ import { Schema, model, models } from 'mongoose'
 
 
 const memberSchema = new Schema({
-  memberId: String, //userId
+  userId: String, //userId
   memberRole: String
 })
 

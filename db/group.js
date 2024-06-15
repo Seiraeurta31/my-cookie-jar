@@ -21,7 +21,7 @@ export async function createNewGroup(user, groupCode, groupName) {
     { $addToSet: 
       { groupMembers: 
         {
-          memberId: user._id, 
+          userId: user._id, 
           memberRole: 'admin'
         } 
       } 
@@ -47,7 +47,7 @@ export async function getGroupById(userId, groupId) {
   if (!group) return null
 
   //Validate user is a member of the group
-  const memberFound = group.groupMembers.find(member => member.memberId === userId)
+  const memberFound = group.groupMembers.find(member => member.userId === userId)
   if (!memberFound) return null
 
   return convertIdToString(group)
@@ -66,13 +66,15 @@ export async function getGroupMembers(groupId) {
 }
 
 //TO DO: Update member role
-export async function updateMemberRole(memberId, newMemberRole, group) {
+export async function updateMemberRole(memberId, newMemberRole, groupId) {
 
   await dbConnect()
 
+  const group = await Group.findById(groupId).lean()
+
   //Update sepecific member role in group using member id
-  const memberUpdated = await group.update(
-    {"groupMembers.memberId": memberId},
+  const memberUpdated = await Group.updateOne(
+    {"groupMembers._id": memberId},
     { $set: 
       { 
         "groupMembers.$.memberRole": newMemberRole

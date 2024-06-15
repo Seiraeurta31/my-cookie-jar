@@ -9,12 +9,14 @@ import Link from "next/link";
 export default function Signup(props) {
   const router = useRouter();
   const [
-    { username, password, "confirm-password": confirmPassword },
+    { username, password, "confirm-password": confirmPassword, fullName, email},
     setForm,
   ] = useState({
     username: "",
     password: "",
     "confirm-password": "",
+    fullName,
+    email,
   });
   const [error, setError] = useState("");
 
@@ -23,6 +25,8 @@ export default function Signup(props) {
       username,
       password,
       "confirm-password": confirmPassword,
+      fullName,
+      email,
       ...{ [e.target.name]: e.target.value.trim() },
     });
   }
@@ -30,6 +34,8 @@ export default function Signup(props) {
     e.preventDefault();
     if (!username) return setError("Must include username");
     if (password !== confirmPassword) return setError("Passwords must Match");
+    if (!fullName) return setError("Must include your first and last name");
+    if (!email) return setError("Must include your email");
 
     try {
       const res = await fetch("/api/auth/signup", {

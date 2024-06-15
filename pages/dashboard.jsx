@@ -5,6 +5,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../config/session";
+import db from '../db'
 
 
 //TO DO: Build user dashboard
@@ -24,8 +25,12 @@ export const getServerSideProps = withIronSessionSsr (
       props.isLoggedIn = false;
     }
 
-    //TO DO: Get user groups
-
+    //TO DO: Get user groups 
+    const userGroups = await db.user.getUserGroups(user._id)
+    
+    if(userGroups?.length){
+      props.userGroups = userGroups
+    }
 
     return { props };
   },
