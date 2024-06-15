@@ -35,16 +35,21 @@ export async function getUserGroups(userId) {
 }
 
 //POST: Add user to group 
-export async function joinGroup(userId, gCode, gName) {
+export async function joinGroup(userId,  name, email, gCode, gName) {
 
   await dbConnect()
 
   //Find group in group database with group code and name from search
-  const groupFound = await Group.find({"groupCode": gCode, "groupName": gName})
+  let groupFound = await Group.find({"groupCode": gCode, "groupName": gName})
   if (!groupFound) return null
 
+
+  console.log("group:", groupFound[0].id)
+
   //Identify group id
-  const groupId = groupFound.id
+  const groupId = groupFound[0].id
+
+  console.log("groupId:", groupId)
 
   //Add group id to the users list of groups
   const user = await User.findByIdAndUpdate(
@@ -64,9 +69,11 @@ export async function joinGroup(userId, gCode, gName) {
     { $addToSet: 
       { groupMembers: 
         {
-          memberId: userId, 
-          memberRole: 'member'
-        } 
+          userId: userId, 
+          name: name,
+          email: email,
+          memberRole: 'admin'
+        }  
       } 
     },    
     { new: true } 

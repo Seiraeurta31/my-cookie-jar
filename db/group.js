@@ -22,6 +22,8 @@ export async function createNewGroup(user, groupCode, groupName) {
       { groupMembers: 
         {
           userId: user._id, 
+          name: user.name,
+          email: user.email,
           memberRole: 'admin'
         } 
       } 

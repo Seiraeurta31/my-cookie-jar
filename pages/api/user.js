@@ -9,6 +9,8 @@ export default withIronSessionApiRoute(
       return res.status(401).end()
 
     const {_id: userId} = req.session.user
+    const { name: name} = req.session.user
+    const { email: email} = req.session.user
 
 
   //API Routes/SECRETARY to handle requests to DB  
@@ -18,7 +20,7 @@ export default withIronSessionApiRoute(
       case 'POST': 
         try{
           const {groupCode, groupName} = req.body
-          const addedGroup= await db.group.joinGroup(userId, groupCode, groupName)
+          const addedGroup= await db.user.joinGroup(userId, name, email, groupCode, groupName)
           if(addedGroup == null){
             req.session.destroy()  
             return res.status(401)
