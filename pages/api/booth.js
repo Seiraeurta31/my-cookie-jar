@@ -14,8 +14,45 @@ export default withIronSessionApiRoute(
   //API Routes/SECRETARY to handle requests to DB  
     switch(req.method) {
       
+      //Create new booth
+      case 'POST': 
+        try{
+          const {
+            groupId, 
+            locationName, 
+            date, 
+            time,
+            amPm, 
+            shifts,
+            address,
+            city,
+            state,
+            notes
+        } = req.body
 
-      //TO DO: Update member role in group  
+          const newBooth= await db.group.createNewBooth( 
+            groupId, 
+            locationName, 
+            date, 
+            time,
+            amPm, 
+            shifts,
+            address,
+            city,
+            state,
+            notes)
+
+          if(newBooth == null){
+            req.session.destroy()  
+            return res.status(401).json({error: "Unable to create new booth"})
+          }
+          return res.status(200).json(newBooth)
+        }catch(error){
+          return res.status(400).json({error: error.message})
+        }
+
+
+      //TO DO: Update booth information  
       case 'PUT': 
       try{
         const {memberId, newMemberRole, group} = req.body
@@ -28,11 +65,6 @@ export default withIronSessionApiRoute(
       }catch(error){
         return res.status(400).json({error: error.message})
       }
-      
-      //TO DO: Create a new booth
-
-
-      
 
       //Delete group
       case 'DELETE': 

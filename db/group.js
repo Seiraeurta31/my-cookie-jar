@@ -2,55 +2,14 @@ import Group from './models/group'
 import User from './models/user'
 import dbConnect from './connection'
 
-//Create new group
-export async function createNewGroup(user, groupCode, groupName) {
-  if (!(groupCode && groupName))
-    throw new Error('Must include group ID and group name')
 
-  await dbConnect()
-
-  const group = await Group.create({ groupCode, groupName })
-
-  if (!group)
-    throw new Error('Error creating group')
-
-  const groupId = group._id //identify new group by id
-
-  const member = await Group.findByIdAndUpdate( //add first user to group member list/default to admin
-    groupId,
-    { $addToSet: 
-      { groupMembers: 
-        {
-          userId: user._id, 
-          name: user.name,
-          email: user.email,
-          memberRole: 'admin'
-        } 
-      } 
-    },    
-    { new: true } 
-  )
-  if (!member) return null
-
-
-  const userGroup = await User.findByIdAndUpdate(
-    user._id,
-    { $addToSet: 
-      { 
-        "userGroupIDs": groupId 
-      } 
-    },   
-    { new: true } 
-  )
-  if (!userGroup) return null
-
-  return group.toJSON()
-}
 
 //GET group details by id
 export async function getGroupById(userId, groupId) {
 
   await dbConnect()
+
+  console.log("get group by id activated")
 
   //Validate user exists
   const user = await User.findById(userId).lean()
@@ -60,11 +19,15 @@ export async function getGroupById(userId, groupId) {
   const group = await Group.findById(groupId)
   if (!group) return null
 
+
+   console.log("group found: ", group)
   //Validate user is a member of the group
   const memberFound = group.groupMembers.find(member => member.userId === userId)
   if (!memberFound) return null
 
-  return convertIdToString(group)
+  console.log("Member Found: ", memberFound)
+
+  return group.toJSON()
 }
 
 //TO DO: Get list of group members
@@ -100,9 +63,6 @@ export async function updateMemberRole(memberId, newMemberRole, groupId) {
 
   return memberUpdated
 }
-
-
-
 
 
 //Delete a group

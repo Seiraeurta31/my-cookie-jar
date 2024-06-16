@@ -1,7 +1,26 @@
 import User from './models/user'
 import Group from './models/group'
 import dbConnect from './connection'
-import { getGroupById,  } from './group'
+
+
+//GET: Get all user groups
+export async function getUserGroups(userId) {
+
+  await dbConnect()
+  
+  //Validate user exists
+  const user = await User.findById(userId).lean()
+  if (!user) return null
+
+  //Use user group list to GET group info by group Id's
+  const userGroupList = user.userGroupIDs
+
+  if (!userGroupList) return null
+
+  return userGroupList
+
+}
+
 
 //POST: Create new user
 export async function create(username, password, name, email) {
@@ -18,23 +37,58 @@ export async function create(username, password, name, email) {
   return user.toJSON()
 }
 
-//GET: Get all user groups
-export async function getUserGroups(userId) {
+
+//POST: Create new group
+export async function createNewGroup(user, groupCode, groupName) {
+  if (!(groupCode && groupName))
+    throw new Error('Must include group ID and group name')
 
   await dbConnect()
-  
-  //Validate user exists
-  const user = await User.findById(userId).lean()
-  if (!user) return null
 
-  //Use user group list to GET group info by group Id's
-  const userGroups = user.userGroupIDs.map(group => getGroupById(userId, group))
+  const group = await Group.create({ groupCode, groupName })
 
-  return userGroups
+  if (!group)
+    throw new Error('Error creating group')
 
+  const groupId = group._id //identify new group by id
+
+  const member = await Group.findByIdAndUpdate( //add first user to group member list/default to admin
+    groupId,
+    { $addToSet: 
+      { groupMembers: 
+        {
+          userId: user._id, 
+          // name: user.name,  //Access from user table by user id
+          // email: user.email,
+          memberRole: 'admin'
+        } 
+      } 
+    },    
+    { new: true } 
+  )
+  if (!member) return null
+
+  const userGroup = await User.findByIdAndUpdate(
+    user._id,
+    { $addToSet: 
+      { userGroups: 
+        {
+          groupId: groupId,
+          groupName: groupName
+        } 
+      } 
+    },   
+    { new: true } 
+  )
+  if (!userGroup) return null
+
+  return group.toJSON()
 }
 
-//POST: Add user to group 
+
+
+
+//POST: Join user to existing group 
 export async function joinGroup(userId,  name, email, gCode, gName) {
 
   await dbConnect()
@@ -48,8 +102,6 @@ export async function joinGroup(userId,  name, email, gCode, gName) {
 
   //Identify group id
   const groupId = groupFound[0].id
-
-  console.log("groupId:", groupId)
 
   //Add group id to the users list of groups
   const user = await User.findByIdAndUpdate(
@@ -70,8 +122,8 @@ export async function joinGroup(userId,  name, email, gCode, gName) {
       { groupMembers: 
         {
           userId: userId, 
-          name: name,
-          email: email,
+          // name: name,     //Access from user table by user id
+          // email: email,
           memberRole: 'admin'
         }  
       } 
@@ -82,6 +134,10 @@ export async function joinGroup(userId,  name, email, gCode, gName) {
 
   return group
 }
+
+
+
+
 
 //DELETE: Remove user from group
 export async function leaveGroup(userId, groupId) {

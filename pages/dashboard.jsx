@@ -14,7 +14,7 @@ import db from '../db'
 export const getServerSideProps = withIronSessionSsr (
   async function getServerSideProps({ req }) {
 
-    const props = {};
+    const props = {}
 
     //Get user session information
     const user = req.session.user;
@@ -25,13 +25,16 @@ export const getServerSideProps = withIronSessionSsr (
       props.isLoggedIn = false;
     }
 
+
     //TO DO: Get user groups 
     const userGroups = await db.user.getUserGroups(user._id)
-    
+
+      
     if(userGroups?.length){
       props.userGroups = userGroups
     }
 
+    console.log("user groups :", userGroups)
     return { props };
   },
   sessionOptions
@@ -59,6 +62,8 @@ export default function Dashboard(props) {
               <h1 >
                 DASHBOARD
               </h1>
+
+              
                 
           
         </div>

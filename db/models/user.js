@@ -1,4 +1,5 @@
 import { Schema, model, models } from 'mongoose'
+import userGroupSchema from './userGroup'
 import bcrypt from 'bcrypt'
 
 const UserSchema = new Schema({
@@ -15,7 +16,7 @@ const UserSchema = new Schema({
   },
   name: String,
   email: String,
-  userGroupIDs: [String]
+  userGroups: [userGroupSchema]
 })
 
 // hashes the password before it's stored in mongo

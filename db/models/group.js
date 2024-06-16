@@ -1,5 +1,5 @@
 import { Schema, model, models } from 'mongoose'
-import boothSchema from './booth'
+import BoothSchema from './booth'
 import memberSchema from './member'
 
 
@@ -7,7 +7,7 @@ const GroupSchema = new Schema({
   groupCode: String,
   groupName: String,
   groupMembers: [memberSchema],
-  groupBooths: [boothSchema]
+  groupBooths: [String]
 })
 
 

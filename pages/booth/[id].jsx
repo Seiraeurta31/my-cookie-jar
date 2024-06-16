@@ -26,21 +26,10 @@ export const getServerSideProps = withIronSessionSsr (
     }
 
     //TO DO: Get user groups 
-    const group = await db.group.getGroupById(user._id, params._id)
-
-    //Redirect user to landing page if user is no longer a member
-    if(!group){
-      return {
-        redirect: {
-          permanent: false,
-          destination: "/",
-        },
-        props:{},
-      };
-    }
+    const booth = await db.booth.getBoothById(user._id, params._id)
     
-    if(group !== null){
-        props.group = group
+    if(booth !== null){
+        props.booth = booth
       }
 
     return { props };
@@ -68,7 +57,7 @@ export default function Dashboard(props) {
         <div>
           
               <h1 >
-                GROUP PAGE
+                BOOTH PAGE
               </h1>
                 
           
