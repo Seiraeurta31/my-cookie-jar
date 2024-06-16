@@ -43,7 +43,7 @@ export default function Signup(props) {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, fullName, email }),
       });
       if (res.status === 200) return router.push("/dashboard");
       const { error: message } = await res.json();

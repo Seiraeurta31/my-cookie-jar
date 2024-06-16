@@ -7,17 +7,18 @@ import dbConnect from './connection'
 export async function getUserGroups(userId) {
 
   await dbConnect()
+
+  console.log("getusergroups triggered")
+  console.log("userId: ", userId)
   
   //Validate user exists
   const user = await User.findById(userId).lean()
   if (!user) return null
 
+  console.log("user: ", user)
+
   //Use user group list to GET group info by group Id's
-  const userGroupList = user.userGroupIDs
-
-  if (!userGroupList) return null
-
-  return userGroupList
+  return user.userGroups.map(drink=> convertIdToString(drink))
 
 }
 
