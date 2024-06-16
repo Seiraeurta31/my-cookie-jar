@@ -164,7 +164,6 @@ export async function addBoothAttendee(groupMemberId, boothId) {
 }
 
 
-
 //Remove member from booth attendee list
 export async function removeBoothAttendee(attendeeId, boothId) {
 
