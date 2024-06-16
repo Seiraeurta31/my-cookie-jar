@@ -126,8 +126,8 @@ export async function addBoothAttendee(groupMemberId, boothId) {
 
 
 //PUT: Update booth information
-export async function updateBoothDatails(
-  boothId,
+export async function updateBoothDetails(
+  bId,
   locationName, 
   date, 
   time,
@@ -140,12 +140,9 @@ export async function updateBoothDatails(
 
   await dbConnect()
 
-  // const groupApproved = validateGroupAccess (memberId, groupId)
-  // if (!groupApproved ) return null
-
   //Update booth details by id
-  const boothUpdated = await Booth.updateOne(
-    {boothId},
+  const boothUpdated = await Booth.findByIdAndUpdate(
+    bId,
     { $set: 
       { 
         "locationName": locationName, 

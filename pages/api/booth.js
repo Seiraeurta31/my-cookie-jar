@@ -68,7 +68,7 @@ export default withIronSessionApiRoute(
             notes
           } = req.body
 
-          const newBooth= await db.group.updateBoothDatails( 
+          const newBooth= await db.booth.updateBoothDetails( 
             boothId,
             locationName, 
             date, 
