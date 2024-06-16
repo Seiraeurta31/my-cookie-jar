@@ -9,8 +9,6 @@ export default withIronSessionApiRoute(
       return res.status(401).end()
 
     const user = req.session.user
-
-    
   
     switch(req.method) {
       
@@ -30,7 +28,7 @@ export default withIronSessionApiRoute(
             notes
           } = req.body
 
-          const newBooth= await db.group.createNewBooth( 
+          const newBooth = await db.booth.createNewBooth( 
             groupId, 
             locationName, 
             date, 
@@ -46,6 +44,8 @@ export default withIronSessionApiRoute(
             req.session.destroy()  
             return res.status(401).json({error: "Unable to create new booth"})
           }
+
+          
           return res.status(200).json(newBooth)
         }catch(error){
           return res.status(400).json({error: error.message})

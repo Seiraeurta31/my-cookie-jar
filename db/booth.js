@@ -4,51 +4,64 @@ import dbConnect from './connection'
 
 //Create new booth
 export async function createNewBooth(
-    groupId, 
-    locationName, 
-    date, 
-    time,
-    amPm, 
-    shifts,
-    address,
-    city,
-    state,
-    notes) {
+  gId, 
+  locationName, 
+  date, 
+  time,
+  amPm, 
+  shifts,
+  address,
+  city,
+  state,
+  notes) {
 
-    if (!(
-        groupId &&
-        locationName && 
-        date && 
-        time &&
-        amPm && 
-        shifts &&
-        address &&
-        city &&
-        state))
-        throw new Error('Must include all * fields')
 
-    await dbConnect()
+  if (!(
+      locationName && 
+      date && 
+      time &&
+      amPm && 
+      shifts &&
+      address &&
+      city &&
+      state))
+      throw new Error('Must include all * fields')
 
-    const newBooth = await Booth.create({ 
-        groupId, 
-        locationName, 
-        date, 
-        time,
-        amPm, 
-        shifts,
-        address,
-        city,
-        state,
-        notes })
+  await dbConnect()
 
-    if (!newBooth)
-    throw new Error('Error creating booth')
+  const newBooth = await Booth.create({ 
+      gId, 
+      locationName, 
+      date, 
+      time,
+      amPm, 
+      shifts,
+      address,
+      city,
+      state,
+      notes })
+
+  if (!newBooth)
+  throw new Error('Error creating booth')
 
 
     //TO DO: Add booth Id to group booth list
+    const userGroup = await Group.findByIdAndUpdate(
+      gId,
+      { $addToSet: 
+        { groupBooths: 
+          {
+            groupId: gId
+          } 
+        } 
+      },   
+      { new: true } 
+    )
+    if (!userGroup) return null
+  
 
 
-    return newBooth.toJSON()
+  return newBooth.toJSON()
 }
 
 
