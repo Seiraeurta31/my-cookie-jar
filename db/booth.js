@@ -15,17 +15,17 @@ export async function createNewBooth(
   state,
   notes) {
 
-
   if (!(
-      locationName && 
-      date && 
-      time &&
-      amPm && 
-      shifts &&
-      address &&
-      city &&
-      state))
-      throw new Error('Must include all * fields')
+    gId,
+    locationName && 
+    date && 
+    time &&
+    amPm && 
+    shifts &&
+    address &&
+    city &&
+    state))
+    throw new Error('Must include all * fields')
 
   await dbConnect()
 
@@ -43,7 +43,6 @@ export async function createNewBooth(
 
   if (!newBooth)
   throw new Error('Error creating booth')
-
 
     //TO DO: Add booth Id to group booth list
     const userGroup = await Group.findByIdAndUpdate(
@@ -65,6 +64,10 @@ export async function createNewBooth(
 }
 
 
+
+
+
+
 //GET: Get booth details by id
 export async function getBoothById(boothId) {
 
@@ -82,7 +85,6 @@ export async function getBoothById(boothId) {
 }
 
 
-
 //GET: Get list of booth attendees
 export async function getBoothAttendees(boothId) {
 
@@ -97,31 +99,6 @@ export async function getBoothAttendees(boothId) {
   if (!attendeeList) return null
 
   return attendeeList.map(attendee => convertIdToString(attendee))
-}
-
-
-//Add member to booth attendee list
-export async function addBoothAttendee(groupMemberId, boothId) {
-
-  await dbConnect()
-
-  //If user exists, add drink to user Favorites
-  const user = await Booth.findByIdAndUpdate(
-    boothId,
-    { $addToSet: 
-      { 
-        attendingMembers: groupMemberId 
-      } 
-    },  
-    { new: true } 
-  )
-  //If user was not found, return null
-  if (!user) return null
-
-  //If user exists, confirm new drink was added by searching for drink in favorites by id and returning new drink
-  const addedDrink = user.favoriteDrinks.find(fav => fav.cocktailDbId == drink.cocktailDbId) 
-
-  return convertDrinkIdToString(addedDrink)
 }
 
 
@@ -161,6 +138,29 @@ export async function updateBoothDetails(
   if (!boothUpdated) return null
 
   return boothUpdated
+}
+
+
+
+//Add member to booth attendee list
+export async function addBoothAttendee(groupMemberId, boothId) {
+
+  await dbConnect()
+
+  console.log("add booth member triggered")
+
+  console.log("gorupMemberID: ", groupMemberId)
+  console.log("boothId: ", boothId)
+  //If user exists, add drink to user Favorites
+  const attendee = await Booth.findByIdAndUpdate(
+    boothId,
+    { $addToSet: { attendingMembers: {memberId: groupMemberId}} }, 
+    { new: true } 
+  )
+  //If user was not found, return null
+  if (!attendee) return null
+
+  return attendee
 }
 
 

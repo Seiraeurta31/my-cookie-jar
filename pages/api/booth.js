@@ -90,37 +90,6 @@ export default withIronSessionApiRoute(
         }
 
 
-      //Add booth attendee
-      case 'POST': 
-      try{
-        const { boothId, groupMemberId }= req.body
-        const addedAttendee= await db.drink.addBoothAttendee(boothId, groupMemberId)
-        if(addedAttendee == null){
-          req.session.destroy()  
-          return res.status(401)
-        }
-        return res.status(200).json(addedAttendee)
-      }catch(error){
-        return res.status(400).json({error: error.message})
-      }  
-
-      //Remove booth attendee
-      case 'DELETE': 
-        try{
-          const { boothId, attendeeId } = req.body
-          const deletedAttendee = await db.group.removeBoothAttendee(boothId, attendeeId)
-          if(deletedAttendee == null){
-            req.session.destroy()
-            return res.status(401)
-          }
-          return res.status(200).json(deletedAttendee)
-        }catch(error){
-          return res.status(400).json({error: error.message})
-        }
-
-
-
-
       //Delete booth
       case 'DELETE': 
         try{
