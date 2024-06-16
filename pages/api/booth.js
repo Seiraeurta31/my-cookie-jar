@@ -93,8 +93,8 @@ export default withIronSessionApiRoute(
       //Delete booth
       case 'DELETE': 
         try{
-          const boothToRemove = req.body
-          const deletedBooth = await db.group.boothGroup(boothToRemove.id)
+          const { boothId} = req.body
+          const deletedBooth = await db.booth.deleteBooth(boothId)
           if(deletedBooth == null){
             req.session.destroy()
             return res.status(401)

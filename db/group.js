@@ -121,29 +121,12 @@ export async function deleteGroup(groupId) {
   //Start up database connection
   await dbConnect()
 
-  console.log("groupId: ", groupId)
-
   //Find group by ID and remove it
   const group = await Group.deleteOne(
     {_id: groupId},
     { new: true }
   )
   if (!group) return null
-
-
-  //TO DO: Get all group members and remove group from the user table
-
-  // const user = await User.update(
-  //   "userGroups",
-  //   { $pull: 
-  //     { 
-  //       groupId: groupId
-  //     } 
-  //   },   
-  //   { new: true } 
-  // )
-  // if (!user) return null
-
 
   return true
 

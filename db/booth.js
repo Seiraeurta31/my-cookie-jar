@@ -4,7 +4,7 @@ import dbConnect from './connection'
 
 //Create new booth
 export async function createNewBooth(
-  gId, 
+  groupId, 
   locationName, 
   date, 
   time,
@@ -16,7 +16,7 @@ export async function createNewBooth(
   notes) {
 
   if (!(
-    gId,
+    groupId &&
     locationName && 
     date && 
     time &&
@@ -30,7 +30,7 @@ export async function createNewBooth(
   await dbConnect()
 
   const newBooth = await Booth.create({ 
-      gId, 
+      groupId, 
       locationName, 
       date, 
       time,
@@ -46,11 +46,11 @@ export async function createNewBooth(
 
     //TO DO: Add booth Id to group booth list
     const userGroup = await Group.findByIdAndUpdate(
-      gId,
+      groupId,
       { $addToSet: 
         { groupBooths: 
           {
-            groupId: gId
+            groupId: groupId
           } 
         } 
       },   
@@ -188,40 +188,18 @@ export async function removeBoothAttendee(attendeeId, boothId) {
 
 
 //Delete: Delete a booth
-export async function deleteBooth(groupId, boothId) {
+export async function deleteBooth(boothId) {
 
   //Start up database connection
   await dbConnect()
 
-  //If user exists, add drink to user Favorites
-  const removedBooth = await Group.findByIdAndUpdate(
-    boothId,
-    { $pull: 
-      { 
-        _id: boothId
-      } 
-    },
-    { new: true } 
+  //Remove booth 
+  const boothRemoved = await Booth.deleteOne(
+    {_id: boothId},
+    { new: true }
   )
-  //If user does not exists, return null, otherwise return true for successful deletion
-  if (!removedBooth) return null
 
-  //If user exists, add drink to user Favorites
-  const removedGroupBooth = await Group.findByIdAndUpdate(
-    groupId,
-    { $pull: 
-      { 
-        _id: boothId
-      } 
-    },
-    { new: true } 
-  )
-  //If user does not exists, return null, otherwise return true for successful deletion
-  if (!removedBooth) return null
-
-
-
-
+  if (!boothRemoved) return null
   
   return true
 }
