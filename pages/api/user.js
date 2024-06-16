@@ -16,27 +16,11 @@ export default withIronSessionApiRoute(
   //API Routes/SECRETARY to handle requests to DB  
     switch(req.method) {
 
-
-      //Create new group
+    //Join a group
       case 'POST': 
         try{
           const {groupCode, groupName} = req.body
-          const addedDrink= await db.group.createNewGroup(user, groupCode, groupName)
-          if(addedDrink == null){
-            req.session.destroy()  
-            return res.status(401)
-          }
-          return res.status(200).json(addedDrink)
-        }catch(error){
-          return res.status(400).json({error: error.message})
-        }
-
-      
-      //Join a group
-      case 'POST': 
-        try{
-          const {groupCode, groupName} = req.body
-          const addedGroup= await db.user.joinGroup(userId, name, email, groupCode, groupName)
+          const addedGroup= await db.user.joinGroup(userId, groupCode, groupName)
           if(addedGroup == null){
             req.session.destroy()  
             return res.status(401)
@@ -47,11 +31,11 @@ export default withIronSessionApiRoute(
         }
 
         
-      //Leave a group
+    //Leave a group
       case 'DELETE': 
       try{
-        const groupToLeave = req.body
-        const memberRemoved = await db.user.leaveGroup(userId, groupToLeave.id)
+        const {userId, groupId} = req.body
+        const memberRemoved = await db.user.leaveGroup(userId, groupId)
         if(memberRemoved == null){
           req.session.destroy()
           return res.status(401)
@@ -61,7 +45,7 @@ export default withIronSessionApiRoute(
         return res.status(400).json({error: error.message})
       }
 
-      // 
+    // 
       default: 
         return res.status(404).end()
     }

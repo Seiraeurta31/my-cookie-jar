@@ -15,8 +15,8 @@ export default function Signup(props) {
     username: "",
     password: "",
     "confirm-password": "",
-    fullName,
-    email,
+    fullName:"",
+    email: "",
   });
   const [error, setError] = useState("");
 

@@ -2,7 +2,7 @@ import Booth from './models/booth'
 import Group from './models/group'
 import dbConnect from './connection'
 
-//Create new group
+//Create new booth
 export async function createNewBooth(
     groupId, 
     locationName, 
@@ -41,17 +41,25 @@ export async function createNewBooth(
         state,
         notes })
 
-    if (!group)
-    throw new Error('Error creating group')
+    if (!newBooth)
+    throw new Error('Error creating booth')
+
+
+    //TO DO: Add booth Id to group booth list
+
 
     return newBooth.toJSON()
 }
 
 
-//GET group details by id
+//GET: Get booth details by id
 export async function getBoothById(boothId) {
 
   await dbConnect()
+
+  //Validate group contains member
+  // const groupApproved = validateGroupAccess (memberId, groupId)
+  // if (!groupApproved ) return null
 
   //Get booth details by booth id
   const booth = Booth.findById(boothId)
@@ -62,79 +70,151 @@ export async function getBoothById(boothId) {
 
 
 
-//GET list of booth attendees
-export async function getBoothAttendees(memberId, groupId, boothId) {
+//GET: Get list of booth attendees
+export async function getBoothAttendees(boothId) {
 
   await dbConnect()
 
   //Validate group contains member
-  const group = validateGroupAccess (memberId, groupId)
-  if (!group ) return null
+  // const groupApproved = validateGroupAccess (memberId, groupId)
+  // if (!groupApproved ) return null
 
 
   const attendeeList = Booth.attendingMembers.findById(boothId)
   if (!attendeeList) return null
 
-  const attendeeDetails = attendeeList.map()
-
-  return group.groupBooths.attendingMembers.map(attendee => convertIdToString(attendee))
+  return attendeeList.map(attendee => convertIdToString(attendee))
 }
 
 
-
-
-//TO DO: Update member role
-export async function updateMemberRole(memberId, newMemberRole, groupId) {
+//Add member to booth attendee list
+export async function addBoothAttendee(groupMemberId, boothId) {
 
   await dbConnect()
 
-  const group = await Group.findById(groupId).lean()
+  //If user exists, add drink to user Favorites
+  const user = await Booth.findByIdAndUpdate(
+    boothId,
+    { $addToSet: 
+      { 
+        attendingMembers: groupMemberId 
+      } 
+    },  
+    { new: true } 
+  )
+  //If user was not found, return null
+  if (!user) return null
 
-  //Update sepecific member role in group using member id
-  const memberUpdated = await Group.updateOne(
-    {"groupMembers._id": memberId},
+  //If user exists, confirm new drink was added by searching for drink in favorites by id and returning new drink
+  const addedDrink = user.favoriteDrinks.find(fav => fav.cocktailDbId == drink.cocktailDbId) 
+
+  return convertDrinkIdToString(addedDrink)
+}
+
+
+//PUT: Update booth information
+export async function updateBoothDatails(
+  boothId,
+  locationName, 
+  date, 
+  time,
+  amPm, 
+  shifts,
+  address,
+  city,
+  state,
+  notes) {
+
+  await dbConnect()
+
+  // const groupApproved = validateGroupAccess (memberId, groupId)
+  // if (!groupApproved ) return null
+
+  //Update booth details by id
+  const boothUpdated = await Booth.updateOne(
+    {boothId},
     { $set: 
       { 
-        "groupMembers.$.memberRole": newMemberRole
+        "locationName": locationName, 
+        "date": date, 
+        "time": time,
+        "amPm": amPm, 
+        "shifts": shifts,
+        "address": address,
+        "city": city,
+        "state": state,
+        "notes": notes
       }
     },   
     { new: true } 
   )
-  if (!memberUpdated) return null
+  if (!boothUpdated) return null
 
-  return memberUpdated
+  return boothUpdated
 }
 
 
-//Delete a group
-export async function deleteGroup(groupId) {
 
-  //Start up database connection
+//Remove member from booth attendee list
+export async function removeBoothAttendee(attendeeId, boothId) {
+
   await dbConnect()
- 
-  //If user exists, find drink in Favorites by ID and remove it
-  const user = await Group.findByIdAndUpdate(
-    groupId,
-    { $pull: { _id: groupId } },
-    { new: true }
+
+  //If user exists, add drink to user Favorites
+  const removedAttendee = await Booth.findByIdAndUpdate(
+    boothId,
+    { $pull: 
+      { 
+        attendingMembers: {_id: attendeeId } 
+      } 
+    },
+    { new: true } 
   )
   //If user does not exists, return null, otherwise return true for successful deletion
-  if (!user) return null
+  if (!removedAttendee) return null
   return true
 }
 
 
 
 
+//Delete: Delete a booth
+export async function deleteBooth(groupId, boothId) {
 
-export async function validateGroupAccess (memberId, groupId) {
+  //Start up database connection
+  await dbConnect()
 
-    //Get group info by id
-    const group = await Group.find({"_id": groupId, "groupMembers.memberId": memberId })
-    if (!group ) return null
+  //If user exists, add drink to user Favorites
+  const removedBooth = await Group.findByIdAndUpdate(
+    boothId,
+    { $pull: 
+      { 
+        _id: boothId
+      } 
+    },
+    { new: true } 
+  )
+  //If user does not exists, return null, otherwise return true for successful deletion
+  if (!removedBooth) return null
+
+  //If user exists, add drink to user Favorites
+  const removedGroupBooth = await Group.findByIdAndUpdate(
+    groupId,
+    { $pull: 
+      { 
+        _id: boothId
+      } 
+    },
+    { new: true } 
+  )
+  //If user does not exists, return null, otherwise return true for successful deletion
+  if (!removedBooth) return null
+
+
+
+
   
-    return group
-
+  return true
 }
 
 

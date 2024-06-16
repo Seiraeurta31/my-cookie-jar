@@ -22,19 +22,22 @@ export const getServerSideProps = withIronSessionSsr (
       props.user = req.session.user;
       props.isLoggedIn = true;
     } else {
-      props.isLoggedIn = false;
+        return {
+          redirect: {
+            permanent: false,
+            destination: "/",
+          },
+          props:{},
+        };
     }
-
 
     //TO DO: Get user groups 
     const userGroups = await db.user.getUserGroups(user._id)
 
-      
     if(userGroups?.length){
       props.userGroups = userGroups
     }
 
-    console.log("user groups :", userGroups)
     return { props };
   },
   sessionOptions

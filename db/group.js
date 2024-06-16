@@ -3,6 +3,53 @@ import User from './models/user'
 import dbConnect from './connection'
 
 
+//POST: Create new group
+export async function createNewGroup(uId, groupCode, groupName) {
+  if (!(groupCode && groupName))
+    throw new Error('Must include group ID and group name')
+
+  await dbConnect()
+
+  const group = await Group.create({ groupCode, groupName })
+
+  if (!group)
+    throw new Error('Error creating group')
+
+  const groupId = group._id //identify new group by id
+
+  const member = await Group.findByIdAndUpdate( //add first user to group member list/default to admin
+    groupId,
+    { $addToSet: 
+      { groupMembers: 
+        {
+          userId: uId, 
+          memberRole: 'admin'
+        } 
+      } 
+    },    
+    { new: true } 
+  )
+  if (!member) return null
+
+  const userGroup = await User.findByIdAndUpdate(
+    uId,
+    { $addToSet: 
+      { userGroups: 
+        {
+          groupId: groupId,
+          groupName: groupName
+        } 
+      } 
+    },   
+    { new: true } 
+  )
+  if (!userGroup) return null
+
+  return group.toJSON()
+}
+
+
+
 
 //GET group details by id
 export async function getGroupById(userId, groupId) {
@@ -42,6 +89,9 @@ export async function getGroupMembers(groupId) {
   return group.groupMembers.map(member => convertIdToString(member))
 }
 
+
+
+
 //TO DO: Update member role
 export async function updateMemberRole(memberId, newMemberRole, groupId) {
 
@@ -70,16 +120,33 @@ export async function deleteGroup(groupId) {
 
   //Start up database connection
   await dbConnect()
- 
-  //If user exists, find drink in Favorites by ID and remove it
-  const user = await Group.findByIdAndUpdate(
-    groupId,
-    { $pull: { _id: groupId } },
+
+  console.log("groupId: ", groupId)
+
+  //Find group by ID and remove it
+  const group = await Group.deleteOne(
+    {_id: groupId},
     { new: true }
   )
-  //If user does not exists, return null, otherwise return true for successful deletion
-  if (!user) return null
+  if (!group) return null
+
+
+  //TO DO: Get all group members and remove group from the user table
+
+  // const user = await User.update(
+  //   "userGroups",
+  //   { $pull: 
+  //     { 
+  //       groupId: groupId
+  //     } 
+  //   },   
+  //   { new: true } 
+  // )
+  // if (!user) return null
+
+
   return true
+
 }
 
 

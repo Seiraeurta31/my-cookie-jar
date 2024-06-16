@@ -14,8 +14,23 @@ export default withIronSessionApiRoute(
   //API Routes/SECRETARY to handle requests to DB  
     switch(req.method) {
       
+      //Create new group
+      case 'POST': 
+        try{
+          const {userId, groupCode, groupName} = req.body
+          const newGroup= await db.group.createNewGroup(userId, groupCode, groupName)
+          if(newGroup == null){
+            req.session.destroy()  
+            return res.status(401)
+          }
+          return res.status(200).json(newGroup)
+        }catch(error){
+          return res.status(400).json({error: error.message})
+        }
 
-      //TO DO: Update member role in group  
+
+
+      //Update member role in group  
       case 'PUT': 
       try{
         const {memberId, newMemberRole, group} = req.body
@@ -28,17 +43,19 @@ export default withIronSessionApiRoute(
       }catch(error){
         return res.status(400).json({error: error.message})
       }
-      
-      //TO DO: Create a new booth
+ 
+
+      //TO DO: Remove member from group
 
 
-      
+
+
 
       //Delete group
       case 'DELETE': 
       try{
-        const groupToRemove = req.body
-        const deletedGroup = await db.group.deleteGroup(groupToRemove.id)
+        const {groupId} = req.body
+        const deletedGroup = await db.group.deleteGroup(groupId)
         if(deletedGroup == null){
           req.session.destroy()
           return res.status(401)

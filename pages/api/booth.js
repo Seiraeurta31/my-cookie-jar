@@ -10,8 +10,8 @@ export default withIronSessionApiRoute(
 
     const user = req.session.user
 
-
-  //API Routes/SECRETARY to handle requests to DB  
+    
+  
     switch(req.method) {
       
       //Create new booth
@@ -28,7 +28,7 @@ export default withIronSessionApiRoute(
             city,
             state,
             notes
-        } = req.body
+          } = req.body
 
           const newBooth= await db.group.createNewBooth( 
             groupId, 
@@ -52,33 +52,88 @@ export default withIronSessionApiRoute(
         }
 
 
-      //TO DO: Update booth information  
+      //Update booth information  
       case 'PUT': 
+        try{
+          const {
+            boothId,
+            locationName, 
+            date, 
+            time,
+            amPm, 
+            shifts,
+            address,
+            city,
+            state,
+            notes
+          } = req.body
+
+          const newBooth= await db.group.updateBoothDatails( 
+            boothId,
+            locationName, 
+            date, 
+            time,
+            amPm, 
+            shifts,
+            address,
+            city,
+            state,
+            notes)
+
+          if(newBooth == null){
+            req.session.destroy()  
+            return res.status(401)
+          }
+          return res.status(200).json(newBooth)
+        }catch(error){
+          return res.status(400).json({error: error.message})
+        }
+
+
+      //Add booth attendee
+      case 'POST': 
       try{
-        const {memberId, newMemberRole, group} = req.body
-        const memberUpdated= await db.group.updateMemberRole(memberId, newMemberRole, group)
-        if(memberUpdated == null){
+        const { boothId, groupMemberId }= req.body
+        const addedAttendee= await db.drink.addBoothAttendee(boothId, groupMemberId)
+        if(addedAttendee == null){
           req.session.destroy()  
           return res.status(401)
         }
-        return res.status(200).json(memberUpdated)
+        return res.status(200).json(addedAttendee)
       }catch(error){
         return res.status(400).json({error: error.message})
-      }
+      }  
 
-      //Delete group
+      //Remove booth attendee
       case 'DELETE': 
-      try{
-        const groupToRemove = req.body
-        const deletedGroup = await db.group.deleteGroup(groupToRemove.id)
-        if(deletedGroup == null){
-          req.session.destroy()
-          return res.status(401)
+        try{
+          const { boothId, attendeeId } = req.body
+          const deletedAttendee = await db.group.removeBoothAttendee(boothId, attendeeId)
+          if(deletedAttendee == null){
+            req.session.destroy()
+            return res.status(401)
+          }
+          return res.status(200).json(deletedAttendee)
+        }catch(error){
+          return res.status(400).json({error: error.message})
         }
-        return res.status(200).json(deletedGroup)
-      }catch(error){
-        return res.status(400).json({error: error.message})
-      }
+
+
+
+
+      //Delete booth
+      case 'DELETE': 
+        try{
+          const boothToRemove = req.body
+          const deletedBooth = await db.group.boothGroup(boothToRemove.id)
+          if(deletedBooth == null){
+            req.session.destroy()
+            return res.status(401)
+          }
+          return res.status(200).json(deletedBooth)
+        }catch(error){
+          return res.status(400).json({error: error.message})
+        }
 
       default: 
         return res.status(404).end()

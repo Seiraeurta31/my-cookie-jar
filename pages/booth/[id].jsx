@@ -25,7 +25,21 @@ export const getServerSideProps = withIronSessionSsr (
       props.isLoggedIn = false;
     }
 
-    //TO DO: Get user groups 
+    //Validate user is member of group
+    const group = await db.group.getGroupById(user._id, params._id)
+
+    //Redirect user to landing page if user is no longer a member
+    if(!group){
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/dashboard",
+        },
+        props:{},
+      };
+    }
+
+    //Get booth details
     const booth = await db.booth.getBoothById(user._id, params._id)
     
     if(booth !== null){
