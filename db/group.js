@@ -52,29 +52,22 @@ export async function createNewGroup(uId, groupCode, groupName) {
 
 
 //GET group details by id
-export async function getGroupById(userId, groupId) {
+export async function getGroupById(groupId) {
 
   await dbConnect()
 
   console.log("get group by id activated")
 
-  //Validate user exists
-  const user = await User.findById(userId).lean()
-  if (!user) return null
-
   //Validate group exists
-  const group = await Group.findById(groupId)
+  const group = await Group.findById(groupId).lean() 
   if (!group) return null
 
+  console.log("group from DB: ", group)
 
-   console.log("group found: ", group)
-  //Validate user is a member of the group
-  const memberFound = group.groupMembers.find(member => member.userId === userId)
-  if (!memberFound) return null
-
-  console.log("Member Found: ", memberFound)
-
-  return group.toJSON()
+  if (group) 
+    
+  return convertIdToString(group)
+    return null
 }
 
 //TO DO: Get list of group members

@@ -8,9 +8,6 @@ import Header from "../../components/header";
 import Footer from "../../components/footer";
 
 
-//TO DO: Build user dashboard
-
-
 export const getServerSideProps = withIronSessionSsr (
   async function getServerSideProps({ req, params }) {
 
@@ -26,24 +23,15 @@ export const getServerSideProps = withIronSessionSsr (
     }
 
     //TO DO: Get user groups 
-    const group = await db.group.getGroupById(user._id, params._id)
+    // const group = await db.group.getGroupById(user._id, params.id)
+    const group = await db.group.getGroupById(params.id)
 
-    //Redirect user to landing page if user is no longer a member
-    if(!group){
-      return {
-        redirect: {
-          permanent: false,
-          destination: "/dashboard",
-        },
-        props:{},
-      };
-    }
-    
+    const groupConverted = JSON.parse(JSON.stringify(group))
+
+
     if(group !== null){
-        props.group = group
+        props.group = groupConverted
       }
-
-    console.log("Group Info: ", props.group)
       
     return { props };
   },
@@ -53,10 +41,10 @@ export const getServerSideProps = withIronSessionSsr (
 
 
 
-export default function Dashboard(props) {
+export default function GroupPage(props) {
   const router = useRouter();
 
-  console.log("user name: ", props.user.name)
+  console.log("Group Info: ", props.group)
 
   return (
     <div >
@@ -79,22 +67,25 @@ export default function Dashboard(props) {
           <h1>User Info</h1> 
           <h3>User ID:</h3>
           <p>{props.user._id}</p>
-          <h3>User name: </h3>
-          <p> {props.user.name}</p>
-          <h3>User email: </h3>
-          <p> {props.user.email}</p>
+          <h1>Group Id: </h1>
+          <p> {props.group.id}</p>
+          <h3>Group Name: </h3>
+          <p> {props.group.groupName}</p>
+          <h3>Group Code: </h3>
+          <p> {props.group.groupCode}</p>
         </div>
 
         <div>
-          <h1>User Groups</h1>
-          {props.userGroups ? (
+          <h1>Group Members</h1>
+          {props.group.groupMembers ? (
             <>
-              {props.userGroups.map((group, i) => (
-                <UserGroups 
+              {props.group.groupMembers.map((group, i) => (
+                <GroupMembers 
                   key={i}
-                  groupId={group.groupId} 
-                  groupName={group.groupName}>
-                </UserGroups>
+                  memberId={group.userId} 
+                  memberRole={group.memberRole}
+                  id={group._id}>
+                </GroupMembers>
               ))}
             </>
             ):( 
@@ -112,24 +103,13 @@ export default function Dashboard(props) {
 }
 
 
-function UserGroups({groupId, groupName}) {
+function GroupMembers({memberId, memberRole, id}) {
   const noImage = "/No_image_available.svg.png"
   return (
-    <div className={styles.favoriteDrinkCard }>
-        <h1>{groupId}</h1>
-        <h1>{groupName}</h1>
-
-    </div>  
-    
-  )
-}
-
-function UserInfo({groupId, groupName}) {
-  const noImage = "/No_image_available.svg.png"
-  return (
-    <div className={styles.favoriteDrinkCard }>
-        <h1>{groupId}</h1>
-        <h1>{groupName}</h1>
+    <div>
+        <h2>Member#{id}</h2>
+        <p>{memberId}</p>
+        <p>{memberRole}</p>
 
     </div>  
     
