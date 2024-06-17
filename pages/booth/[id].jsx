@@ -8,9 +8,6 @@ import Header from "../../components/header";
 import Footer from "../../components/footer";
 
 
-//TO DO: Build user dashboard
-
-
 export const getServerSideProps = withIronSessionSsr (
   async function getServerSideProps({ req, params }) {
 
@@ -25,27 +22,17 @@ export const getServerSideProps = withIronSessionSsr (
       props.isLoggedIn = false;
     }
 
-    //Validate user is member of group
-    const group = await db.group.getGroupById(user._id, params._id)
+    //TO DO: Get user groups 
+    // const group = await db.group.getGroupById(user._id, params.id)
+    const booth = await db.booth.getBoothById(params.id)
 
-    //Redirect user to landing page if user is no longer a member
-    if(!group){
-      return {
-        redirect: {
-          permanent: false,
-          destination: "/dashboard",
-        },
-        props:{},
-      };
-    }
+    const boothConverted = JSON.parse(JSON.stringify(booth))
 
-    //Get booth details
-    const booth = await db.booth.getBoothById(user._id, params._id)
-    
+
     if(booth !== null){
-        props.booth = booth
+        props.booth = boothConverted
       }
-
+      
     return { props };
   },
   sessionOptions
@@ -53,7 +40,8 @@ export const getServerSideProps = withIronSessionSsr (
 
 
 
-export default function Dashboard(props) {
+
+export default function BoothPage(props) {
   const router = useRouter();
 
   return (
@@ -67,19 +55,74 @@ export default function Dashboard(props) {
       <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} />
 
       <main >
-        
         <div>
-          
-              <h1 >
-                BOOTH PAGE
-              </h1>
-                
-          
+          <h1 >
+            BOOTH PAGE
+          </h1>
+        </div>
+
+        <div>
+          <h1>User Info</h1> 
+          <h3>User ID:</h3>
+          <p>{props.user._id}</p>
+          <h1>Group Id: </h1>
+          <p> {props.group.id}</p>
+          <h3>Location: </h3>
+          <p> {props.group.groupName}</p>
+          <h3>Date: </h3>
+          <p> {props.group.groupCode}</p>
+          <h3>Time: </h3>
+          <p> {props.group.groupName}</p>
+          <h3>Time of day </h3>
+          <p> {props.group.groupCode}</p>
+          <h3>Number of shifts: </h3>
+          <p> {props.group.groupName}</p>
+          <h3>Address: </h3>
+          <p> {props.group.groupCode}</p>
+          <h3>City: </h3>
+          <p> {props.group.groupName}</p>
+          <h3>State: </h3>
+          <p> {props.group.groupCode}</p>
+
+        </div>
+
+        <div>
+          <h1>Group Members</h1>
+          {props.group.groupMembers ? (
+            <>
+              {props.booth.attendingMembers.map((attendee, i) => (
+                <BoothMembers 
+                  key={i}
+                  memberId={attendee.userId}
+                  attendeeId={attendee._id}>
+                </BoothMembers>
+              ))}
+            </>
+            ):( 
+              <>
+                <p >No user groups yet!</p>
+              </>
+          )}
         </div>
       </main>
 
       <Footer/>
-    </div>
-  );
+
+    </div>      
+   );         
 }
 
+
+function BoothMembers({memberId, attendeeId}) {
+
+  return (
+    <div>
+        <h2>Member#{id}</h2>
+        <p>{memberId}</p>
+        <h2>AttendeeId</h2>
+        <p>{attendeeId}</p>
+
+    </div>  
+    
+  )
+}

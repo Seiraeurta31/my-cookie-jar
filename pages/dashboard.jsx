@@ -35,8 +35,6 @@ export const getServerSideProps = withIronSessionSsr (
     //TO DO: Get user groups 
     const userGroups = await db.user.getUserGroups(user._id)
 
-    console.log("user groups: ", userGroups)
-
     if(userGroups?.length){
       props.userGroups = userGroups
     }
@@ -50,8 +48,6 @@ export const getServerSideProps = withIronSessionSsr (
 
 export default function Dashboard(props) {
   const router = useRouter();
-
-  console.log("user name: ", props.user.name)
 
   return (
     <div >

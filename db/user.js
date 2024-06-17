@@ -7,15 +7,10 @@ import dbConnect from './connection'
 export async function getUserGroups(userId) {
 
   await dbConnect()
-
-  console.log("getusergroups triggered")
-  console.log("userId: ", userId)
   
   //Validate user exists
   const user = await User.findById(userId).lean()
   if (!user) return null
-
-  console.log("user: ", user)
 
   //Use user group list to GET group info by group Id's
   return user.userGroups.map(drink=> convertIdToString(drink))
@@ -48,9 +43,6 @@ export async function joinGroup(userId, gCode, gName) {
   //Find group in group database with group code and name from search
   let groupFound = await Group.find({"groupCode": gCode, "groupName": gName})
   if (!groupFound) return null
-
-
-  console.log("group:", groupFound[0].id)
 
   //Identify group id
   const groupId = groupFound[0].id

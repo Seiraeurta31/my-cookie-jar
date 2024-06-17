@@ -56,13 +56,9 @@ export async function getGroupById(groupId) {
 
   await dbConnect()
 
-  console.log("get group by id activated")
-
   //Validate group exists
   const group = await Group.findById(groupId).lean() 
   if (!group) return null
-
-  console.log("group from DB: ", group)
 
   if (group) 
     

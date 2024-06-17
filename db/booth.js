@@ -29,6 +29,8 @@ export async function createNewBooth(
 
   await dbConnect()
 
+  console.log("groupId passed in: ", groupId)
+
   const newBooth = await Booth.create({ 
       groupId, 
       locationName, 
@@ -44,19 +46,23 @@ export async function createNewBooth(
   if (!newBooth)
   throw new Error('Error creating booth')
 
+  const gId = groupId
+
     //TO DO: Add booth Id to group booth list
-    const userGroup = await Group.findByIdAndUpdate(
+    const groupBooth = await Group.findByIdAndUpdate(
       groupId,
       { $addToSet: 
         { groupBooths: 
           {
-            groupId: groupId
+            boothId: newBooth._id
           } 
         } 
       },   
       { new: true } 
     )
-    if (!userGroup) return null
+
+    console.log (groupBooth)
+    if (!groupBooth) return null
   
 
 
@@ -73,9 +79,6 @@ export async function getBoothById(boothId) {
 
   await dbConnect()
 
-  //Validate group contains member
-  // const groupApproved = validateGroupAccess (memberId, groupId)
-  // if (!groupApproved ) return null
 
   //Get booth details by booth id
   const booth = Booth.findById(boothId)
@@ -89,10 +92,6 @@ export async function getBoothById(boothId) {
 export async function getBoothAttendees(boothId) {
 
   await dbConnect()
-
-  //Validate group contains member
-  // const groupApproved = validateGroupAccess (memberId, groupId)
-  // if (!groupApproved ) return null
 
 
   const attendeeList = Booth.attendingMembers.findById(boothId)
@@ -147,10 +146,6 @@ export async function addBoothAttendee(groupMemberId, boothId) {
 
   await dbConnect()
 
-  console.log("add booth member triggered")
-
-  console.log("gorupMemberID: ", groupMemberId)
-  console.log("boothId: ", boothId)
   //If user exists, add drink to user Favorites
   const attendee = await Booth.findByIdAndUpdate(
     boothId,
@@ -188,14 +183,20 @@ export async function removeBoothAttendee(attendeeId, boothId) {
 
 
 //Delete: Delete a booth
-export async function deleteBooth(boothId) {
+export async function deleteBooth(groupId, bId) {
 
   //Start up database connection
   await dbConnect()
 
   //Remove booth 
   const boothRemoved = await Booth.deleteOne(
-    {_id: boothId},
+    {_id: bId},
+    { new: true }
+  )
+
+  const groupBoothRemoved = await Group.findByIdAndUpdate(
+    groupId,
+    { $pull: { groupBooths: {boothId: bId } } },
     { new: true }
   )
 

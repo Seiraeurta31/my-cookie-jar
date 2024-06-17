@@ -44,8 +44,6 @@ export const getServerSideProps = withIronSessionSsr (
 export default function GroupPage(props) {
   const router = useRouter();
 
-  console.log("Group Info: ", props.group)
-
   return (
     <div >
       <Head>
@@ -79,12 +77,12 @@ export default function GroupPage(props) {
           <h1>Group Members</h1>
           {props.group.groupMembers ? (
             <>
-              {props.group.groupMembers.map((group, i) => (
+              {props.group.groupMembers.map((member, i) => (
                 <GroupMembers 
                   key={i}
-                  memberId={group.userId} 
-                  memberRole={group.memberRole}
-                  id={group._id}>
+                  memberId={member.userId} 
+                  memberRole={member.memberRole}
+                  id={member._id}>
                 </GroupMembers>
               ))}
             </>
@@ -94,6 +92,27 @@ export default function GroupPage(props) {
               </>
           )}
         </div>
+
+        <div>
+          <h1>Booths</h1>
+          {props.group.groupBooths ? (
+            <>
+              {props.group.groupBooths.map((booth, i) => (
+                <GroupBooths 
+                  key={i}
+                  groupId={booth.groupId} 
+                  id={booth._id}>
+                </GroupBooths>
+              ))}
+            </>
+            ):( 
+              <>
+                <p >No user groups yet!</p>
+              </>
+          )}
+        </div>
+
+
       </main>
 
       <Footer/>
@@ -104,12 +123,29 @@ export default function GroupPage(props) {
 
 
 function GroupMembers({memberId, memberRole, id}) {
-  const noImage = "/No_image_available.svg.png"
+
   return (
     <div>
-        <h2>Member#{id}</h2>
+        <h3>User ID#</h3>
         <p>{memberId}</p>
+        <h3>MemberRole</h3>
         <p>{memberRole}</p>
+        <h3>Group Member ID</h3>
+        <p>{id}</p>
+
+    </div>  
+    
+  )
+}
+
+function GroupBooths({groupId, id}) {
+
+  return (
+    <div>
+        <h3>GroupId#</h3>
+        <p>{groupId}</p>
+        <h3>Booth Id</h3>
+        <p>{id}</p>
 
     </div>  
     
