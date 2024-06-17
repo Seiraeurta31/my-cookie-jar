@@ -63,7 +63,6 @@ export async function getGroupById(groupId) {
   if (group) 
     
   return convertIdToString(group)
-    return null
 }
 
 //TO DO: Get list of group members

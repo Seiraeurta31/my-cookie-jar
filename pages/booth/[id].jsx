@@ -66,44 +66,60 @@ export default function BoothPage(props) {
           <h3>User ID:</h3>
           <p>{props.user._id}</p>
           <h1>Group Id: </h1>
-          <p> {props.group.id}</p>
+          <p> {props.booth.groupId}</p>
           <h3>Location: </h3>
-          <p> {props.group.groupName}</p>
+          <p> {props.booth.locationName}</p>
           <h3>Date: </h3>
-          <p> {props.group.groupCode}</p>
+          <p> {props.booth.date}</p>
           <h3>Time: </h3>
-          <p> {props.group.groupName}</p>
+          <p> {props.booth.time}</p>
           <h3>Time of day </h3>
-          <p> {props.group.groupCode}</p>
+          <p> {props.booth.amPM}</p>
           <h3>Number of shifts: </h3>
-          <p> {props.group.groupName}</p>
+          <p> {props.booth.shifts}</p>
           <h3>Address: </h3>
-          <p> {props.group.groupCode}</p>
+          <p> {props.booth.address}</p>
           <h3>City: </h3>
-          <p> {props.group.groupName}</p>
+          <p> {props.booth.city}</p>
           <h3>State: </h3>
-          <p> {props.group.groupCode}</p>
+          <p> {props.booth.state}</p>
 
         </div>
 
         <div>
-          <h1>Group Members</h1>
-          {props.group.groupMembers ? (
+          <h1>Booth Notes</h1>
+          {(props.booth.notes!= " ")? (
+            <>
+              <p>{props.booth.notes}</p>
+            </>
+            ):( 
+            <>
+              <p >No booth notes yet!</p>
+            </>
+          )}
+        </div>
+
+        <div>
+          <h1>Booth Attendees</h1>
+          {props.booth.attendingMembers.length ? (
             <>
               {props.booth.attendingMembers.map((attendee, i) => (
-                <BoothMembers 
+                <BoothAttendee 
                   key={i}
-                  memberId={attendee.userId}
+                  memberId={attendee.memberId} 
                   attendeeId={attendee._id}>
-                </BoothMembers>
+                </BoothAttendee >
               ))}
             </>
             ):( 
               <>
-                <p >No user groups yet!</p>
+                <p >No attendees yet!</p>
               </>
           )}
         </div>
+
+
+
       </main>
 
       <Footer/>
@@ -113,11 +129,11 @@ export default function BoothPage(props) {
 }
 
 
-function BoothMembers({memberId, attendeeId}) {
+function BoothAttendee({memberId, attendeeId}) {
 
   return (
     <div>
-        <h2>Member#{id}</h2>
+        <h2>Member#</h2>
         <p>{memberId}</p>
         <h2>AttendeeId</h2>
         <p>{attendeeId}</p>

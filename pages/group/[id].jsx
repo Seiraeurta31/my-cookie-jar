@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../../config/session";
 import db from '../../db'
+import Link from "next/link";
 import Head from 'next/head';
 import Header from "../../components/header";
 import Footer from "../../components/footer";
@@ -142,11 +143,12 @@ function GroupBooths({boothId, id}) {
 
   return (
     <div>
+      <Link href={'/booth/' + boothId}>
         <h3>BoothId#</h3>
         <p>{boothId}</p>
         <h3>GroupBooth Id#</h3>
         <p>{id}</p>
-
+      </Link>
     </div>  
     
   )

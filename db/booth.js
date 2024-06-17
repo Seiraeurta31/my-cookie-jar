@@ -81,8 +81,10 @@ export async function getBoothById(boothId) {
 
 
   //Get booth details by booth id
-  const booth = Booth.findById(boothId)
+  const booth = await Booth.findById(boothId).lean()
   if (!booth) return null
+
+  console.log("Booth Info: ", booth)
 
   return convertIdToString(booth)
 }
