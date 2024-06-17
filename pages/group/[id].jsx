@@ -100,7 +100,7 @@ export default function GroupPage(props) {
               {props.group.groupBooths.map((booth, i) => (
                 <GroupBooths 
                   key={i}
-                  groupId={booth.groupId} 
+                  boothId={booth.boothId} 
                   id={booth._id}>
                 </GroupBooths>
               ))}
@@ -138,13 +138,13 @@ function GroupMembers({memberId, memberRole, id}) {
   )
 }
 
-function GroupBooths({groupId, id}) {
+function GroupBooths({boothId, id}) {
 
   return (
     <div>
-        <h3>GroupId#</h3>
-        <p>{groupId}</p>
-        <h3>Booth Id</h3>
+        <h3>BoothId#</h3>
+        <p>{boothId}</p>
+        <h3>GroupBooth Id#</h3>
         <p>{id}</p>
 
     </div>  
