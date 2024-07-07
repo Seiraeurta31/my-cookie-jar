@@ -29,6 +29,8 @@ export const getServerSideProps = withIronSessionSsr (
 
     const groupConverted = JSON.parse(JSON.stringify(group))
 
+    //TO DO: Parsing turns it to Javascript to read in browser
+
 
     if(group !== null){
         props.group = groupConverted

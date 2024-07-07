@@ -74,6 +74,7 @@ export async function getGroupMembers(groupId) {
   const group = await Group.findById(groupId).lean()
   if (!group) return null
 
+  //TO DO: Stringify data to convert to JSON to be read from database
   return group.groupMembers.map(member => convertIdToString(member))
 }
 
