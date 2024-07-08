@@ -99,8 +99,7 @@ function UserGroups({groupId, groupName}) {
   return (
     <div>
        <Link href={'/group/' + groupId}>
-        <p>Group Id: {groupId}</p> 
-        <p>Group Name: {groupName}</p>
+        <p> {groupName}</p>
        </Link>
     </div>  
     

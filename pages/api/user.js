@@ -8,7 +8,7 @@ export default withIronSessionApiRoute(
     if(!req.session.user)
       return res.status(401).end()
 
-    const {_id: userId} = req.session.user
+    const user = req.session.user
     const { name: name} = req.session.user
     const { email: email} = req.session.user
 
@@ -20,7 +20,7 @@ export default withIronSessionApiRoute(
       case 'POST': 
         try{
           const {groupCode, groupName} = req.body
-          const addedGroup= await db.user.joinGroup(userId, groupCode, groupName)
+          const addedGroup= await db.user.joinGroup(user._id, groupCode, groupName)
           if(addedGroup == null){
             req.session.destroy()  
             return res.status(401)
@@ -34,8 +34,8 @@ export default withIronSessionApiRoute(
     //Leave a group
       case 'DELETE': 
       try{
-        const {userId, groupId} = req.body
-        const memberRemoved = await db.user.leaveGroup(userId, groupId)
+        const {groupId} = req.body
+        const memberRemoved = await db.user.leaveGroup(user._id, groupId)
         if(memberRemoved == null){
           req.session.destroy()
           return res.status(401)
