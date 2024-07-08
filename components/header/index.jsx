@@ -12,7 +12,7 @@ export default function Header(props) {
             {props.menu === "user" ? (
               <>
                 <Link href="/dashboard">Dashboard    </Link>
-                <Link href="/addGroup">Create Group    </Link> 
+                <Link href="/createGroup">Create Group    </Link> 
                 <Link href="/joinGroup">Join Group    </Link>
                 <a onClick={logout} style={{ cursor: "pointer" }}>Logout</a> 
               </>
