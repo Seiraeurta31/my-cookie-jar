@@ -7,11 +7,34 @@ export default function Header(props) {
   return (
     <header>
       {props.isLoggedIn ? (
-        <>
+        <>         
           <div >
-            <Link href="/dashboard">Home</Link>
-            <a onClick={logout} style={{ cursor: "pointer" }}>Logout</a> 
-          </div>   
+            {props.menu === "user" ? (
+              <>
+                <Link href="/dashboard">Dashboard    </Link>
+                <Link href="/addGroup">Create Group    </Link> 
+                <Link href="/joinGroup">Join Group    </Link>
+                <a onClick={logout} style={{ cursor: "pointer" }}>Logout</a> 
+              </>
+              ) : (
+                <div>  
+                </div>
+            )}
+          </div>
+
+          <div >
+            {props.menu === "group" ? (
+              <>
+                <Link href="/dashboard">Dashboard    </Link>
+                <Link href="/addGroup">Group Main    </Link> 
+                <Link href="/joinGroup">Members List    </Link>
+                <a onClick={logout} style={{ cursor: "pointer" }}>Logout</a> 
+              </>
+            ) : (
+              <div>  
+              </div>
+            )}
+          </div>
         </>
       ) : ( 
           <div>  

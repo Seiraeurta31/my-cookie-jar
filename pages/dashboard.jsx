@@ -48,6 +48,7 @@ export const getServerSideProps = withIronSessionSsr (
 
 export default function Dashboard(props) {
   const router = useRouter();
+  const menuType = "user"
 
   return (
     <div >
@@ -57,23 +58,13 @@ export default function Dashboard(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} />
+      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType}/>
 
       <main >
         <div>
           <h1 >
             DASHBOARD
           </h1>
-        </div>
-
-        <div>
-          <h1>User Info</h1> 
-          <h3>User ID:</h3>
-          <p>{props.user._id}</p>
-          <h3>User name: </h3>
-          <p> {props.user.name}</p>
-          <h3>User email: </h3>
-          <p> {props.user.email}</p>
         </div>
 
         <div>
