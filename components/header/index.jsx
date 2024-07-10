@@ -26,7 +26,7 @@ export default function Header(props) {
             {props.menu === "group" ? (
               <>
                 <Link href="/dashboard">Dashboard    </Link>
-                <Link href="/addGroup">Group Main    </Link> 
+                <Link href={'/group/' + props.groupId}>Group Main    </Link> 
                 <Link href="/joinGroup">Members List    </Link>
                 <a onClick={logout} style={{ cursor: "pointer" }}>Logout</a> 
               </>

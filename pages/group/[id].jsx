@@ -42,10 +42,9 @@ export const getServerSideProps = withIronSessionSsr (
 );
 
 
-
-
 export default function GroupPage(props) {
   const router = useRouter();
+  const menuType = "group"
 
   return (
     <div >
@@ -55,7 +54,7 @@ export default function GroupPage(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} />
+      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType}/>
 
       <main >
         <div>
@@ -65,15 +64,10 @@ export default function GroupPage(props) {
         </div>
 
         <div>
-          <h1>User Info</h1> 
-          <h3>User ID:</h3>
-          <p>{props.user._id}</p>
-          <h1>Group Id: </h1>
-          <p> {props.group.id}</p>
-          <h3>Group Name: </h3>
-          <p> {props.group.groupName}</p>
-          <h3>Group Code: </h3>
-          <p> {props.group.groupCode}</p>
+          <h3>Group Details</h3>
+          <p> Group Id:  {props.group.id}</p>
+          <p> Group Name: {props.group.groupName}</p>
+          <p> Group Code: {props.group.groupCode}</p>
         </div>
 
         <div>
@@ -83,6 +77,7 @@ export default function GroupPage(props) {
               {props.group.groupMembers.map((member, i) => (
                 <GroupMembers 
                   key={i}
+                  groupId={props.group.id}
                   memberId={member.userId} 
                   memberRole={member.memberRole}
                   id={member._id}>
@@ -125,16 +120,16 @@ export default function GroupPage(props) {
 }
 
 
-function GroupMembers({memberId, memberRole, id}) {
+function GroupMembers({memberId, memberRole, groupId, id}) {
 
   return (
     <div>
-        <h3>User ID#</h3>
-        <p>{memberId}</p>
-        <h3>MemberRole</h3>
-        <p>{memberRole}</p>
-        <h3>Group Member ID</h3>
-        <p>{id}</p>
+      <Link href={'/member/' + groupId}>
+        <h3>Member Info</h3>
+        <p>User Id: {memberId}</p>
+        <p>Member Role: {memberRole}</p>
+      </Link>
+        
 
     </div>  
     
