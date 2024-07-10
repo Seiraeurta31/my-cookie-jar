@@ -39,10 +39,15 @@ export async function create(username, password, name, email) {
 export async function joinGroup(userId, gCode, gName) {
 
   await dbConnect()
+  console.log("join group triggered")
 
   //Find group in group database with group code and name from search
   let groupFound = await Group.find({"groupCode": gCode, "groupName": gName})
   if (!groupFound) return null
+
+  //Check to see if user is current member of group
+  const currentMember = groupFound[0].groupMembers.find(member => member.userId === userId)
+  if(currentMember) return currentMember
 
   //Identify group id
   const groupId = groupFound[0].id

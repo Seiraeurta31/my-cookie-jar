@@ -18,6 +18,7 @@ export default withIronSessionApiRoute(
 
     //Join a group
       case 'POST': 
+        console.log("join group POST triggered")
         try{
           const {groupCode, groupName} = req.body
           const addedGroup= await db.user.joinGroup(user._id, groupCode, groupName)

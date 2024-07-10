@@ -56,7 +56,7 @@ export default function CreateGroup(props) {
       if (!groupCode) return setError("Must include group code");
   
       try {
-        const res = await fetch("/api/group", {
+        const res = await fetch("/api/user", {
           method: "POST",
           headers: {
             "content-type": "application/json",
