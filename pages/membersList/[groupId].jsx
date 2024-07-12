@@ -13,8 +13,6 @@ import Footer from "../../components/footer";
 export const getServerSideProps = withIronSessionSsr (
   async function getServerSideProps({ req, params }) {
 
-    console.log("member list page params: ", params)
-
     const props = {};
 
     //Get user session information
@@ -30,10 +28,7 @@ export const getServerSideProps = withIronSessionSsr (
     // const group = await db.group.getGroupById(user._id, params.id)
     const group = await db.group.getGroupById(params.groupId)
  
-
     const groupConverted = JSON.parse(JSON.stringify(group))
-
-    console.log("group Id on members page: ", groupConverted.id)
 
     //TO DO: Parsing turns it to Javascript to read in browser
 
@@ -68,6 +63,29 @@ export default function GroupPage(props) {
           <h1 >Group Member List</h1>
           <h3> Page In Progress</h3>
         </div>
+
+       <div>
+          <h1>Group Members</h1>
+          {props.group.groupMembers ? (
+            <>
+              {props.group.groupMembers.map((member, i) => (
+                <GroupMembers 
+                  key={i}
+                  groupId={props.group.id}
+                  memberId={member._id}
+                  userId={member.userId} 
+                  memberName={member.memberName} 
+                  memberRole={member.memberRole}
+                  id={member._id}>
+                </GroupMembers>
+              ))}
+            </>
+            ):( 
+              <>
+                <p >No user groups yet!</p>
+              </>
+          )}
+        </div>
    
       </main>
 
@@ -78,14 +96,12 @@ export default function GroupPage(props) {
 }
 
 
-function GroupMembers({memberId, memberRole, groupId, id}) {
+function GroupMembers({userId, memberRole, groupId, memberName, memberId}) {
 
   return (
     <div>
-      <Link href={'/member/' + groupId}>
-        <h3>Member Info</h3>
-        <p>User Id: {memberId}</p>
-        <p>Member Role: {memberRole}</p>
+      <Link href={"/member/" +  groupId + "/" + memberId}>
+        <h3>Member Name: {memberName}</h3>
       </Link>
         
 

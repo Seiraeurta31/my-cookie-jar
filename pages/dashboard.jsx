@@ -15,7 +15,7 @@ export const getServerSideProps = withIronSessionSsr (
   async function getServerSideProps({ req }) {
 
     const props = {}
-    console.log("get serverside props triggered")
+
     //Get user session information
     const user = req.session.user;
     if (user) {
@@ -49,8 +49,6 @@ export const getServerSideProps = withIronSessionSsr (
 export default function Dashboard(props) {
   const router = useRouter();
   const menuType = "user"
-
-  console.log("dashboard refreshed")
 
   return (
     <div >

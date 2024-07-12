@@ -32,8 +32,7 @@ export const getServerSideProps = withIronSessionSsr (
       const group = await db.group.getGroupById(params.groupId)
   
       const groupConverted = JSON.parse(JSON.stringify(group))
-  
-      console.log("group converted: ", groupConverted)
+
   
       //TO DO: Parsing turns it to Javascript to read in browser
   

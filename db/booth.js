@@ -29,7 +29,7 @@ export async function createNewBooth(
 
   await dbConnect()
 
-  console.log("groupId passed in: ", groupId)
+
 
   const newBooth = await Booth.create({ 
       groupId, 
@@ -84,7 +84,7 @@ export async function getBoothById(boothId) {
   const booth = await Booth.findById(boothId).lean()
   if (!booth) return null
 
-  console.log("Booth Info: ", booth)
+
 
   return convertIdToString(booth)
 }

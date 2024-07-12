@@ -3,16 +3,22 @@ import { useRouter } from "next/router";
 import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../../config/session";
 import db from '../../db'
-import Link from "next/link";
 import Head from 'next/head';
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 
 
+
 export const getServerSideProps = withIronSessionSsr (
   async function getServerSideProps({ req, params }) {
+    // let { groupId } = useParams();
+
+    const groupId = params.id[0]
+    const memberId = params.id[1]
 
     const props = {};
+
+    props.groupId = groupId
 
     //Get user session information
     const user = req.session.user;
@@ -25,28 +31,21 @@ export const getServerSideProps = withIronSessionSsr (
 
     //TO DO: Get user groups 
     // const group = await db.group.getGroupById(user._id, params.id)
-    const group = await db.group.getGroupById(params.id)
+    const member = await db.group.getMemberById(groupId, memberId)
+    const memberDetails = JSON.parse(JSON.stringify(member))
 
-    const groupConverted = JSON.parse(JSON.stringify(group))
-
-    let member = {}
-
-    for( let i = 0; i < groupConverted.groupMembers.length; i++){
-      if (groupConverted.groupMembers[i].userId === user._id){
-        member = groupConverted.groupMembers[i]
-      }
+    if(memberDetails !== null){
+      props.mbrDetails = memberDetails
     }
 
-    console.log ("member: ", member)
+    const memberInfo = await db.user.getUserInfo(memberDetails.userId)
+    const memberUserInfo = JSON.parse(JSON.stringify(memberInfo))
 
-    //TO DO: Parsing turns it to Javascript to read in browser
-
-
-
-
-    if(group !== null){
-        props.group = groupConverted
-      }
+    if(memberUserInfo !== null){
+      props.mbrUserInfo = memberUserInfo
+    }
+    console.log("MEMBER INFO: ", memberDetails)
+    
       
     return { props };
   },
@@ -60,6 +59,8 @@ export default function MemberPage(props) {
   const router = useRouter();
   const menuType = "group"
 
+
+
   return (
     <div >
       <Head>
@@ -68,20 +69,20 @@ export default function MemberPage(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} groupId={props.group.id}/>
+      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} groupId={props.groupId}/>
 
       <main >
         <div>
           <h1 >
-            Member Page
+            Member Details Page
           </h1>
         </div>
 
         <div>
-          <p> User ID: {props.user._id}</p>
-          <p> Member Name:{props.user.name}</p>
-          <p> Member Email: {props.user.email}</p>
-          <p> Member Role: {props.group.groupCode}</p>
+          <p> Member Name: {props.mbrUserInfo.name}</p>
+          <p> Member Email: {props.mbrUserInfo.email}</p>
+          <p> Member Role: {props.mbrDetails.memberRole}</p>
+
         </div>
 
         

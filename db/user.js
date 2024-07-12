@@ -13,7 +13,7 @@ export async function getUserGroups(userId) {
   if (!user) return null
 
   //Use user group list to GET group info by group Id's
-  return user.userGroups.map(drink=> convertIdToString(drink))
+  return user.userGroups.map(group=> convertIdToString(group))
 
 }
 
@@ -34,12 +34,23 @@ export async function create(username, password, name, email) {
 }
 
 
-
-//POST: Join user to existing group 
-export async function joinGroup(userId, gCode, gName) {
+export async function getUserInfo(userId) {
 
   await dbConnect()
-  console.log("join group triggered")
+  
+  //Validate user exists
+  const user = await User.findById(userId).lean()
+  if (!user) return null
+
+  //Use user group list to GET group info by group Id's
+  return user
+
+}
+
+//POST: Join user to existing group 
+export async function joinGroup(userId, userName, gCode, gName) {
+
+  await dbConnect()
 
   //Find group in group database with group code and name from search
   let groupFound = await Group.find({"groupCode": gCode, "groupName": gName})
@@ -74,6 +85,7 @@ export async function joinGroup(userId, gCode, gName) {
       { groupMembers: 
         {
           userId: userId, 
+          memberName: userName,
           memberRole: 'member'
         }  
       } 

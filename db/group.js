@@ -4,7 +4,7 @@ import dbConnect from './connection'
 
 
 //POST: Create new group
-export async function createNewGroup(uId, groupCode, groupName) {
+export async function createNewGroup(uId, uName, groupCode, groupName) {
   if (!(groupCode && groupName))
     throw new Error('Must include group ID and group name')
 
@@ -23,6 +23,7 @@ export async function createNewGroup(uId, groupCode, groupName) {
       { groupMembers: 
         {
           userId: uId, 
+          memberName: uName,
           memberRole: 'admin'
         } 
       } 
@@ -65,6 +66,9 @@ export async function getGroupById(groupId) {
   return convertIdToString(group)
 }
 
+
+
+
 //TO DO: Get list of group members
 export async function getGroupMembers(groupId) {
 
@@ -79,6 +83,27 @@ export async function getGroupMembers(groupId) {
 }
 
 
+
+
+export async function getMemberById(groupId, memberId) {
+
+  await dbConnect()
+
+  console.log(memberId)
+  console.log("669086312801e0eb83459a67")
+
+  //Check for user, if none, return null, otherwise proceed to find drink by user.
+ const memberList = await getGroupMembers(groupId)
+ if (!memberList) return null
+
+ const member = memberList.find(mem => mem.id === memberId)
+  if (!member) return null
+
+ console.log("member: ", member)
+
+
+  return member
+}
 
 
 //TO DO: Update member role
