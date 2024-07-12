@@ -61,7 +61,6 @@ export async function createNewBooth(
       { new: true } 
     )
 
-    console.log (groupBooth)
     if (!groupBooth) return null
   
 

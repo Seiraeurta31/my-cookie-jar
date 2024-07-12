@@ -1,20 +1,22 @@
 //TO DO: Build group dashboard pageimport Head from "next/head";
 import { useRouter } from "next/router";
 import { withIronSessionSsr } from "iron-session/next";
-import sessionOptions from "../../config/session";
-import db from '../../db'
+import sessionOptions from "../config/session";
+import db from '../db'
 import Head from 'next/head';
-import Header from "../../components/header";
-import Footer from "../../components/footer";
+import Header from "../components/header";
+import Footer from "../components/footer";
 
 
 
 export const getServerSideProps = withIronSessionSsr (
-  async function getServerSideProps({ req, params }) {
+  async function getServerSideProps({ req, query }) {
     // let { groupId } = useParams();
 
-    const groupId = params.id[0]
-    const memberId = params.id[1]
+    const groupId = query.g
+    const memberId = query.m
+
+    console.log("query: ", query.g)
 
     const props = {};
 
@@ -33,6 +35,8 @@ export const getServerSideProps = withIronSessionSsr (
     // const group = await db.group.getGroupById(user._id, params.id)
     const member = await db.group.getMemberById(groupId, memberId)
     const memberDetails = JSON.parse(JSON.stringify(member))
+
+    console.log("MEMBER - DETAILS: ", memberDetails)
 
     if(memberDetails !== null){
       props.mbrDetails = memberDetails

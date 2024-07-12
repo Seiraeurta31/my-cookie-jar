@@ -11,7 +11,7 @@ import Footer from "../../components/footer";
 
 
 export const getServerSideProps = withIronSessionSsr (
-  async function getServerSideProps({ req, params }) {
+  async function getServerSideProps({ req, params, query }) {
 
     const props = {};
 
@@ -100,7 +100,7 @@ function GroupMembers({userId, memberRole, groupId, memberName, memberId}) {
 
   return (
     <div>
-      <Link href={"/member/" +  groupId + "/" + memberId}>
+      <Link href={`/member?g=${groupId}&m=${memberId}`}>
         <h3>Member Name: {memberName}</h3>
       </Link>
         
