@@ -9,8 +9,11 @@ import Header from "../../components/header";
 import Footer from "../../components/footer";
 
 
+
 export const getServerSideProps = withIronSessionSsr (
   async function getServerSideProps({ req, params }) {
+
+    console.log("member list page params: ", params)
 
     const props = {};
 
@@ -23,13 +26,14 @@ export const getServerSideProps = withIronSessionSsr (
       props.isLoggedIn = false;
     }
 
-    //TO DO: Get user groups 
+        //TO DO: Get user groups 
     // const group = await db.group.getGroupById(user._id, params.id)
-    const group = await db.group.getGroupById(params.id)
+    const group = await db.group.getGroupById(params.groupId)
+ 
 
     const groupConverted = JSON.parse(JSON.stringify(group))
 
-    console.log("group converted: ", groupConverted)
+    console.log("group Id on members page: ", groupConverted.id)
 
     //TO DO: Parsing turns it to Javascript to read in browser
 
@@ -37,7 +41,7 @@ export const getServerSideProps = withIronSessionSsr (
     if(group !== null){
         props.group = groupConverted
       }
-      
+
     return { props };
   },
   sessionOptions
@@ -59,66 +63,12 @@ export default function GroupPage(props) {
       <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} groupId={props.group.id}/>
 
       <main >
+
         <div>
-          <h1 >
-            GROUP PAGE
-          </h1>
+          <h1 >Group Member List</h1>
+          <h3> Page In Progress</h3>
         </div>
-
-        <div>
-          <h3>Group Details</h3>
-          <p> Group Id:  {props.group.id}</p>
-          <p> Group Name: {props.group.groupName}</p>
-          <p> Group Code: {props.group.groupCode}</p>
-        </div>
-
-
-        <div>
-          <Link href={`/membersList/${props.group.id}`}>Group Member List</Link>
-        </div>  
-
-
-        {/* <div>
-          <h1>Group Members</h1>
-          {props.group.groupMembers ? (
-            <>
-              {props.group.groupMembers.map((member, i) => (
-                <GroupMembers 
-                  key={i}
-                  groupId={props.group.id}
-                  memberId={member.userId} 
-                  memberRole={member.memberRole}
-                  id={member._id}>
-                </GroupMembers>
-              ))}
-            </>
-            ):( 
-              <>
-                <p >No user groups yet!</p>
-              </>
-          )}
-        </div>
-
-        <div>
-          <h1>Booths</h1>
-          {props.group.groupBooths ? (
-            <>
-              {props.group.groupBooths.map((booth, i) => (
-                <GroupBooths 
-                  key={i}
-                  boothId={booth.boothId} 
-                  id={booth._id}>
-                </GroupBooths>
-              ))}
-            </>
-            ):( 
-              <>
-                <p >No user groups yet!</p>
-              </>
-          )}
-        </div> */}
-
-
+   
       </main>
 
       <Footer/>
@@ -144,17 +94,3 @@ function GroupMembers({memberId, memberRole, groupId, id}) {
   )
 }
 
-function GroupBooths({boothId, id}) {
-
-  return (
-    <div>
-      <Link href={'/booth/' + boothId}>
-        <h3>BoothId#</h3>
-        <p>{boothId}</p>
-        <h3>GroupBooth Id#</h3>
-        <p>{id}</p>
-      </Link>
-    </div>  
-    
-  )
-}
