@@ -1,17 +1,16 @@
 //TO DO: Build group dashboard pageimport Head from "next/head";
 import { useRouter } from "next/router";
 import { withIronSessionSsr } from "iron-session/next";
-import sessionOptions from "../../config/session";
-import db from '../../db'
-import Link from "next/link";
+import sessionOptions from "../config/session";
+import db from '../db'
 import Head from 'next/head';
-import Header from "../../components/header";
-import Footer from "../../components/footer";
+import Header from "../components/header";
+import Footer from "../components/footer";
 
 
 
 export const getServerSideProps = withIronSessionSsr (
-  async function getServerSideProps({ req, params}) {
+  async function getServerSideProps({ req, params }) {
 
     const props = {};
 
@@ -60,31 +59,8 @@ export default function GroupPage(props) {
       <main >
 
         <div>
-          <h1 >Group Member List</h1>
+          <h1 >Troop Booth List</h1>
           <h3> Page In Progress</h3>
-        </div>
-
-       <div>
-          <h1>Group Members</h1>
-          {props.group.groupMembers ? (
-            <>
-              {props.group.groupMembers.map((member, i) => (
-                <GroupMembers 
-                  key={i}
-                  groupId={props.group.id}
-                  memberId={member._id}
-                  userId={member.userId} 
-                  memberName={member.memberName} 
-                  memberRole={member.memberRole}
-                  id={member._id}>
-                </GroupMembers>
-              ))}
-            </>
-            ):( 
-              <>
-                <p >No user groups yet!</p>
-              </>
-          )}
         </div>
    
       </main>
@@ -96,12 +72,14 @@ export default function GroupPage(props) {
 }
 
 
-function GroupMembers({userId, memberRole, groupId, memberName, memberId}) {
+function GroupMembers({memberId, memberRole, groupId, id}) {
 
   return (
     <div>
-      <Link href={`/member?g=${groupId}&m=${memberId}`}>
-        <h3>Member Name: {memberName}</h3>
+      <Link href={'/member/' + groupId}>
+        <h3>Member Info</h3>
+        <p>User Id: {memberId}</p>
+        <p>Member Role: {memberRole}</p>
       </Link>
         
 

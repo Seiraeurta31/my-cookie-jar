@@ -11,16 +11,10 @@ import Footer from "../components/footer";
 
 export const getServerSideProps = withIronSessionSsr (
   async function getServerSideProps({ req, query }) {
-    // let { groupId } = useParams();
-
-    const groupId = query.g
-    const memberId = query.m
-
+    
     const props = {};
 
-    props.groupId = groupId
-
-    //Get user session information
+    //Get active user session information
     const user = req.session.user;
     if (user) {
       props.user = req.session.user;
@@ -29,8 +23,12 @@ export const getServerSideProps = withIronSessionSsr (
       props.isLoggedIn = false;
     }
 
-    //TO DO: Get user groups 
-    // const group = await db.group.getGroupById(user._id, params.id)
+    //GET Member/User Info
+    const groupId = query.g
+    const memberId = query.m
+
+    props.groupId = groupId
+
     const member = await db.group.getMemberById(groupId, memberId)
     const memberDetails = JSON.parse(JSON.stringify(member))
 
@@ -59,8 +57,6 @@ export default function MemberPage(props) {
   const router = useRouter();
   const menuType = "group"
 
-
-
   return (
     <div >
       <Head>
@@ -84,9 +80,6 @@ export default function MemberPage(props) {
           <p> Member Role: {props.mbrDetails.memberRole}</p>
 
         </div>
-
-        
-
 
       </main>
 
