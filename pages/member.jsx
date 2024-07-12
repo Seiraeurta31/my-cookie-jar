@@ -16,8 +16,6 @@ export const getServerSideProps = withIronSessionSsr (
     const groupId = query.g
     const memberId = query.m
 
-    console.log("query: ", query.g)
-
     const props = {};
 
     props.groupId = groupId
@@ -36,7 +34,6 @@ export const getServerSideProps = withIronSessionSsr (
     const member = await db.group.getMemberById(groupId, memberId)
     const memberDetails = JSON.parse(JSON.stringify(member))
 
-    console.log("MEMBER - DETAILS: ", memberDetails)
 
     if(memberDetails !== null){
       props.mbrDetails = memberDetails
@@ -48,8 +45,7 @@ export const getServerSideProps = withIronSessionSsr (
     if(memberUserInfo !== null){
       props.mbrUserInfo = memberUserInfo
     }
-    console.log("MEMBER INFO: ", memberDetails)
-    
+   
       
     return { props };
   },
