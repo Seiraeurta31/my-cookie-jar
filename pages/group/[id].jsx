@@ -66,16 +66,20 @@ export default function GroupPage(props) {
         </div>
 
         <div>
-          <h3>Group Details</h3>
-          <p> Group Id:  {props.group.id}</p>
-          <p> Group Name: {props.group.groupName}</p>
-          <p> Group Code: {props.group.groupCode}</p>
-        </div>
-
+          <Link href={`/membersList/${props.group.id}`}>Group Member List</Link>
+        </div> 
 
         <div>
-          <Link href={`/membersList/${props.group.id}`}>Group Member List</Link>
-        </div>  
+          <Link href={`/boothList/${props.group.id}`}>Troop Booth List</Link>
+        </div>   
+
+        <div>
+          <Link href={`/inventory/${props.group.id}`}>Cookie Inventory</Link>
+        </div> 
+
+        <div>
+          <Link href={`/boothList/${props.group.id}`}>Troop Booth List</Link>
+        </div> 
 
 
         {/* <div>
