@@ -8,7 +8,7 @@ export async function createNewBooth(
   locationName, 
   date, 
   time,
-  amPm, 
+  amPM, 
   shifts,
   address,
   city,
@@ -19,7 +19,7 @@ export async function createNewBooth(
     locationName, 
     date, 
     time,
-    amPm, 
+    amPM, 
     shifts,
     address,
     city,
@@ -31,7 +31,7 @@ export async function createNewBooth(
     locationName && 
     date && 
     time &&
-    amPm && 
+    amPM && 
     shifts &&
     address &&
     city &&
@@ -47,7 +47,7 @@ export async function createNewBooth(
       locationName, 
       date, 
       time,
-      amPm, 
+      amPM, 
       shifts,
       address,
       city,
@@ -119,7 +119,7 @@ export async function updateBoothDetails(
   locationName, 
   date, 
   time,
-  amPm, 
+  amPM, 
   shifts,
   address,
   city,
@@ -136,7 +136,7 @@ export async function updateBoothDetails(
         "locationName": locationName, 
         "date": date, 
         "time": time,
-        "amPm": amPm, 
+        "amPM": amPM, 
         "shifts": shifts,
         "address": address,
         "city": city,
