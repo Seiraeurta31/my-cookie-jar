@@ -11,7 +11,7 @@ const BoothSchema = new Schema({
   address: String,
   city: String,
   state: String,
-  notes: [String],
+  notes: String,
   attendingMembers: [boothAttendeeSchema]
 })
 

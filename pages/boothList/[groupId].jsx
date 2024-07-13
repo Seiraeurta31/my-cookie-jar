@@ -24,19 +24,17 @@ export const getServerSideProps = withIronSessionSsr (
       props.isLoggedIn = false;
     }
 
-        //TO DO: Get user groups 
-    // const group = await db.group.getGroupById(user._id, params.id)
+
     const group = await db.group.getGroupById(params.groupId)
- 
     const groupConverted = JSON.parse(JSON.stringify(group))
 
-    //TO DO: Parsing turns it to Javascript to read in browser
-
+    console.log("group: ", groupConverted)
 
     if(group !== null){
         props.group = groupConverted
       }
 
+     console.log("group: ", groupConverted) 
     return { props };
   },
   sessionOptions
@@ -63,6 +61,34 @@ export default function GroupPage(props) {
           <h1 >Troop Booth List</h1>
           <h3> Page In Progress</h3>
         </div>
+        <div>
+          <h1>Group Booths</h1>
+
+          <Link href={`/boothForm?g=${props.group.id}`}>
+            <h3>Add New Booth</h3>
+          </Link>
+
+          {props.group.groupBooths.length ? (
+            <>
+              {props.group.groupBooths.map((booth, i) => (
+                <GroupBooths 
+                  key={i}
+                  groupId={props.group.id}
+                  boothId={booth.boothId}
+                  locationName={booth.locationName} 
+                  date={booth.date} 
+                  time={booth.time} 
+                  amPM={booth.amPM}
+                  numShifts={booth.shifts}> 
+                </GroupBooths>
+              ))}
+            </>
+            ):( 
+            <>
+              <p >No group booths yet!</p>
+            </>
+          )}
+        </div>
    
       </main>
 
@@ -73,14 +99,12 @@ export default function GroupPage(props) {
 }
 
 
-function GroupMembers({memberId, memberRole, groupId, id}) {
-
+function GroupBooths({groupId, boothId, locationName, date, time, amPM, numShifts}) {
   return (
     <div>
-      <Link href={'/member/' + groupId}>
-        <h3>Member Info</h3>
-        <p>User Id: {memberId}</p>
-        <p>Member Role: {memberRole}</p>
+      <Link href={`/booth?g=${groupId}&b=${boothId}`}>
+        <p>Booth Id: {boothId} </p>
+        
       </Link>
         
 
@@ -88,4 +112,5 @@ function GroupMembers({memberId, memberRole, groupId, id}) {
     
   )
 }
+
 

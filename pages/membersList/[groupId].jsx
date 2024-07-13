@@ -24,13 +24,8 @@ export const getServerSideProps = withIronSessionSsr (
       props.isLoggedIn = false;
     }
 
-        //TO DO: Get user groups 
-    // const group = await db.group.getGroupById(user._id, params.id)
     const group = await db.group.getGroupById(params.groupId)
- 
     const groupConverted = JSON.parse(JSON.stringify(group))
-
-    //TO DO: Parsing turns it to Javascript to read in browser
 
 
     if(group !== null){
@@ -82,7 +77,6 @@ export default function GroupPage(props) {
             </>
             ):( 
               <>
-                <p >No user groups yet!</p>
               </>
           )}
         </div>

@@ -65,6 +65,9 @@ export default function Dashboard(props) {
           <h1 >
             DASHBOARD
           </h1>
+          <h3 >
+            Active: {props.user.name}
+          </h3>
         </div>
 
         <div>

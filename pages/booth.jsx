@@ -10,11 +10,11 @@ import Footer from "../components/footer";
 
 
 export const getServerSideProps = withIronSessionSsr (
-  async function getServerSideProps({ req, params }) {
-
+  async function getServerSideProps({ req, query }) {
+    
     const props = {};
 
-    //Get user session information
+    //Get active user session information
     const user = req.session.user;
     if (user) {
       props.user = req.session.user;
@@ -23,26 +23,33 @@ export const getServerSideProps = withIronSessionSsr (
       props.isLoggedIn = false;
     }
 
-        //TO DO: Get user groups 
-    // const group = await db.group.getGroupById(user._id, params.id)
-    const group = await db.group.getGroupById(params.groupId)
- 
-    const groupConverted = JSON.parse(JSON.stringify(group))
+    //GET Member/User Info
+    const groupId = query.g
+    const boothId = query.b
 
-    //TO DO: Parsing turns it to Javascript to read in browser
+    console.log("boothId: ", boothId)
+
+    props.groupId = groupId
+
+    const booth = await db.booth.getBoothById(boothId)
+    const boothDetails = JSON.parse(JSON.stringify(booth))
+
+    console.log("booth details: ", booth)
 
 
-    if(group !== null){
-        props.group = groupConverted
-      }
-
+    if(boothDetails !== null){
+      props.booth = boothDetails
+    }
+    
     return { props };
   },
   sessionOptions
 );
 
 
-export default function GroupPage(props) {
+
+
+export default function MemberPage(props) {
   const router = useRouter();
   const menuType = "group"
 
@@ -54,15 +61,23 @@ export default function GroupPage(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} groupId={props.group.id}/>
+      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} groupId={props.groupId}/>
 
       <main >
+        <div>
+          <h1 >
+            Booth Details Page
+          </h1>
+        </div>
 
         <div>
-          <h1 >Troop Booth List</h1>
-          <h3> Page In Progress</h3>
+          <p> Location Name: {props.booth.locationName}</p>
+          <p> Date: {props.booth.date}</p>
+          <p> Time: {props.booth.time}{props.booth.amPM}</p>
+          <p> Number of Shifts: {props.booth.shifts}</p>
+
         </div>
-   
+
       </main>
 
       <Footer/>
@@ -70,21 +85,3 @@ export default function GroupPage(props) {
     </div>      
    );         
 }
-
-
-function GroupMembers({memberId, memberRole, groupId, id}) {
-
-  return (
-    <div>
-      <Link href={'/member/' + groupId}>
-        <h3>Member Info</h3>
-        <p>User Id: {memberId}</p>
-        <p>Member Role: {memberRole}</p>
-      </Link>
-        
-
-    </div>  
-    
-  )
-}
-

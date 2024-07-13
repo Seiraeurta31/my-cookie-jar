@@ -15,6 +15,17 @@ export async function createNewBooth(
   state,
   notes) {
 
+  console.log(groupId, 
+    locationName, 
+    date, 
+    time,
+    amPm, 
+    shifts,
+    address,
+    city,
+    state,
+    notes)
+
   if (!(
     groupId &&
     locationName && 

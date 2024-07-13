@@ -16,11 +16,11 @@ export default withIronSessionApiRoute(
       case 'POST': 
         try{
           const {
-            groupId, 
-            locationName, 
-            date, 
+            groupId,
+            locationName,
+            date,
             time,
-            amPm, 
+            amPM,
             shifts,
             address,
             city,
@@ -29,21 +29,24 @@ export default withIronSessionApiRoute(
           } = req.body
 
           const newBooth = await db.booth.createNewBooth( 
-            groupId, 
-            locationName, 
-            date, 
+            groupId,
+            locationName,
+            date,
             time,
-            amPm, 
+            amPM,
             shifts,
             address,
             city,
             state,
             notes)
 
+          console.log("new booth: ", newBooth)
+
           if(newBooth == null){
             req.session.destroy()  
             return res.status(401).json({error: "Unable to create new booth"})
           }
+
 
           
           return res.status(200).json(newBooth)
