@@ -19,13 +19,13 @@ export async function getUserGroups(userId) {
 
 
 //POST: Create new user
-export async function create(username, password, name, email) {
+export async function create(username, password, firstName, lastName, email) {
   if (!(username && password))
     throw new Error('Must include username and password')
 
   await dbConnect()
 
-  const user = await User.create({username, password, name, email})
+  const user = await User.create({username, password, firstName, lastName, email})
 
   if (!user)
     throw new Error('Error creating user')

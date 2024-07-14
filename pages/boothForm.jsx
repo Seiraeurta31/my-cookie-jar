@@ -51,7 +51,8 @@ export default function CreateGroup(props) {
         address,
         city,
         state,
-        notes},
+        notes
+      },
 
       setForm,
     ] = useState({

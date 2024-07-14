@@ -9,13 +9,14 @@ import Link from "next/link";
 export default function Signup(props) {
   const router = useRouter();
   const [
-    { username, password, "confirm-password": confirmPassword, fullName, email},
+    { username, password, "confirm-password": confirmPassword, firstName, lastName, email},
     setForm,
   ] = useState({
     username: "",
     password: "",
     "confirm-password": "",
-    fullName:"",
+    firstName:"",
+    lastName:"",
     email: "",
   });
   const [error, setError] = useState("");
@@ -25,7 +26,8 @@ export default function Signup(props) {
       username,
       password,
       "confirm-password": confirmPassword,
-      fullName,
+      firstName,
+      lastName,
       email,
       ...{ [e.target.name]: e.target.value.trim() },
     });
@@ -34,7 +36,8 @@ export default function Signup(props) {
     e.preventDefault();
     if (!username) return setError("Must include username");
     if (password !== confirmPassword) return setError("Passwords must Match");
-    if (!fullName) return setError("Must include your first and last name");
+    if (!firstName) return setError("Must include your first name");
+    if (!lastName) return setError("Must include your last name");
     if (!email) return setError("Must include your email");
 
     try {
@@ -43,7 +46,7 @@ export default function Signup(props) {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ username, password, fullName, email }),
+        body: JSON.stringify({ username, password, firstName, lastName, email }),
       });
       if (res.status === 200) return router.push("/dashboard");
       const { error: message } = await res.json();
@@ -70,13 +73,22 @@ export default function Signup(props) {
         <form
           onSubmit={handleCreateAccount}
         >
-          <label htmlFor="fullName">First and Last Name: </label>
+          <label htmlFor="firstName">First Name: </label>
           <input
             type="text"
-            name="fullName"
-            id="fullName"
+            name="firstName"
+            id="firstName"
             onChange={handleChange}
-            value={fullName}
+            value={firstName}
+          />
+
+          <label htmlFor="lastName">Last Name: </label>
+          <input
+            type="text"
+            name="lastName"
+            id="lastName"
+            onChange={handleChange}
+            value={lastName}
           />
 
           <label htmlFor="email">Email: </label>

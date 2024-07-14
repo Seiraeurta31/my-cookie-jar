@@ -47,11 +47,11 @@ async function logout(req, res) {
 
 async function signup(req, res) {
   try {
-    const { username, password, fullName, email } = req.body
+    const { username, password, firstName, lastName, email } = req.body
     const {
       password: _,
       ...otherFields
-    } = await db.user.create( username, password, fullName, email )
+    } = await db.user.create( username, password, firstName, lastName, email )
     req.session.user = otherFields
     await req.session.save()
     res.redirect('/dashboard')
