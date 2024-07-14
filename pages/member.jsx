@@ -73,7 +73,7 @@ export default function MemberPage(props) {
         </div>
 
         <div>
-          <p> Member Name: {props.mbrUserInfo.name}</p>
+          <p> Member Name: {props.mbrDetails.memberFirstName} {props.mbrDetails.memberLastName}</p>
           <p> Member Email: {props.mbrUserInfo.email}</p>
           <p> Member Role: {props.mbrDetails.memberRole}</p>
 

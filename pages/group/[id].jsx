@@ -7,6 +7,7 @@ import Link from "next/link";
 import Head from 'next/head';
 import Header from "../../components/header";
 import Footer from "../../components/footer";
+// import group from "../api/group";
 
 
 export const getServerSideProps = withIronSessionSsr (
@@ -26,8 +27,21 @@ export const getServerSideProps = withIronSessionSsr (
     //TO DO: Get user groups 
     // const group = await db.group.getGroupById(user._id, params.id)
     const group = await db.group.getGroupById(params.id)
-
     const groupConverted = JSON.parse(JSON.stringify(group))
+
+    //check if user is member
+    const member = await db.group.getMemberByUserId(groupConverted.id, user._id)
+    if (!member) {
+        return {
+          redirect: {
+            permanent: false,
+            destination: "/dashboard",
+          },
+          props:{},
+        };
+    }
+
+    
 
 
     //TO DO: Parsing turns it to Javascript to read in browser
@@ -47,6 +61,30 @@ export default function GroupPage(props) {
   const router = useRouter();
   const menuType = "group"
 
+  const groupId = props.group.id
+  console.log("groupId: ", groupId)
+
+  const userId = props.user._id
+  console.log("user: ", userId)
+
+  async function leaveGroup(e) {
+    e.preventDefault()
+    const res = await fetch(`/api/user`, {
+      method: 'DELETE',
+      headers: 
+      {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({userId, groupId})
+    })
+    console.log("Deleted drink ID response: ", res)
+    // Call router.replace(router.asPath) if you receive a 200 status
+    if (res.status === 200) {
+      router.replace(router.asPath)
+    }  
+  }
+
+
   return (
     <div >
       <Head>
@@ -60,9 +98,10 @@ export default function GroupPage(props) {
       <main >
         <div>
           <h1 >
-            GROUP PAGE
+            {props.group.groupName} Home Page
           </h1>
         </div>
+
 
         <div>
           <Link href={`/membersList/${props.group.id}`}>Group Member List</Link>
@@ -77,50 +116,8 @@ export default function GroupPage(props) {
         </div> 
 
         <div>
-          <Link href={`/boothList/${props.group.id}`}>Troop Booth List</Link>
-        </div> 
-
-
-        {/* <div>
-          <h1>Group Members</h1>
-          {props.group.groupMembers ? (
-            <>
-              {props.group.groupMembers.map((member, i) => (
-                <GroupMembers 
-                  key={i}
-                  groupId={props.group.id}
-                  memberId={member.userId} 
-                  memberRole={member.memberRole}
-                  id={member._id}>
-                </GroupMembers>
-              ))}
-            </>
-            ):( 
-              <>
-                <p >No user groups yet!</p>
-              </>
-          )}
+          <a onClick={leaveGroup} style={{ cursor: "pointer" }}>Leave Group</a> 
         </div>
-
-        <div>
-          <h1>Booths</h1>
-          {props.group.groupBooths ? (
-            <>
-              {props.group.groupBooths.map((booth, i) => (
-                <GroupBooths 
-                  key={i}
-                  boothId={booth.boothId} 
-                  id={booth._id}>
-                </GroupBooths>
-              ))}
-            </>
-            ):( 
-              <>
-                <p >No user groups yet!</p>
-              </>
-          )}
-        </div> */}
-
 
       </main>
 

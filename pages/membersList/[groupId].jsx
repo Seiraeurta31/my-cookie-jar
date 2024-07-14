@@ -55,12 +55,11 @@ export default function GroupPage(props) {
       <main >
 
         <div>
-          <h1 >Group Member List</h1>
-          <h3> Page In Progress</h3>
+          <h1 >{props.group.groupName} Member List</h1>
         </div>
 
        <div>
-          <h1>Group Members</h1>
+          <h3>Group Members:</h3>
           {props.group.groupMembers ? (
             <>
               {props.group.groupMembers.map((member, i) => (
@@ -69,7 +68,8 @@ export default function GroupPage(props) {
                   groupId={props.group.id}
                   memberId={member._id}
                   userId={member.userId} 
-                  memberName={member.memberName} 
+                  memberFirstName={member.memberFirstName} 
+                  memberLastName={member.memberLastName}
                   memberRole={member.memberRole}
                   id={member._id}>
                 </GroupMembers>
@@ -90,12 +90,12 @@ export default function GroupPage(props) {
 }
 
 
-function GroupMembers({userId, memberRole, groupId, memberName, memberId}) {
+function GroupMembers({memberFirstName, memberLastName, groupId, memberId}) {
 
   return (
     <div>
       <Link href={`/member?g=${groupId}&m=${memberId}`}>
-        <h3>Member Name: {memberName}</h3>
+        <h3>{memberFirstName} {memberLastName}</h3>
       </Link>
         
 

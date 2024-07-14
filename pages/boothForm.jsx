@@ -133,86 +133,112 @@ export default function CreateGroup(props) {
           <form
             onSubmit={handleCreateAccount}
           >
-            <label htmlFor="locationName">Location Name: </label>
-            <input
-              type="text"
-              name="locationName"
-              id="locationName"
-              onChange={handleChange}
-              value={locationName}
-            />
-  
-            <label htmlFor="date">Date: (mm/yy): </label>
-            <input
-              type="text"
-              name="date"
-              id="date"
-              onChange={handleChange}
-              value={date}
-            />
-  
-            <label htmlFor="time">Time:: </label>
-            <input
-              type="text"
-              name="time"
-              id="time"
-              onChange={handleChange}
-              value={time}
-            />
+            <div>
+              <label htmlFor="locationName">Location Name: </label>
+              <input
+                type="text"
+                name="locationName"
+                id="locationName"
+                onChange={handleChange}
+                value={locationName}
+              />
+            </div>
 
-            <label htmlFor="amPM">am/pm: </label>
-            <input
-              type="text"
-              name="amPM"
-              id="amPM"
-              onChange={handleChange}
-              value={amPM}
-            />
-
-            <label htmlFor="shifts">Number of Shiifts: </label>
-            <input
-              type="text"
-              name="shifts"
-              id="shifts"
-              onChange={handleChange}
-              value={shifts}
-            />
   
-            <label htmlFor="address">Street Address: </label>
-            <input
-              type="text"
-              name="address"
-              id="address"
-              onChange={handleChange}
-              value={address}
-            />
-
-            <label htmlFor="city">City: </label>
-            <input
-              type="text"
-              name="city"
-              id="city"
-              onChange={handleChange}
-              value={city}
-            />
-
-            <label htmlFor="state">State: </label>
-            <input
-              type="text"
-              name="state"
-              id="state"
-              onChange={handleChange}
-              value={state}
-            />
+            <div>
+              <label htmlFor="date">Date: (mm/yy): </label>
+              <input
+                type="text"
+                name="date"
+                id="date"
+                onChange={handleChange}
+                value={date}
+              />
+            </div>
+          
   
-            <label htmlFor="notes">Notes: </label>
-            <input
-              type="text"
-              name="notes"
-              id="notes"
-              onChange={handleChange}
-              value={notes}
-            />
+            <div>
+              <label htmlFor="time">Time:: </label>
+              <input
+                type="text"
+                name="time"
+                id="time"
+                onChange={handleChange}
+                value={time}
+              /> 
+            </div>         
+
+            <div>
+              <label htmlFor="amPM">am/pm: </label>
+              <input
+                type="text"
+                name="amPM"
+                id="amPM"
+                onChange={handleChange}
+                value={amPM}
+              />
+            </div>
+            
+
+            <div>
+              <label htmlFor="shifts">Number of Shiifts: </label>
+              <input
+                type="text"
+                name="shifts"
+                id="shifts"
+                onChange={handleChange}
+                value={shifts}
+              />
+            </div>
+        
+  
+            <div>
+              <label htmlFor="address">Street Address: </label>
+              <input
+                type="text"
+                name="address"
+                id="address"
+                onChange={handleChange}
+                value={address}
+              />
+            </div>
+        
+
+            <div>
+              <label htmlFor="city">City: </label>
+              <input
+                type="text"
+                name="city"
+                id="city"
+                onChange={handleChange}
+                value={city}
+              />
+            </div>
+          
+
+            <div>
+              <label htmlFor="state">State: </label>
+              <input
+                type="text"
+                name="state"
+                id="state"
+                onChange={handleChange}
+                value={state}
+              />
+            </div>
+           
+
+            <div>
+              <label htmlFor="notes">Notes: </label>
+              <input
+                type="text"
+                name="notes"
+                id="notes"
+                onChange={handleChange}
+                value={notes}
+              />
+            </div>
+            
   
             <button>Submit</button>
             {error && <p>{error}</p>}

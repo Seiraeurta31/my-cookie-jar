@@ -18,7 +18,7 @@ export default withIronSessionApiRoute(
       case 'POST': 
         try{
           const {groupCode, groupName} = req.body
-          const newGroup= await db.group.createNewGroup(user._id, user.name, groupCode, groupName)
+          const newGroup= await db.group.createNewGroup(user._id, user.firstName, user.lastName, groupCode, groupName)
           if(newGroup == null){
             req.session.destroy()  
             return res.status(401)
@@ -53,6 +53,7 @@ export default withIronSessionApiRoute(
 
       //Delete group
       case 'DELETE': 
+
       try{
         const {groupId} = req.body
         const deletedGroup = await db.group.deleteGroup(groupId)

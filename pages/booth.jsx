@@ -75,6 +75,7 @@ export default function MemberPage(props) {
           <p> Date: {props.booth.date}</p>
           <p> Time: {props.booth.time}{props.booth.amPM}</p>
           <p> Number of Shifts: {props.booth.shifts}</p>
+          <p> Notes: {props.booth.notes}</p>
 
         </div>
 

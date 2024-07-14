@@ -1,4 +1,4 @@
-import Link from "next/link";
+
 import useLogout from "../../hooks/useLogout";
 
 
@@ -11,10 +11,22 @@ export default function Header(props) {
           <div >
             {props.menu === "user" ? (
               <>
-                <Link href="/dashboard">Dashboard    </Link>
-                <Link href="/createGroup">Create Group    </Link> 
-                <Link href="/joinGroup">Join Group    </Link>
+              <div>
+                <a href="/dashboard">Dashboard    </a>
+              </div>
+                
+              <div>
+                <a href="/createGroup">Create Group    </a> 
+              </div>
+                
+              <div>
+                <a href="/joinGroup">Join Group    </a>
+              </div>
+
+              <div>
                 <a onClick={logout} style={{ cursor: "pointer" }}>Logout</a> 
+              </div>
+                
               </>
               ) : (
                 <div>  
@@ -25,10 +37,23 @@ export default function Header(props) {
           <div >
             {props.menu === "group" ? (
               <>
-                <Link href="/dashboard">Dashboard    </Link>
-                <Link href={'/group/' + props.groupId}>Group Main    </Link> 
-                <Link href={`/membersList/${props.groupId}`}>Members List    </Link>
+              <div>
+                <a href="/dashboard">Dashboard </a>
+              </div>
+
+              <div>
+                <a href={'/group/' + props.groupId}>Home Page   </a> 
+              </div>
+                
+              <div>
+                <a href={`/membersList/${props.groupId}`}>Members List    </a>
+              </div>
+                
+              <div>
                 <a onClick={logout} style={{ cursor: "pointer" }}>Logout</a> 
+
+              </div>
+                
               </>
             ) : (
               <div>  

@@ -73,59 +73,74 @@ export default function Signup(props) {
         <form
           onSubmit={handleCreateAccount}
         >
-          <label htmlFor="firstName">First Name: </label>
-          <input
-            type="text"
-            name="firstName"
-            id="firstName"
-            onChange={handleChange}
-            value={firstName}
-          />
 
-          <label htmlFor="lastName">Last Name: </label>
-          <input
-            type="text"
-            name="lastName"
-            id="lastName"
-            onChange={handleChange}
-            value={lastName}
-          />
+          <div>
+            <label htmlFor="firstName">First Name: </label>
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              onChange={handleChange}
+              value={firstName}
+            />
+          </div>
+          
 
-          <label htmlFor="email">Email: </label>
-          <input
-            type="text"
-            name="email"
-            id="email"
-            onChange={handleChange}
-            value={email}
-          />
-
-          <label htmlFor="username">Username: </label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            onChange={handleChange}
-            value={username}
-          />
-
-          <label htmlFor="password">Password: </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={handleChange}
-            value={password}
-          />
-
-          <label htmlFor="confirm-password">Confirm Password: </label>
-          <input
-            type="password"
-            name="confirm-password"
-            id="confirm-password"
-            onChange={handleChange}
-            value={confirmPassword}
-          />
+          <div>
+            <label htmlFor="lastName">Last Name: </label>
+            <input
+              type="text"
+              name="lastName"
+              id="lastName"
+              onChange={handleChange}
+              value={lastName}
+            />
+          </div>
+          
+          <div>
+            <label htmlFor="email">Email: </label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              onChange={handleChange}
+              value={email}
+            />
+          </div>
+          
+          <div>
+            <label htmlFor="username">Username: </label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              onChange={handleChange}
+              value={username}
+            />
+          </div>
+          
+          <div>
+            <label htmlFor="password">Password: </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              onChange={handleChange}
+              value={password}
+            />
+          </div>
+          
+          <div>
+            <label htmlFor="confirm-password">Confirm Password: </label>
+            <input
+              type="password"
+              name="confirm-password"
+              id="confirm-password"
+              onChange={handleChange}
+              value={confirmPassword}
+            />
+          </div>
+          
 
           <button>Submit</button>
           {error && <p>{error}</p>}
