@@ -51,8 +51,6 @@ export async function createNewGroup(uId, uFirstName, uLastName, groupCode, grou
 }
 
 
-
-
 //GET group details by id
 export async function getGroupById(groupId) {
 
@@ -66,9 +64,6 @@ export async function getGroupById(groupId) {
     
   return convertIdToString(group)
 }
-
-
-
 
 //TO DO: Get list of group members
 export async function getGroupMembers(groupId) {
@@ -84,6 +79,19 @@ export async function getGroupMembers(groupId) {
 }
 
 
+export async function getGroupBooths(groupId) {
+
+  await dbConnect()
+
+  //Validate user exists
+  const group = await Group.findById(groupId).lean()
+  if (!group) return null
+
+  console.log("group found")
+
+  //TO DO: Stringify data to convert to JSON to be read from database
+  return group.groupBooths.map(booth => convertIdToString(booth))
+}
 
 
 export async function getMemberById(groupId, memberId) {
@@ -101,6 +109,30 @@ export async function getMemberById(groupId, memberId) {
 }
 
 
+export async function getGroupBoothById(groupId, boothId) {
+
+  await dbConnect()
+
+  console.log("boothId recieved: ", boothId)
+
+  console.log ("getGroupBoothById triggered")
+
+  //Check for user, if none, return null, otherwise proceed to find drink by user.
+ const boothList = await getGroupBooths(groupId)
+ if (!boothList) return null
+
+ console.log("booths found")
+
+ console.log ("boothList: ", boothList)
+
+ const booth = boothList.find(b => b.boothId === boothId)
+  if (!booth) return null
+
+  console.log("booth found")
+  return booth
+}
+
+
 export async function getMemberByUserId(groupId, userId) {
 
   await dbConnect()
@@ -114,7 +146,6 @@ export async function getMemberByUserId(groupId, userId) {
 
   return member
 }
-
 
 //TO DO: Update member role
 export async function updateMemberRole(memberId, newMemberRole, groupId) {
@@ -137,7 +168,6 @@ export async function updateMemberRole(memberId, newMemberRole, groupId) {
 
   return memberUpdated
 }
-
 
 //Delete a group
 export async function deleteGroup(groupId) {

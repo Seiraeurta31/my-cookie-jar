@@ -27,15 +27,30 @@ export const getServerSideProps = withIronSessionSsr (
     const groupId = query.g
     const boothId = query.b
 
+    console.log("group Id: ", groupId )
     console.log("boothId: ", boothId)
 
     props.groupId = groupId
+    props.boothId = boothId
+
+    const boothExists = await db.group.getGroupBoothById(groupId, boothId)
+    
+    if (!boothExists) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: (`/group/${groupId}`),
+        },
+        props:{},
+      };
+    }
 
     const booth = await db.booth.getBoothById(boothId)
+
+    console.log("booth: ", booth)
     const boothDetails = JSON.parse(JSON.stringify(booth))
 
-    console.log("booth details: ", booth)
-
+    console.log("boothDetails: ", boothDetails)
 
     if(boothDetails !== null){
       props.booth = boothDetails
@@ -49,9 +64,37 @@ export const getServerSideProps = withIronSessionSsr (
 
 
 
-export default function MemberPage(props) {
+export default function BoothPage(props) {
   const router = useRouter();
   const menuType = "group"
+
+  const boothId = props.boothId
+  const groupId= props.groupId
+
+  console.log("groupId from booth page: ", groupId)
+
+
+
+
+  async function deleteBooth(e) {
+    e.preventDefault()
+    const res = await fetch(`/api/booth`, {
+      method: 'DELETE',
+      headers: 
+      {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({groupId, boothId})
+    })
+    // Call router.replace(router.asPath) if you receive a 200 status
+    if (res.status === 200) {
+      router.replace(router.asPath)
+    }  
+  }
+
+
+
+
 
   return (
     <div >
@@ -61,6 +104,7 @@ export default function MemberPage(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+
       <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} groupId={props.groupId}/>
 
       <main >
@@ -68,6 +112,10 @@ export default function MemberPage(props) {
           <h1 >
             Booth Details Page
           </h1>
+        </div>
+
+        <div >
+          <a onClick={deleteBooth} style={{ cursor: 'pointer', fontSize : 20, color: 'blue', textDecoration: 'underline' }}>Delete Booth</a> 
         </div>
 
         <div>

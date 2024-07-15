@@ -31,7 +31,7 @@ export const getServerSideProps = withIronSessionSsr (
     sessionOptions
 );
 
-export default function CreateGroup(props) {
+export default function JoinGroup(props) {
     const router = useRouter();
     const menuType = "user"
     const [

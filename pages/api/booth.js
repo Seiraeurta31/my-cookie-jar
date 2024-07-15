@@ -40,13 +40,10 @@ export default withIronSessionApiRoute(
             state,
             notes)
 
-          console.log("new booth: ", newBooth)
-
           if(newBooth == null){
             req.session.destroy()  
             return res.status(401).json({error: "Unable to create new booth"})
           }
-
 
           
           return res.status(200).json(newBooth)
@@ -97,6 +94,8 @@ export default withIronSessionApiRoute(
       case 'DELETE': 
         try{
           const {groupId, boothId} = req.body
+
+          console.log("groupId from API delete page: ", groupId)
           const deletedBooth = await db.booth.deleteBooth(groupId, boothId)
           if(deletedBooth == null){
             req.session.destroy()

@@ -15,17 +15,6 @@ export async function createNewBooth(
   state,
   notes) {
 
-  console.log(groupId, 
-    locationName, 
-    date, 
-    time,
-    amPM, 
-    shifts,
-    address,
-    city,
-    state,
-    notes)
-
   if (!(
     groupId &&
     locationName && 
@@ -81,14 +70,12 @@ export async function createNewBooth(
 
 
 
-
-
-
 //GET: Get booth details by id
 export async function getBoothById(boothId) {
 
   await dbConnect()
 
+  console.log("boothId searched: ", boothId)
 
   //Get booth details by booth id
   const booth = await Booth.findById(boothId).lean()

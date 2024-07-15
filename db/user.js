@@ -48,7 +48,7 @@ export async function getUserInfo(userId) {
 }
 
 //POST: Join user to existing group 
-export async function joinGroup(userId, userName, gCode, gName) {
+export async function joinGroup(userId, uFirstName, uLastName, gCode, gName) {
 
   await dbConnect()
 
@@ -85,7 +85,8 @@ export async function joinGroup(userId, userName, gCode, gName) {
       { groupMembers: 
         {
           userId: userId, 
-          memberName: userName,
+          memberFirstName: uFirstName,
+          memberLastName: uLastName,
           memberRole: 'member'
         }  
       } 
