@@ -128,6 +128,9 @@ export default function CreateGroup(props) {
           <h1>
             Create New Booth
           </h1>
+
+          
+
   
   
           <form
@@ -241,6 +244,9 @@ export default function CreateGroup(props) {
             
   
             <button>Submit</button>
+            <button>
+              <a href={`/group/${groupId}`}>Cancel</a>
+            </button>
             {error && <p>{error}</p>}
 
           </form>

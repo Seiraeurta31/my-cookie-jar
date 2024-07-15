@@ -125,6 +125,9 @@ export default function CreateGroup(props) {
             />
   
             <button>Submit</button>
+            <button>
+              <a href="/dashboard">Cancel</a>
+            </button>
             {error && <p>{error}</p>}
           </form>
         </main>
