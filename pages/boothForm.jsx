@@ -79,7 +79,7 @@ export default function CreateGroup(props) {
         city,
         state,
         notes,
-        ...{ [e.target.name]: e.target.value.trim() },
+        ...{ [e.target.name]: e.target.value},
       });
     }
     async function handleCreateAccount(e) {

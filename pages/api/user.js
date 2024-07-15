@@ -20,7 +20,7 @@ export default withIronSessionApiRoute(
       case 'POST': 
         try{
           const {groupCode, groupName} = req.body
-          const addedGroup= await db.user.joinGroup(user._id, user.name, groupCode, groupName)
+          const addedGroup= await db.user.joinGroup(user._id, user.firstName, user.lastName, groupCode, groupName)
           if(addedGroup == null){
             req.session.destroy()  
             return res.status(401)
