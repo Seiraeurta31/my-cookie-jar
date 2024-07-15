@@ -25,11 +25,10 @@ export const getServerSideProps = withIronSessionSsr (
     }
 
 
-    const group = await db.group.getGroupById(params.groupId)
-    const groupConverted = JSON.parse(JSON.stringify(group))
+    const group = JSON.parse(JSON.stringify(await db.group.getGroupById(params.groupId)))
 
     if(group !== null){
-        props.group = groupConverted
+        props.group = group
       }
       
     return { props };

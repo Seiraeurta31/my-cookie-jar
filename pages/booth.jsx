@@ -27,9 +27,6 @@ export const getServerSideProps = withIronSessionSsr (
     const groupId = query.g
     const boothId = query.b
 
-    console.log("group Id: ", groupId )
-    console.log("boothId: ", boothId)
-
     props.groupId = groupId
     props.boothId = boothId
 
@@ -45,15 +42,10 @@ export const getServerSideProps = withIronSessionSsr (
       };
     }
 
-    const booth = await db.booth.getBoothById(boothId)
+    const booth = JSON.parse(JSON.stringify(await db.booth.getBoothById(boothId)))
 
-    console.log("booth: ", booth)
-    const boothDetails = JSON.parse(JSON.stringify(booth))
-
-    console.log("boothDetails: ", boothDetails)
-
-    if(boothDetails !== null){
-      props.booth = boothDetails
+    if(booth !== null){
+      props.booth = booth
     }
     
     return { props };
