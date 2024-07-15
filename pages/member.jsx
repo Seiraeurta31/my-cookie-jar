@@ -29,16 +29,18 @@ export const getServerSideProps = withIronSessionSsr (
 
     props.groupId = groupId
 
-    const memberDetails = JSON.parse(JSON.stringify(await db.group.getMemberById(groupId, memberId)))
+    const member = await db.group.getMemberById(groupId, memberId)
+    const memberDetails = JSON.parse(JSON.stringify(member))
 
     if(memberDetails !== null){
       props.mbrDetails = memberDetails
     }
 
-    const memUserInfo = JSON.parse(JSON.stringify(await db.user.getUserInfo(memberDetails.userId))) 
+    const memberInfo = await db.user.getUserInfo(memberDetails.userId)
+    const memberUserInfo = JSON.parse(JSON.stringify(memberInfo)) 
 
-    if(memUserInfo !== null){
-      props.mbrUserInfo = memUserInfo
+    if(memberUserInfo !== null){
+      props.mbrUserInfo = memberUserInfo
     }
     
     return { props };

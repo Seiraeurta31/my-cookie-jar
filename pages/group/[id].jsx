@@ -26,11 +26,11 @@ export const getServerSideProps = withIronSessionSsr (
 
     //TO DO: Get user groups 
     // const group = await db.group.getGroupById(user._id, params.id)
-
-    const group = JSON.parse(JSON.stringify(await db.group.getGroupById(params.id)))
+    const group = await db.group.getGroupById(params.id)
+    const groupConverted = JSON.parse(JSON.stringify(group))
 
     //check if user is member
-    const member = await db.group.getMemberByUserId(group.id, user._id)
+    const member = await db.group.getMemberByUserId(groupConverted.id, user._id)
     if (!member) {
         return {
           redirect: {
@@ -48,7 +48,7 @@ export const getServerSideProps = withIronSessionSsr (
 
 
     if(group !== null){
-        props.group = group
+        props.group = groupConverted
       }
       
     return { props };
