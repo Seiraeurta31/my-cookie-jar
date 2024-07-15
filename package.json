@@ -5,6 +5,10 @@
     "config": {
         "DB_NAME": "mongo_my_cookie_jar_db"
     },
+
+    "engines": {
+        "node": "16.x"
+      },
     "scripts": {
         "dev": "npm run mongoDB && next dev",
         "build": "next build",
