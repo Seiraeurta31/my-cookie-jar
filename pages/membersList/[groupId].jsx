@@ -59,7 +59,9 @@ export default function GroupPage(props) {
         </div>
 
         <div>
-          <a href={`/group/${props.group.id}`}>Back</a>
+          <Link href={`/group/${props.group.id}`}>
+            <h3>Back</h3>
+          </Link>
         </div>
       
 
