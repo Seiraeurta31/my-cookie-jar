@@ -113,7 +113,7 @@ export default function GroupPage(props) {
         </div> 
 
         <div>
-          <a onClick={leaveGroup} style={{ cursor: "pointer" }}>Leave Group</a> 
+          <a onClick={leaveGroup} style={{ cursor: 'pointer', fontSize : 16, color: 'blue', textDecoration: 'underline' }}>Leave Group</a> 
         </div>
 
       </main>

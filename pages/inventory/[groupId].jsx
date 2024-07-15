@@ -66,6 +66,11 @@ export default function Dashboard(props) {
         <div>
             <h1 >Cookie Inventory Page</h1>
             <h3> Page In Progress</h3>
+
+            <div>
+              <a href={`/group/${props.group.id}`}>Back</a>
+            </div>
+
         </div>
       </main>
 

@@ -106,16 +106,34 @@ export default function BoothPage(props) {
           </h1>
         </div>
 
+        <div>
+          <a href={`/boothList/${groupId}`}>Back</a>
+        </div>
+
         <div >
-          <a onClick={deleteBooth} style={{ cursor: 'pointer', fontSize : 20, color: 'blue', textDecoration: 'underline' }}>Delete Booth</a> 
+          <a onClick={deleteBooth} style={{ cursor: 'pointer', fontSize : 16, color: 'blue', textDecoration: 'underline' }}>Delete Booth</a> 
         </div>
 
         <div>
           <p> Location Name: {props.booth.locationName}</p>
-          <p> Date: {props.booth.date}</p>
-          <p> Time: {props.booth.time}{props.booth.amPM}</p>
-          <p> Number of Shifts: {props.booth.shifts}</p>
-          <p> Notes: {props.booth.notes}</p>
+          <p> Date/Time: {props.booth.date} @ {props.booth.time}{props.booth.amPM}</p>
+          <p> # of Shifts Available: {props.booth.shifts}</p>
+          <p> Address: {props.booth.address}, {props.booth.city}, {props.booth.state}</p>
+          
+
+          <iframe
+            width="300"
+            height="300"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_API_KEY}&q=${props.booth.address}+${props.booth.city}+${props.booth.state}`}>
+          </iframe>
+
+          <div>
+            <p> Important Notes: {props.booth.notes}</p>
+          </div>
+          
 
         </div>
 
