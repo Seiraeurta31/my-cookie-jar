@@ -77,7 +77,7 @@ export default function GroupPage(props) {
       },
       body: JSON.stringify({userId, groupId})
     })
-    console.log("Deleted drink ID response: ", res)
+
     // Call router.replace(router.asPath) if you receive a 200 status
     if (res.status === 200) {
       router.replace(router.asPath)

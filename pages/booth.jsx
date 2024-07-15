@@ -32,10 +32,18 @@ export const getServerSideProps = withIronSessionSsr (
     props.groupId = groupId
 
     const booth = await db.booth.getBoothById(boothId)
+
+    if (!booth) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: (`/group/${groupId}`),
+        },
+        props:{},
+      };
+    }
+
     const boothDetails = JSON.parse(JSON.stringify(booth))
-
-    console.log("booth details: ", booth)
-
 
     if(boothDetails !== null){
       props.booth = boothDetails
@@ -49,9 +57,33 @@ export const getServerSideProps = withIronSessionSsr (
 
 
 
-export default function MemberPage(props) {
+export default function BoothPage(props) {
   const router = useRouter();
   const menuType = "group"
+
+  const groupId = props.groupId
+  console.log("groupId: ", groupId)
+
+  const boothId = props.booth.id
+
+  async function deleteBooth(e) {
+    e.preventDefault()
+    const res = await fetch(`/api/booth`, {
+      method: 'DELETE',
+      headers: 
+      {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({groupId, boothId})
+    })
+
+    // Call router.replace(router.asPath) if you receive a 200 status
+    if (res.status === 200) {
+      router.replace(router.asPath)
+    }  
+  }
+
+
 
   return (
     <div >
@@ -69,6 +101,12 @@ export default function MemberPage(props) {
             Booth Details Page
           </h1>
         </div>
+        
+        
+        <div>
+          <a onClick={deleteBooth} style={{ cursor: 'pointer', fontSize : 16, color: 'blue', textDecoration: 'underline' }}>Delete Booth</a> 
+        </div>
+
 
         <div>
           <p> Location Name: {props.booth.locationName}</p>
