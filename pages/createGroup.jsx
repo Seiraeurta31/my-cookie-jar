@@ -3,6 +3,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Link from "next/link";
 import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../config/session";
 
