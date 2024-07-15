@@ -1,5 +1,6 @@
 
 import useLogout from "../../hooks/useLogout";
+import Link from "next/link";
 
 
 export default function Header(props) {
@@ -12,15 +13,15 @@ export default function Header(props) {
             {props.menu === "user" ? (
               <>
               <div>
-                <a href="/dashboard">Dashboard    </a>
+                <Link href="/dashboard">Dashboard    </Link>
               </div>
                 
               <div>
-                <a href="/createGroup">Create Group    </a> 
+                <Link href="/createGroup">Create Group    </Link> 
               </div>
                 
               <div>
-                <a href="/joinGroup">Join Group    </a>
+                <Link href="/joinGroup">Join Group    </Link>
               </div>
 
               <div>
@@ -38,15 +39,15 @@ export default function Header(props) {
             {props.menu === "group" ? (
               <>
               <div>
-                <a href="/dashboard">Dashboard </a>
+                <Link href="/dashboard">Dashboard </Link>
               </div>
 
               <div>
-                <a href={'/group/' + props.groupId}>Home Page   </a> 
+                <Link href={'/group/' + props.groupId}>Home Page   </Link> 
               </div>
                 
               <div>
-                <a href={`/membersList/${props.groupId}`}>Members List    </a>
+                <Link href={`/membersList/${props.groupId}`}>Members List    </Link>
               </div>
                 
               <div>

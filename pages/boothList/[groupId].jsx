@@ -57,11 +57,11 @@ export default function GroupPage(props) {
           <h1 >Troop Booth List</h1>
         </div>
 
-      
-        <div>
-          <a href={`/group/${props.group.id}`}>Back</a>
-        </div>
+        <Link href={`/group/${props.group.id}`}>
+          <h3>Add New Booth</h3>
+        </Link>
 
+  
         <div>
           <h2>Group Booths</h2>   
 
