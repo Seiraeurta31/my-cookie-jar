@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../config/session";
-import styles from "../styles/login.module.css"
+import styles from "../styles/login.module.css";
 
 
 export const getServerSideProps =  withIronSessionSsr(
@@ -73,32 +73,36 @@ export default function Login(props) {
 
       <main className={styles.main}>
 
-        <div>
-          <img className={styles.img} src= "/public/MyCookieJarLogo.jpg"></img>
-        </div>
+        <div className={styles.logo}></div>
         
         <div className={styles.mainContainer}>
-          <form
-            onSubmit={handleLogin} className={styles.form}
-          >
+
+          <form onSubmit={handleLogin} className={styles.form}>
+            
+            <div className={styles.fieldContainer}> 
               <label htmlFor="username">Email: </label>
-              <input
-                className={styles.inputBox}
-                type="text"
-                name="username"
-                id="username"
-                onChange={handleChange}
-                value={username}
-              />
+                <input
+                  className={styles.inputBox}
+                  type="text"
+                  name="username"
+                  id="username"
+                  onChange={handleChange}
+                  value={username}
+                />
+            </div>
+              
+            <div className={styles.fieldContainer}>
               <label htmlFor="password">Password: </label>
-              <input
-                className={styles.inputBox}
-                type="password"
-                name="password"
-                id="password"
-                onChange={handleChange}
-                value={password}
-              />
+                <input
+                  className={styles.inputBox}
+                  type="password"
+                  name="password"
+                  id="password"
+                  onChange={handleChange}
+                  value={password}
+                />
+            </div> 
+              
               <button className={styles.button}>Sign In</button>
 
             
@@ -108,12 +112,12 @@ export default function Login(props) {
 
 
 
-        <div >
-          <Link href="/signup">
-            <p className={styles.signUpLink}>Creat an Account</p>
-          </Link>
-          
-        </div>
+          <div >
+            <Link href="/signup">
+              <p className={styles.signUpLink}>Creat an Account</p>
+            </Link>
+            
+          </div>
         
 
 

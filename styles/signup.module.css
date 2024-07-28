@@ -1,8 +1,89 @@
+.main {
+    display: flex;
+    justify-content: top;
+    align-items: center;
+    flex-direction: column;
+    width: 1500x;
+    height: 1000px;
+    background-image: url("../public/HeartsBackground.jpg");;
+    background-size: cover;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    padding-top: 20px;
+    border-radius: 15px;
+}
+
+.fieldContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    margin: 20px;
+    background-image: url("../public/cookieJarLogo.png");
+    width: 350px;
+    height: 220px;
+}
 
 
+.inputBox {
+    width: 250px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.logInLink {
+    color: black;
+    margin-top: 30px;
+    text-decoration: underline;
+    font-size: 15px;
+}
+
+
+.button {
+    display: flex;
+    font-size: 15px; 
+    font-weight: 100;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(227, 116, 116);
+    color: white;
+    height: 50px;
+    width: 200px;
+    margin-top: 30px;
+    padding-right: 25px;
+    padding-left: 25px;
+    border-width: 0px;
+    border-radius: 15px;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 30px;
+    border-color: rgb(15, 159, 191);
+    border-style: solid;
+    border-width: thick;
+}
+
+.img {
+    margin-top: 20px;
+    width: 200px;
+    height: 200px;
+}
 
 @media screen and (max-width: 450px) {
-  
 
 }
   

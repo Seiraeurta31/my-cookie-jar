@@ -1,8 +1,10 @@
 
+import styles from "./style.module.css";
+
 export default function Footer(props) {
   return (
-    <footer>
-        <p>
+    <footer className={styles.byLine}>
+        <p >
           Developed by: Ashley Frank 
         </p>
       </footer>
