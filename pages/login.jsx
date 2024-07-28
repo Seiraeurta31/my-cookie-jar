@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../config/session";
+import styles from "../styles/login.module.css"
 
 
 export const getServerSideProps =  withIronSessionSsr(
@@ -27,6 +28,7 @@ export const getServerSideProps =  withIronSessionSsr(
 export default function Login(props) {
 
   const router = useRouter();
+  const pageTitle = "Sign In";
   const [{ username, password }, setForm] = useState({
     username: "",
     password: "",
@@ -67,43 +69,57 @@ export default function Login(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} />
+      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} pageTitle={pageTitle}/>
 
-      <main>
-        <h1>
-          LogIn Page
-        </h1>
+      <main className={styles.main}>
 
-        <form
-          onSubmit={handleLogin}
-        >
-          <label htmlFor="username">Username: </label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            onChange={handleChange}
-            value={username}
-          />
-          <label htmlFor="password">Password: </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={handleChange}
-            value={password}
-          />
-          <button>Login</button>
-          {error && <p>{error}</p>}
-        </form>
+        <div>
+          <img className={styles.img} src= "/public/MyCookieJarLogo.jpg"></img>
+        </div>
+        
+        <div className={styles.mainContainer}>
+          <form
+            onSubmit={handleLogin} className={styles.form}
+          >
+              <label htmlFor="username">Email: </label>
+              <input
+                className={styles.inputBox}
+                type="text"
+                name="username"
+                id="username"
+                onChange={handleChange}
+                value={username}
+              />
+              <label htmlFor="password">Password: </label>
+              <input
+                className={styles.inputBox}
+                type="password"
+                name="password"
+                id="password"
+                onChange={handleChange}
+                value={password}
+              />
+              <button className={styles.button}>Sign In</button>
+
+            
+            {error && <p>{error}</p>}
+          </form>
 
 
 
 
+        <div >
+          <Link href="/signup">
+            <p className={styles.signUpLink}>Creat an Account</p>
+          </Link>
+          
+        </div>
+        
 
-        <Link href="/signup">
-          <p>Signup instead?</p>
-        </Link>
+
+
+        </div>
+    
 
       </main>
 

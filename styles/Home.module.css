@@ -1,112 +1,43 @@
-@font-face {
-    font-family: "Katerlin-51z";
-    src: url(../public/Katerlin-51zjB.ttf);
-  }
+.main {
+    display: flex;
+    justify-content: top;
+    align-items: center;
+    flex-direction: column;
+    width: 1500x;
+    height: 1000px;
+    background-image: url("../public/HeartsBackground.jpg");;
+    background-size: cover;
+}
 
-@font-face {
-    font-family: "LoveYaLikeASister-Regular";
-    src: url(../public/LoveYaLikeASister-Regular.ttf);
-  }
+.logo {
+    margin: 30px;
+    background-image: url("../public/MyCookieJarLogo.jpg");
+    width: 350px;
+    height: 220px;
+}
 
-
-.container {
+.mainContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: white;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 30px;
+    border-color: rgb(15, 159, 191);
+    border-style: solid;
+    border-width: thick;
 }
 
-
-.drinkSpecialTitle{
-    text-align: center;
-    font-family: Katerlin-51z;
-    font-weight: 200;
-    font-size: 100px;
-    padding-top: 100px;
-    position: absolute;
-    margin-top: -600px;
-}
-
-.randomDrink {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  
-
-.randomDrinkName {
-    color: white;
-    text-align: center;
-    font-family: LoveYaLikeASister-Regular; 
-    font-size: 30px;
-    line-height: 30px; 
-    font-weight: 200;
-    margin-top: 40px; 
-    margin-bottom: 10px;
-}
-
-.randomDrinkIMG {
-    display: flex;
-    border: 0px solid rgb(133, 43, 43);
-    border-width: 5px;
-    align-items: center;
-    align-content: center;
-}
-
-
-.welcomeTitleContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: absolute;
-    height: 100px;
-    margin-top: 100px;
-    z-index: 1;
-}
-
-.welcomeTitle {
-    text-align: center;
-    font-family: Katerlin-51z;
-    font-weight: 200;
-    font-size: 100px;
-    padding-top: 10px;
-    margin-top: -50px;
-}
-
-.subWelcomeTitle{
-    text-align: center;
-    font-family: LoveYaLikeASister-Regular;
-    font-weight: 200;
-    font-size: 30px;
-}
-
-.welcomeButtonContainer {
-    display: flex;
-    flex-direction: column;
-    column-gap: 10px;
-    justify-content: center;
-    align-items: flex-end;
-    background-color: rgb(31, 31, 31);
-    height: 350px;
-    padding: 40px;
-    padding-top: 200px;
-    padding-bottom: 60px;
-    border-radius: 15px;
-    margin-top: 300px;
-    margin-bottom: 100px;
-    position: absolute;
-
-}
-
-.welcomeButton, .favoritesButton{
+.button {
     display: flex;
     font-family: LoveYaLikeASister-Regular; 
     font-size: 15px; 
     font-weight: 100;
     justify-content: center;
     align-items: center;
-    background-color: rgb(133, 43, 43);
+    background-color: rgb(227, 116, 116);
     color: white;
     height: 50px;
     width: 200px;
@@ -114,26 +45,11 @@
     padding-right: 25px;
     padding-left: 25px;
     border-radius: 15px;
+    
 }
-
 
 @media screen and (max-width: 450px) {
   
-.drinkSpecialTitle {
-    font-size: 80px;
-    padding-top: 100px;
-    position: absolute;
-    margin-top: -600px;
-}
-
-.randomDrinkContainer {
-    padding: 50px;
-    width: 350px;
-    height: 450px;
-    margin-top: 50px;
-    padding-top: -80px;
-}
-
 
 
 }

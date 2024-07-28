@@ -1,6 +1,7 @@
 
 import useLogout from "../../hooks/useLogout";
 import Link from "next/link";
+import styles from "./style.module.css";
 
 
 export default function Header(props) {
@@ -9,9 +10,13 @@ export default function Header(props) {
     <header>
       {props.isLoggedIn ? (
         <>         
-          <div >
+          <div className={styles.navLinksContainer}>
             {props.menu === "user" ? (
               <>
+              <div>
+                <h1 className={styles.pageTitle}>props.pageTitle</h1>
+              </div>
+
               <div>
                 <Link href="/dashboard">Dashboard    </Link>
               </div>
@@ -30,7 +35,12 @@ export default function Header(props) {
                 
               </>
               ) : (
-                <div>  
+                <div className={styles.headerContainer}>  
+                  <h1 className={styles.pageTitle}>
+                    {props.pageTitle}
+                  </h1>
+
+
                 </div>
             )}
           </div>

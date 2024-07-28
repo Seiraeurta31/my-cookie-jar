@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Footer from "../components/footer";
+import styles from "../styles/Home.module.css";
 
 
 export default function Home(props) {
@@ -16,24 +17,37 @@ export default function Home(props) {
       </Head>
 
       <main >
-        
-        <div>
-            <h1>
-              Welcome to My Cookie Jar
-            </h1>
-            <h2>
-              Log in or Sign up!
-            </h2>
-        </div>
-        
-        <div>
-            <Link href="/login">
-              <h2>Login </h2>
-            </Link>
+        <div className={styles.main}>
 
-            <Link href="/signup">
-              <h2>Sign Up </h2>
-            </Link>
+
+          <div className={styles.mainContainer}>
+            
+                  <div className={styles.logo}></div>
+
+                  <h1>
+                    Welcome to My Cookie Jar
+                  </h1>
+
+                  
+                  <h2>
+                    Log in or Sign up!
+                  </h2>
+              
+              <div className={styles.button}>
+                  <Link href="/login">
+                    <h2>Login </h2>
+                  </Link>
+              </div>
+
+              <div className={styles.button}>
+                  <Link href="/signup">
+                    <h2>Sign Up </h2>
+                  </Link>
+              </div>
+
+          </div>
+          
+
         </div>
       </main>
 
