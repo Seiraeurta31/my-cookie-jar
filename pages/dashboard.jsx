@@ -92,7 +92,7 @@ export default function Dashboard(props) {
 function UserGroups({groupId, groupName}) {
   const noImage = "/No_image_available.svg.png"
   return (
-    <div>
+    <div className={styles.button}>
        <Link href={'/group/' + groupId}>
         <p> {groupName}</p>
        </Link>
