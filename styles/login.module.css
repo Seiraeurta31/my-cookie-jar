@@ -5,7 +5,7 @@
     flex-direction: column;
     width: 1500x;
     height: 1000px;
-    background-image: url("../public/HeartsBackground.jpg");;
+    background-image: url("../public/HeartsBackground.jpg");
     background-size: cover;
 }
 
@@ -25,10 +25,10 @@
 }
 
 .logo {
-    margin: 20px;
-    background-image: url("../public/cookieJarLogo.png");
-    width: 350px;
-    height: 220px;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    padding: 20px;
 }
 
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Footer from "../components/footer";
 import styles from "../styles/Home.module.css";
+import Image from 'next/image';
 
 
 export default function Home(props) {
@@ -22,7 +23,7 @@ export default function Home(props) {
 
           <div className={styles.mainContainer}>
             
-                  <div className={styles.logo}></div>
+          <Image src="/cookieJarLogo.png" className={styles.logo} width="3000" height="1928"/>
 
                   <h1>
                     Welcome to My Cookie Jar

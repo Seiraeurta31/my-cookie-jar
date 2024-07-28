@@ -1,7 +1,6 @@
-.headerContainer {
+.header {
   display: flex;
   flex-direction: column;
-  color: rgb(7, 6, 6);
   background-color: rgb(35, 121, 192);
   height:100px;
 }
@@ -17,12 +16,33 @@
   color: rgb(255, 255, 255);
 }
 
-.navLinkContainer {
+.logoIcon {
+  width: 100%;
+  max-width: 80px;
+  height: auto;
+}
+
+.headerContainer {
   display: flex;
+  flex-direction: row;
   justify-content:space-around;
   align-items: flex-start;
   justify-content: space-around;
-  padding: 20px;
+  padding: 10px;
+}
+
+.navContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  align-items: flex-start;
+  justify-content: space-around;
+  padding: 10px;
+  margin-top: 30px;
+}
+
+.navLink {
+  padding-right: 40px;
 }
 
 

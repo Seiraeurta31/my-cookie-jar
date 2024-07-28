@@ -6,9 +6,7 @@ import Footer from "../components/footer";
 import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../config/session";
 import db from '../db'
-
-
-//TO DO: Build user dashboard
+import styles from "../styles/dashboard.module.css";
 
 
 export const getServerSideProps = withIronSessionSsr (
@@ -61,18 +59,11 @@ export default function Dashboard(props) {
 
       <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} pageTitle={pageTitle}/>
 
-      <main >
-        <div>
-          <h1 >
-            DASHBOARD
-          </h1>
-          <h3 >
-            Welcome {props.user.firstName}!
-          </h3>
-        </div>
+      <main className={styles.main}>
 
-        <div>
-          <h1>User Groups</h1>
+        <h1> My Groups</h1>
+
+        <div className={styles.mainContainer}>
           {props.userGroups ? (
             <>
               {props.userGroups.map((group, i) => (

@@ -2,6 +2,7 @@ import Head from "next/head";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import Link from "next/link";
+import Image from 'next/image';
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { withIronSessionSsr } from "iron-session/next";
@@ -73,7 +74,8 @@ export default function Login(props) {
 
       <main className={styles.main}>
 
-        <div className={styles.logo}></div>
+        {/* <div className={styles.logo}></div> */}
+        <Image src="/cookieJarLogo.png" className={styles.logo} width="3000" height="1928"/>
         
         <div className={styles.mainContainer}>
 
