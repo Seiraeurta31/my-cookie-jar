@@ -1,0 +1,57 @@
+.main {
+    display: flex;
+    justify-content: top;
+    align-items: center;
+    flex-direction: column;
+    width: 1500x;
+    height: 1000px;
+    background-image: url("../public/HeartsBackground.jpg");;
+    background-size: cover;
+}
+
+.logo {
+    margin: 30px;
+    background-image: url("../public/cookieJarLogo.png");
+    width: 350px;
+    height: 220px;
+}
+
+.mainContainer {
+    min-width: 400px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 30px;
+    border-color: rgb(15, 159, 191);
+    border-style: solid;
+    border-width: thick;
+}
+
+.button {
+    display: flex;
+    font-size: 15px; 
+    font-weight: 100;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(227, 116, 116);
+    color: white;
+    height: 50px;
+    width: 230px;
+    margin-top: 30px;
+    padding-right: 25px;
+    padding-left: 25px;
+    border-radius: 15px;
+    
+}
+
+
+@media screen and (max-width: 450px) {
+  
+
+
+}

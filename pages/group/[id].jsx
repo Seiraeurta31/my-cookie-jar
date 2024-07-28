@@ -7,7 +7,9 @@ import Link from "next/link";
 import Head from 'next/head';
 import Header from "../../components/header";
 import Footer from "../../components/footer";
-// import group from "../api/group";
+import styles from "../../styles/groupMain.module.css"
+
+
 
 
 export const getServerSideProps = withIronSessionSsr (
@@ -53,13 +55,14 @@ export const getServerSideProps = withIronSessionSsr (
       
     return { props };
   },
-  sessionOptions
+  sessionOptions 
 );
 
 
 export default function GroupPage(props) {
   const router = useRouter();
   const menuType = "group"
+  const pageTitle = "Group Home Page"
 
   const groupId = props.group.id
   console.log("groupId: ", groupId)
@@ -93,31 +96,30 @@ export default function GroupPage(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} groupId={props.group.id}/>
+      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} pageTitle={pageTitle}/>
 
-      <main >
-        <div>
-          <h1 >
-            {props.group.groupName} Home Page
-          </h1>
+      <main className={styles.main}>
+        <div className={styles.mainContainer}>
+          
+          <div className={styles.button}>
+            <Link href={`/membersList/${props.group.id}`}>Group Member List</Link>
+          </div> 
+
+          <div className={styles.button}>
+            <Link href={`/boothList/${props.group.id}`}>Troop Booth List</Link>
+          </div>   
+
+          <div className={styles.button}>
+            <Link href={`/inventory/${props.group.id}`}>Cookie Inventory</Link>
+          </div> 
+
+          <div className={styles.button}>
+            <a onClick={leaveGroup} style={{ cursor: 'pointer', fontSize : 16, }}>Leave Group</a> 
+          </div>
+
+          
         </div>
 
-
-        <div>
-          <Link href={`/membersList/${props.group.id}`}>Group Member List</Link>
-        </div> 
-
-        <div>
-          <Link href={`/boothList/${props.group.id}`}>Troop Booth List</Link>
-        </div>   
-
-        <div>
-          <Link href={`/inventory/${props.group.id}`}>Cookie Inventory</Link>
-        </div> 
-
-        <div>
-          <a onClick={leaveGroup} style={{ cursor: 'pointer', fontSize : 16, color: 'blue', textDecoration: 'underline' }}>Leave Group</a> 
-        </div>
 
       </main>
 
