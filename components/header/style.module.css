@@ -14,20 +14,31 @@
 
 .pageTitle {
   color: rgb(255, 255, 255);
+  align-items: center;
+
 }
 
 .logoIcon {
   width: 100%;
   max-width: 80px;
+  margin-right: 10px;
+  margin-left: 20px;
   height: auto;
+}
+
+.logoandTitle {
+  display: flex;
+  justify-content: left;
+  margin-right: 100px;
+
 }
 
 .headerContainer {
   display: flex;
   flex-direction: row;
-  justify-content:space-around;
+  justify-content:left;
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 10px;
 }
 

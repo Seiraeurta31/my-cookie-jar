@@ -16,11 +16,14 @@ export default function Header(props) {
              
               <div className={styles.headerContainer}>
 
-                <Image src="/cookieJarLogo_Circle.png" className={styles.logoIcon} width="3000" height="1928"/>
+                <div className={styles.logoandTitle}>
+                  <Image src="/cookieJarLogo_Circle.png" className={styles.logoIcon} width="3000" height="1928"/>
 
-                <div>
-                  <h1 className={styles.pageTitle}>{props.pageTitle}</h1>
-                </div>
+                  <div>
+                    <h1 className={styles.pageTitle}>{props.pageTitle}</h1>
+                  </div>
+
+                </div>   
 
                 <div className={styles.navContainer}>
                   <div >
