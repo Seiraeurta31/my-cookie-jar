@@ -32,15 +32,19 @@
 }
 
 .address {
-    margin-top: 20px;
     font-weight: bold;
 }
 
-.details {
+.detailsSection {
     display: flex;
     flex-direction: column;
     justify-content: top;
     align-items: center;
+}
+
+.dateTime {
+    margin: 0px;
+
 }
 
 .button {
@@ -56,8 +60,53 @@
     margin-top: 30px;
     padding-right: 25px;
     padding-left: 25px;
+    border-radius: 15px; 
+    border-width: 0px; 
+}
+
+.shiftSignUp {
+    display: flex;
+    flex-direction: row;
+    justify-content: top;
+    align-items: center;
+
+}
+
+.signUpButton {
+    display: flex;
+    font-size: 12px; 
+    font-weight: 100;
+    justify-content: center;
+    align-items: center;
+    background-color: #f37d8c;
+    color: white;
+    height: 30px;
+    width: 80px;
+    margin-left: 20px;
+    font-family: Kanvas File;
+    border-radius: 10px; 
+    border-width: 0px; 
+
+}
+
+.notesSection, .locationSection, .shiftSection, .detailsSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    width: 300px;
+    height: auto;
+    margin-top: 10px;
     border-radius: 15px;
-    
+    border-color: #f37d8c;
+    border-style: solid;
+    padding-bottom: 20px;
+}
+
+
+
+.notesHeader {
+    font-weight: bold;
 }
 
 

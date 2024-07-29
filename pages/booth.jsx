@@ -106,33 +106,49 @@ export default function BoothPage(props) {
 
         <div className={styles.mainContainer}>
 
-          <div className={styles.details}>
+          <div className={styles.detailsSection}>
             <p className={styles.locationName}> {props.booth.locationName}</p>
-            <p> {props.booth.date} @ {props.booth.time}{props.booth.amPM}</p>
-            <p> {props.booth.shifts} Shifts Available </p>
-            <div className={styles.address }>
+            <p className={styles.dateTime}> {props.booth.date}</p>
+            <p className={styles.dateTime}> {props.booth.time}{props.booth.amPM}</p>
+          </div>
+
+          <div className={styles.shiftSection }>
+            <div className={styles.shiftSignUp}>
+              <p> {props.booth.shifts} Shifts Available </p>
+              <button className={styles.signUpButton}>Sign Up</button>
+            </div>
+            <div>
+              <p>Scheduled Members:</p>
+
+            </div>
+        
+          </div>
+
+
+
+          <div className={styles.locationSection}>
+             <div className={styles.address }>
               <p> {props.booth.address}, </p>
               <p> {props.booth.city}, {props.booth.state}</p>
             </div>
-            
-          </div>
 
             <iframe
-              width="300"
-              height="300"
+              width="250"
+              height="250"
               loading="lazy"
               allowfullscreen
               referrerpolicy="no-referrer-when-downgrade"
               src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_API_KEY}&q=${props.booth.address}+${props.booth.city}+${props.booth.state}`}>
             </iframe>
 
-            <div>
-              <p> Important Notes: {props.booth.notes}</p>
-            </div>
+          </div>
             
 
-          
-      
+          <div className={styles.notesSection}>
+            <p className={styles.notesHeader}> Important Notes:</p>
+            <p> {props.booth.notes}</p>
+          </div>
+            
         </div >   
 
       </main>

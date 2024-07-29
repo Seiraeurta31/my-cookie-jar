@@ -148,7 +148,7 @@ export default function CreateGroup(props) {
                   />
                 </div>
                 <div className={styles.fieldContainer}>
-                  <label htmlFor="date">Date: (mm/yy): </label>
+                  <label htmlFor="date">Day, Date (mm/dd): </label>
                   <input
                     className={styles.inputBox}
                     type="text"
@@ -159,7 +159,7 @@ export default function CreateGroup(props) {
                   />
                 </div>
                 <div className={styles.fieldContainer}>
-                  <label htmlFor="time">Time:: </label>
+                  <label htmlFor="time">Time Range: </label>
                   <input
                     className={styles.inputBox}
                     type="text"
