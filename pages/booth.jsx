@@ -44,11 +44,14 @@ export const getServerSideProps = withIronSessionSsr (
       };
     }
 
+
     const boothDetails = JSON.parse(JSON.stringify(booth))
 
     if(boothDetails !== null){
       props.booth = boothDetails
     }
+
+    console.log("BOOTH DETAILS: ", boothDetails)
     
     return { props };
   },
@@ -64,7 +67,8 @@ export default function BoothPage(props) {
    const pageTitle = "Booth Details"
 
   const groupId = props.groupId
-  console.log("groupId: ", groupId)
+  const userFirstName = props.user.firstName
+  const userLastName = props.user.lastName
 
   const boothId = props.booth.id
 
@@ -77,6 +81,24 @@ export default function BoothPage(props) {
         "content-type": "application/json",
       },
       body: JSON.stringify({groupId, boothId})
+    })
+
+    // Call router.replace(router.asPath) if you receive a 200 status
+    if (res.status === 200) {
+      router.replace(router.asPath)
+    }  
+  }
+
+  
+  async function boothSignUp(e) {
+    e.preventDefault()
+    const res = await fetch(`/api/booth/attendee`, {
+      method: 'POST',
+      headers: 
+      {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({userFirstName, userLastName, groupId, boothId})
     })
 
     // Call router.replace(router.asPath) if you receive a 200 status
@@ -115,10 +137,30 @@ export default function BoothPage(props) {
           <div className={styles.shiftSection }>
             <div className={styles.shiftSignUp}>
               <p> {props.booth.shifts} Shifts Available </p>
-              <button className={styles.signUpButton}>Sign Up</button>
+              <div className={styles.signUpButton}>
+                <a onClick={boothSignUp} style={{ cursor: 'pointer', fontSize : 16 }}>Sign Up</a> 
+            </div>
             </div>
             <div>
               <p>Scheduled Members:</p>
+
+              {props.booth.attendingMembers.length ? (
+              <>
+                {props.booth.attendingMembers.map((member, i) => (
+                  <Attendees 
+                    key={i}
+                    attendeeId={member.memberId}
+                    firstName={member.memberFirstName} 
+                    lastName={member.memberLastName} 
+                  >  
+                  </Attendees>
+                ))}
+              </>
+              ):( 
+              <>
+                <p >No attendees yet!</p>
+              </>
+            )}
 
             </div>
         
@@ -157,4 +199,15 @@ export default function BoothPage(props) {
 
     </div>      
    );         
+}
+
+function Attendees({firstName, lastName}) {
+
+
+  return (
+        <div>
+          <p>{firstName} {lastName}</p>
+        </div>  
+    
+  )
 }

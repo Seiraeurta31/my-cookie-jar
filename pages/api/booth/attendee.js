@@ -18,7 +18,7 @@ export default withIronSessionApiRoute(
         case 'POST': 
         try{
         const {groupMemberId,  boothId }= req.body
-        const addedAttendee= await db.booth.addBoothAttendee(groupMemberId, boothId)
+        const addedAttendee= await db.booth.addBoothAttendee(user.firstName, user.lastName, groupMemberId, boothId)
         if(addedAttendee == null){
             req.session.destroy()  
             return res.status(401)

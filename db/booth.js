@@ -159,14 +159,14 @@ export async function updateBoothDetails(
 
 
 //Add member to booth attendee list
-export async function addBoothAttendee(groupMemberId, boothId) {
+export async function addBoothAttendee(firstName, lastName, groupMemberId, boothId) {
 
   await dbConnect()
 
   //If user exists, add drink to user Favorites
   const attendee = await Booth.findByIdAndUpdate(
     boothId,
-    { $addToSet: { attendingMembers: {memberId: groupMemberId}} }, 
+    { $addToSet: { attendingMembers: {memberId: groupMemberId, memberFirstName: firstName, memberLastName: lastName}} }, 
     { new: true } 
   )
   //If user was not found, return null
