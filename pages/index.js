@@ -25,7 +25,7 @@ export default function Home(props) {
             
           <Image src="/cookieJarLogo.png" className={styles.logo} width="3000" height="1928"/>
 
-                  <h1>
+                  <h1 className={styles.pageTitle}>
                     Welcome to My Cookie Jar
                   </h1>
 

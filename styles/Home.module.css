@@ -43,9 +43,10 @@
     margin-top: 30px;
     padding-right: 25px;
     padding-left: 25px;
-    border-radius: 15px;
-    
+    border-radius: 15px;  
 }
+
+
 
 @media screen and (max-width: 550px) {
     .mainContainer {
@@ -56,5 +57,9 @@
         background-image: url("../public/cookieJarLogo.png");
         width: 250px;
         height: auto;
+    }
+
+    .pageTitle {
+        text-align: center;
     }
 }
