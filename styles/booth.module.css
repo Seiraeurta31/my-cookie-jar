@@ -89,6 +89,14 @@
 
 }
 
+.attendee {
+    display: flex;
+    flex-direction: row;
+    justify-content: top;
+    align-items: center;
+}
+
+
 .notesSection, .locationSection, .shiftSection, .detailsSection {
     display: flex;
     flex-direction: column;
