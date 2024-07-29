@@ -99,8 +99,6 @@ export default function GroupPage(props) {
       <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} pageTitle={pageTitle} groupId={props.group.id}/>
 
       <main className={styles.main}>
-
-        <h1> My Groups</h1>
         
         <div className={styles.mainContainer}>
           
