@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Header from "../components/header";
 import Footer from "../components/footer";
 import Link from "next/link";
 import Image from 'next/image';
@@ -70,13 +69,13 @@ export default function Login(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} pageTitle={pageTitle}/>
-
       <main className={styles.main}>
+
+      <div className={styles.mainContainer}>
 
         <Image src="/cookieJarLogo.png" className={styles.logo} width="3000" height="1928"/>
         
-        <div className={styles.mainContainer}>
+        <h1 className={styles.title}>Sign In</h1>
 
           <form onSubmit={handleLogin} className={styles.form}>
             

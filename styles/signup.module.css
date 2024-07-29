@@ -4,7 +4,7 @@
     align-items: center;
     flex-direction: column;
     width: 1500x;
-    height: 1000px;
+    height: 1200px;
     background-image: url("../public/HeartsBackground.jpg");;
     background-size: cover;
 }
@@ -16,6 +16,10 @@
     padding: 20px;
     padding-top: 20px;
     border-radius: 15px;
+}
+
+.title {
+    font-size: 25px;
 }
 
 .fieldContainer {
@@ -68,7 +72,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 20px;
     margin-top: 40px;
     border-radius: 30px;
@@ -83,7 +87,15 @@
     height: 200px;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 550px) {
+    .mainContainer {
+        max-width: 300px;
+    }
 
+    .logo {
+        background-image: url("../public/cookieJarLogo.png");
+        width: 250px;
+        height: auto;
+    }
 }
   

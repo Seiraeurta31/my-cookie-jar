@@ -47,9 +47,14 @@
     
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 550px) {
     .mainContainer {
-        width: auto;
+        max-width: 300px;
     }
 
+    .logo {
+        background-image: url("../public/cookieJarLogo.png");
+        width: 250px;
+        height: auto;
+    }
 }
