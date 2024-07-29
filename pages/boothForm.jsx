@@ -229,8 +229,10 @@ export default function CreateGroup(props) {
                 </div>
                 <div className={styles.fieldContainer}>
                   <label htmlFor="notes">Notes: </label>
-                  <input
+                  <textarea
                     className={styles.notes}
+                    rows="1" 
+                    cols="50"
                     type="text"
                     name="notes"
                     id="notes"

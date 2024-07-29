@@ -103,7 +103,7 @@ function GroupMembers({memberFirstName, memberLastName, groupId, memberId}) {
   return (
     <div>
       <Link href={`/member?g=${groupId}&m=${memberId}`}>
-        <h3>{memberFirstName} {memberLastName}</h3>
+        <h3 style={{color: "blue"}}> --- {memberFirstName} {memberLastName} ---</h3>
       </Link>
         
 

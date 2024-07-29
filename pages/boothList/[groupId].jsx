@@ -45,7 +45,7 @@ export const getServerSideProps = withIronSessionSsr (
 export default function GroupPage(props) {
   const router = useRouter();
   const menuType = "group"
-  const pageTitle = `${props.group.groupName} - Booth List`
+  const pageTitle = `${props.group.groupName}`
 
   return (
     <div >
@@ -63,7 +63,7 @@ export default function GroupPage(props) {
         <div className={styles.mainContainer}>
 
           <Link href={`/boothForm?g=${props.group.id}`} className={styles.button}>
-            <h3>Add New Booth</h3>
+            <h3> + New Booth</h3>
           </Link>
          
         </div>
