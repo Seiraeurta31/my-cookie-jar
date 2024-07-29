@@ -71,6 +71,8 @@ export default function GroupPage(props) {
         <div className={styles.listContainer}>
           <div>
 
+            <h1 className={styles.sectionTitle}> Booths</h1>
+
             {props.group.groupBooths.length ? (
               <>
                 {props.group.groupBooths.map((booth, i) => (
@@ -117,21 +119,25 @@ function GroupBooths({groupId, boothId, locationName, date, time, amPM, numShift
   return (
     <div>
       <Link href={`/booth?g=${groupId}&b=${boothId}`}>
-      <div className={styles.boothInfo}>
+      <div className={styles.boothContainer}>
 
-        <div className={styles.locationInfo}>
+        <div>
           <p className={styles.infoName}>{locationName}</p>
-          <p className={styles.infoItem}>{date}</p>
-          <p className={styles.infoItem}>{time} {amPM}</p>
         </div>
 
-        <div className={styles.shiftInfo}>
-            <p className={styles.infoItem}># of Shifts <br></br> Available</p>
-          <div>
-            <p className={styles.numShift}>{numShifts}</p>
-          </div>   
+        <div className={styles.boothInfo}>
+          <div className={styles.locationInfo}>
+            <p className={styles.infoItem}>{date}</p>
+            <p className={styles.infoItem}>{time} {amPM}</p>
+          </div>
+          <div className={styles.shiftInfo}>
+              <p className={styles.infoItem}># of Shifts <br></br> Available</p>
+            <div>
+              <p style={{color: "white"}}className={styles.numShift}>{numShifts}</p>
+            </div>   
+          </div>
+          
         </div>
-
       </div>
         
         
