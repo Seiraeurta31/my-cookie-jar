@@ -45,16 +45,18 @@
 .logInLink {
     color: black;
     margin-top: 30px;
+    font-size: 20px;
+    font-family: Kanvas File;
     text-decoration: underline;
-    font-size: 15px;
 }
 
 
 .button {
     display: flex;
-    font-size: 15px; 
+    font-size: 20px; 
     font-weight: 100;
     justify-content: center;
+    font-family: Kanvas File;
     align-items: center;
     background-color: #f37d8c;
     color: white;

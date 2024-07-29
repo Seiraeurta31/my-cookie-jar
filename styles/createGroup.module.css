@@ -38,16 +38,12 @@
     margin-bottom: 20px;
 }
 
-.signUpLink {
-    color: black;
-    text-decoration: underline;
-    font-size: 15px;
-}
 
 
 .button {
     display: flex;
-    font-size: 15px; 
+    font-size: 20px;
+    font-family: Kanvas File;
     font-weight: 100;
     justify-content: center;
     align-items: center;

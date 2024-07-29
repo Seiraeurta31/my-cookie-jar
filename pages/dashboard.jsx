@@ -64,6 +64,7 @@ export default function Dashboard(props) {
         <h1> My Groups</h1>
 
         <div className={styles.mainContainer}>
+          
           {props.userGroups ? (
             <>
               {props.userGroups.map((group, i) => (
@@ -94,7 +95,7 @@ function UserGroups({groupId, groupName}) {
   return (
     <div className={styles.button}>
        <Link href={'/group/' + groupId}>
-        <p> {groupName}</p>
+        <p > {groupName}</p>
        </Link>
     </div>  
     

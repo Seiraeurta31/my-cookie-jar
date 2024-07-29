@@ -5,7 +5,7 @@
   border-style: solid;
   border-bottom-width: 6px;
   border-color:  rgb(248, 176, 176);
-  height:150px;
+  height: 150px;
 }
 
 .headerImage {
@@ -17,7 +17,6 @@
 
 .pageTitle {
   display: flex;
-  flex-wrap: wrap;
   color: rgb(255, 255, 255);
   align-items: center;
   margin-left: -30px;
@@ -26,7 +25,7 @@
 
 .logoIcon {
   width: 100%;
-  max-width: 80px;
+  max-width: 100px;
   margin-left: 20px;
   height: 100%;
 }
@@ -62,6 +61,8 @@
 .navLink {
   padding-right: 40px;
   text-align: center;
+  font-size: 20px;
+  font-family: Kanvas File;
 }
 
 
@@ -92,7 +93,6 @@
   }
 
   .logoIcon {
-    width: 100%;
     max-width: 80px;
     margin-left: 0px;
   }

@@ -99,6 +99,9 @@ export default function GroupPage(props) {
       <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} pageTitle={pageTitle} groupId={props.group.id}/>
 
       <main className={styles.main}>
+
+        <h1> My Groups</h1>
+        
         <div className={styles.mainContainer}>
           
           <div className={styles.button}>
@@ -130,33 +133,3 @@ export default function GroupPage(props) {
 }
 
 
-function GroupMembers({memberId, memberRole, groupId, id}) {
-
-  return (
-    <div>
-      <Link href={'/member/' + groupId}>
-        <h3>Member Info</h3>
-        <p>User Id: {memberId}</p>
-        <p>Member Role: {memberRole}</p>
-      </Link>
-        
-
-    </div>  
-    
-  )
-}
-
-function GroupBooths({boothId, id}) {
-
-  return (
-    <div>
-      <Link href={'/booth/' + boothId}>
-        <h3>BoothId#</h3>
-        <p>{boothId}</p>
-        <h3>GroupBooth Id#</h3>
-        <p>{id}</p>
-      </Link>
-    </div>  
-    
-  )
-}

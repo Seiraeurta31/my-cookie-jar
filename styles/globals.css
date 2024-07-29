@@ -4,11 +4,16 @@
   src: url(../public/AUBREY1__.TTF);
 }
 
+@font-face {
+  font-family: "Kanvas File";
+  src: url(../public/Kanvas\ file.otf);
+}
+
 
 html,
 body {
   align-content: center;
-  font-family: Aubrey;
+  font-family: Kanvas File;
 }
 
 a {

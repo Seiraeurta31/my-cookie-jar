@@ -45,19 +45,20 @@
 .signUpLink {
     color: black;
     text-decoration: underline;
-    font-size: 15px;
+    font-size: 20px;
+    font-family: Kanvas File;
 }
 
 
 .button {
     display: flex;
-    font-family: LoveYaLikeASister-Regular; 
-    font-size: 15px; 
     font-weight: 100;
     justify-content: center;
     align-items: center;
     background-color: #f37d8c;
     color: white;
+    font-size: 20px;
+    font-family: Kanvas File;
     height: 50px;
     width: 200px;
     margin-top: 30px;
