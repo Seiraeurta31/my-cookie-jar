@@ -10,7 +10,7 @@
 }
 
 .mainContainer {
-    min-width: 200px;
+    min-width: 300px;
     min-height: 400px;
     display: flex;
     flex-direction: column;
@@ -23,6 +23,10 @@
     border-color: #077ea5;
     border-style: solid;
     border-width: thick;
+}
+
+.sectionTitle {
+    font-size: 30px;
 }
 
 .button {

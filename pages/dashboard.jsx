@@ -61,9 +61,11 @@ export default function Dashboard(props) {
 
       <main className={styles.main}>
 
-        <h1> My Groups</h1>
+        
 
         <div className={styles.mainContainer}>
+
+        <h1 className={styles.sectionTitle}> My Groups</h1>
           
           {props.userGroups ? (
             <>

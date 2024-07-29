@@ -56,14 +56,15 @@
   align-items: center;
   text-align: center;
   justify-content: center;
-  padding: 10px;
   padding-bottom: 20px;
+  margin-left: -40px;
 }
 
 .navLink {
-  padding-right: 25px;
+
   text-align: center;
   font-size: 20px;
+  padding: 20px;
   font-family: Kanvas File;
 }
 
@@ -105,15 +106,15 @@
     margin-left: 0px;
   }
 
-  .navContainer {
-    margin-left: 30px;
-  }
 
   .navLink {
     font-size: 18px;
     width: 100%;
   }
   
+  .navContainer {
+    margin-left: 0px;
+  }
   
 }
 
