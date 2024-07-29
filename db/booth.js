@@ -65,7 +65,12 @@ export async function createNewBooth(
       { $addToSet: 
         { groupBooths: 
           {
-            boothId: newBooth._id
+            boothId: newBooth._id,
+            locationName: newBooth.locationName,
+            date: newBooth.date,
+            time: newBooth.time,
+            amPM: newBooth.amPM,
+            numShifts: newBooth.shifts
           } 
         } 
       },   

@@ -1,0 +1,124 @@
+.main {
+    display: flex;
+    justify-content: top;
+    align-items: center;
+    flex-direction: column;
+    width: 1500x;
+    height: 1000px;
+    background-image: url("../public/HeartsBackground.jpg");
+    background-size: cover;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    padding-top: 20px;
+    border-radius: 15px;
+}
+
+.fieldContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    padding: 20px;
+}
+
+
+.inputBox {
+    width: 200px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.signUpLink {
+    color: black;
+    text-decoration: underline;
+    font-size: 15px;
+}
+
+
+.button {
+    display: flex;
+    font-size: 15px; 
+    font-weight: 100;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(227, 116, 116);
+    color: white;
+    height: 40px;
+    width: 100px;
+    margin-top: 30px;
+    padding-right: 25px;
+    padding-left: 25px;
+    border-width: 0px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.notes {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 30px;
+    border-color: rgb(15, 159, 191);
+    border-style: solid;
+    border-width: thick;
+}
+
+.formFieldSections {
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+}
+
+.formFieldcolum {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-top: 0px;
+
+
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+.img {
+    margin-top: 20px;
+    width: 200px;
+    height: 200px;
+}
+
+@media screen and (max-width: 650px) {
+
+    .formFieldSections {
+        flex-direction: column;
+
+    }
+
+}
+  

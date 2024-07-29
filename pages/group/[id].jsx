@@ -62,7 +62,7 @@ export const getServerSideProps = withIronSessionSsr (
 export default function GroupPage(props) {
   const router = useRouter();
   const menuType = "group"
-  const pageTitle = "Group Home Page"
+  const pageTitle = `${props.group.groupName}`
 
   const groupId = props.group.id
   console.log("groupId: ", groupId)
@@ -96,7 +96,7 @@ export default function GroupPage(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} pageTitle={pageTitle}/>
+      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} pageTitle={pageTitle} groupId={props.group.id}/>
 
       <main className={styles.main}>
         <div className={styles.mainContainer}>

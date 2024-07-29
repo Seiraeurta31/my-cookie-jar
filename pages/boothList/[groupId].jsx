@@ -7,6 +7,7 @@ import Link from "next/link";
 import Head from 'next/head';
 import Header from "../../components/header";
 import Footer from "../../components/footer";
+import styles from "../../styles/boothList.module.css"
 
 
 
@@ -44,6 +45,7 @@ export const getServerSideProps = withIronSessionSsr (
 export default function GroupPage(props) {
   const router = useRouter();
   const menuType = "group"
+  const pageTitle = `${props.group.groupName} - Booth List`
 
   return (
     <div >
@@ -53,47 +55,50 @@ export default function GroupPage(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} groupId={props.group.id}/>
+      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} pageTitle={pageTitle} groupId={props.group.id}/>
 
-      <main >
 
-        <div>
-          <h1 >Troop Booth List</h1>
-        </div>
+      <main className={styles.main}>
 
-        <Link href={`/group/${props.group.id}`}>
-          <h3>Back</h3>
-        </Link>
+        <div className={styles.mainContainer}>
 
-  
-        <div>
-          <h2>Group Booths</h2>   
-
-          <Link href={`/boothForm?g=${props.group.id}`}>
+          <Link href={`/boothForm?g=${props.group.id}`} className={styles.button}>
             <h3>Add New Booth</h3>
           </Link>
-
-          {props.group.groupBooths.length ? (
-            <>
-              {props.group.groupBooths.map((booth, i) => (
-                <GroupBooths 
-                  key={i}
-                  groupId={props.group.id}
-                  boothId={booth.boothId}
-                  locationName={booth.locationName} 
-                  date={booth.date} 
-                  time={booth.time} 
-                  amPM={booth.amPM}
-                  numShifts={booth.shifts}> 
-                </GroupBooths>
-              ))}
-            </>
-            ):( 
-            <>
-              <p >No group booths yet!</p>
-            </>
-          )}
+         
         </div>
+
+        <div className={styles.listContainer}>
+          <div>
+
+            {props.group.groupBooths.length ? (
+              <>
+                {props.group.groupBooths.map((booth, i) => (
+                  <GroupBooths 
+                    key={i}
+                    groupId={props.group.id}
+                    boothId={booth.boothId}
+                    locationName={booth.locationName} 
+                    date={booth.date} 
+                    time={booth.time} 
+                    amPM={booth.amPM}
+                    numShifts={booth.numShifts}> 
+                  </GroupBooths>
+                ))}
+              </>
+              ):( 
+              <>
+                <p >No group booths yet!</p>
+              </>
+            )}
+          </div>
+        </div>
+
+
+        
+
+  
+        
    
       </main>
 
@@ -105,14 +110,32 @@ export default function GroupPage(props) {
 
 
 function GroupBooths({groupId, boothId, locationName, date, time, amPM, numShifts}) {
+
+  console.log("BOOTH INFO: ", groupId, boothId, locationName, date, time, amPM, numShifts)
+
+
   return (
     <div>
       <Link href={`/booth?g=${groupId}&b=${boothId}`}>
-        <p>Booth Id: {boothId} </p>
+      <div className={styles.boothInfo}>
+
+        <div className={styles.locationInfo}>
+          <p className={styles.infoName}>{locationName}</p>
+          <p className={styles.infoItem}>{date}</p>
+          <p className={styles.infoItem}>{time} {amPM}</p>
+        </div>
+
+        <div className={styles.shiftInfo}>
+            <p className={styles.infoItem}># of Shifts <br></br> Available</p>
+          <div>
+            <p className={styles.numShift}>{numShifts}</p>
+          </div>   
+        </div>
+
+      </div>
+        
         
       </Link>
-        
-
     </div>  
     
   )

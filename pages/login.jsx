@@ -81,7 +81,7 @@ export default function Login(props) {
           <form onSubmit={handleLogin} className={styles.form}>
             
             <div className={styles.fieldContainer}> 
-              <label htmlFor="username">Email: </label>
+              <label htmlFor="username">Username: </label>
                 <input
                   className={styles.inputBox}
                   type="text"
