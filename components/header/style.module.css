@@ -18,6 +18,7 @@
   color: rgb(255, 255, 255);
   align-items: center;
   margin-left: -30px;
+  margin-bottom: 0px;
 }
 
 .logoIcon {
@@ -48,16 +49,28 @@
 .navContainer {
   display: flex;
   flex-direction: row;
-  justify-content:flex-end;
-  align-items: flex-end;
-  justify-content: space-around;
+  justify-content:space-around;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
   padding: 10px;
 }
 
 .navLink {
   padding-right: 40px;
+  text-align: center;
 }
 
+
+@media screen and ((min-width: 360px) and (max-width: 729px)) {
+  
+  .navLink {
+    text-align: center;
+    align-items: center;
+  }
+  
+
+}
 
 @media screen and (max-width: 730px) {
 
@@ -82,13 +95,14 @@
   }
 
   .navContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-    align-items: center;
-    justify-content: space-around;
-    padding: 10px;
+    margin-left: 30px;
   }
 
+  .navLink {
+    font-size: 15px;
+    width: 100%;
+  }
+  
+  
 }
 

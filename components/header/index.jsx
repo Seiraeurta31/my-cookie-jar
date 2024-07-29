@@ -51,18 +51,25 @@ export default function Header(props) {
                     {props.menu === "group" ? (
                       <>
                         <div className={styles.navContainer}>
-                          <div>
-                            <Link href="/dashboard" className={styles.navLink}>Dashboard </Link>
-                          </div>
-                          <div>
-                            <Link href={'/group/' + props.groupId} className={styles.navLink}>Home Page   </Link> 
-                          </div>
-                          <div>
-                            <Link href={`/membersList/${props.groupId}`} className={styles.navLink}>Members List    </Link>
-                          </div>
-                          <div>
-                            <a onClick={logout} style={{ cursor: "pointer" }} className={styles.navLink}>Logout</a> 
-                          </div>
+                          
+                            <Link href="/dashboard" className={styles.navLink}>
+                              <p>Dashboard </p>
+                            </Link>
+                        
+                          
+                            <Link href={'/group/' + props.groupId} className={styles.navLink}>
+                              <p>Home</p>  
+                            </Link> 
+                          
+                    
+                            <Link href={`/boothList/${props.groupId}`} className={styles.navLink}>
+                              <p>Booths</p>  
+                            </Link>
+                          
+                            <a onClick={logout} style={{ cursor: "pointer" }} className={styles.navLink}>
+                              <p>Logout</p>
+                            </a> 
+
                         </div> 
                       </>
                     ) : (

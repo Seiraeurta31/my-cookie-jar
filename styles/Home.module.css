@@ -48,7 +48,8 @@
 }
 
 @media screen and (max-width: 450px) {
-  
-
+    .mainContainer {
+        width: auto;
+    }
 
 }
