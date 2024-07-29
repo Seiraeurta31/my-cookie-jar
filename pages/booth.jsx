@@ -6,6 +6,7 @@ import db from '../db'
 import Head from 'next/head';
 import Header from "../components/header";
 import Footer from "../components/footer";
+import styles from "../styles/booth.module.css"
 
 
 
@@ -60,6 +61,7 @@ export const getServerSideProps = withIronSessionSsr (
 export default function BoothPage(props) {
   const router = useRouter();
   const menuType = "group"
+   const pageTitle = "Booth Details"
 
   const groupId = props.groupId
   console.log("groupId: ", groupId)
@@ -93,43 +95,45 @@ export default function BoothPage(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} groupId={props.groupId}/>
+      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} pageTitle={pageTitle} groupId={props.groupId}/>
 
-      <main >
-        <div>
-          <h1 >
-            Booth Details Page
-          </h1>
-        </div>
-        
-        
-        <div>
-          <a onClick={deleteBooth} style={{ cursor: 'pointer', fontSize : 16, color: 'blue', textDecoration: 'underline' }}>Delete Booth</a> 
+
+      <main className={styles.main}>
+
+        <div className={styles.button}>
+          <a onClick={deleteBooth} style={{ cursor: 'pointer', fontSize : 16 }}>Delete Booth</a> 
         </div>
 
+        <div className={styles.mainContainer}>
 
-        <div>
-          <p> Location Name: {props.booth.locationName}</p>
-          <p> Date/Time: {props.booth.date} @ {props.booth.time}{props.booth.amPM}</p>
-          <p> # of Shifts Available: {props.booth.shifts}</p>
-          <p> Address: {props.booth.address}, {props.booth.city}, {props.booth.state}</p>
-          
-
-          <iframe
-            width="300"
-            height="300"
-            loading="lazy"
-            allowfullscreen
-            referrerpolicy="no-referrer-when-downgrade"
-            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_API_KEY}&q=${props.booth.address}+${props.booth.city}+${props.booth.state}`}>
-          </iframe>
-
-          <div>
-            <p> Important Notes: {props.booth.notes}</p>
+          <div className={styles.details}>
+            <p className={styles.locationName}> {props.booth.locationName}</p>
+            <p> {props.booth.date} @ {props.booth.time}{props.booth.amPM}</p>
+            <p> {props.booth.shifts} Shifts Available </p>
+            <div className={styles.address }>
+              <p> {props.booth.address}, </p>
+              <p> {props.booth.city}, {props.booth.state}</p>
+            </div>
+            
           </div>
-          
 
-        </div>
+            <iframe
+              width="300"
+              height="300"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_API_KEY}&q=${props.booth.address}+${props.booth.city}+${props.booth.state}`}>
+            </iframe>
+
+            <div>
+              <p> Important Notes: {props.booth.notes}</p>
+            </div>
+            
+
+          
+      
+        </div >   
 
       </main>
 

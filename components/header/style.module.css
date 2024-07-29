@@ -1,7 +1,10 @@
 .header {
   display: flex;
   flex-direction: column;
-  background-color: rgb(35, 121, 192);
+  background-color: #077ea5;
+  border-style: solid;
+  border-bottom-width: 6px;
+  border-color:  rgb(248, 176, 176);
   height:150px;
 }
 

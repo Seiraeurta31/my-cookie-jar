@@ -30,7 +30,7 @@
     padding: 20px;
     margin-top: 40px;
     border-radius: 30px;
-    border-color: rgb(15, 159, 191);
+    border-color: #077ea5;
     border-style: solid;
     border-width: thick;
 }
@@ -42,7 +42,7 @@
     font-weight: 100;
     justify-content: center;
     align-items: center;
-    background-color: rgb(227, 116, 116);
+    background-color: #f37d8c;
     color: white;
     height: 40px;
     width: 150px;
