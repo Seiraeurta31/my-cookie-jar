@@ -36,13 +36,13 @@ export default function Home(props) {
               
               <div className={styles.button}>
                   <Link href="/login">
-                    <h2>Login </h2>
+                    <p>Login </p>
                   </Link>
               </div>
 
               <div className={styles.button}>
                   <Link href="/signup">
-                    <h2>Sign Up </h2>
+                    <p>Sign Up </p>
                   </Link>
               </div>
 

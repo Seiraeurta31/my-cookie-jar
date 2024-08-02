@@ -108,7 +108,7 @@ export default function CreateGroup(props) {
             notes,
             }),
         });
-        if (res.status === 200) return router.push("/group/" + groupId);
+        if (res.status === 200) return router.push("/boothList/" + groupId);
         const { error: message } = await res.json();
         setError(message);
       } catch (err) {
