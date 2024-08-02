@@ -60,6 +60,17 @@
   width: 500px;
 }
 
+.groupNavContainer  {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 20px;
+  margin-left: -40px;
+  width: 400px;
+}
+
 .navLink {
 
   text-align: center;
@@ -109,6 +120,12 @@
     max-width: 315px;
   }
 
+  .groupNavContainer {
+    margin-left: 0px;
+    max-width: 290px;
+  }
+
+
 }
 
 @media (min-width: 426px) and (max-width: 730px) {
@@ -148,6 +165,11 @@
   .navContainer {
     margin-left: 0px;
     max-width: 410px;
+  }
+
+  .groupNavContainer {
+    margin-left: 0px;
+    max-width: 320px;
   }
   
 }

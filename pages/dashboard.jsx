@@ -47,7 +47,7 @@ export const getServerSideProps = withIronSessionSsr (
 export default function Dashboard(props) {
   const router = useRouter();
   const menuType = "user"
-  const pageTitle = "Dashboard"
+  const pageTitle = "Home Page"
 
   return (
     <div >

@@ -29,7 +29,7 @@ export default function Header(props) {
                     <>
                       <div className={styles.navContainer}>
                         <div >
-                          <Link href="/dashboard" className={styles.navLink}>Dashboard </Link>
+                          <Link href="/dashboard" className={styles.navLink}>Home </Link>
                         </div>
                         <div>
                           <Link href="/createGroup" className={styles.navLink}>Create  Group </Link> 
@@ -50,17 +50,17 @@ export default function Header(props) {
 
                     {props.menu === "group" ? (
                       <>
-                        <div className={styles.navContainer}>
+                        <div className={styles.groupNavContainer}>
                           
                           <div >  
-                            <Link href="/dashboard" className={styles.navLink}> Dashboard </Link>
+                            <Link href="/dashboard" className={styles.navLink}> Home </Link>
                           </div>
                           <div>
-                            <Link href={'/group/' + props.groupId} className={styles.navLink}>Home </Link>
+                            <Link href={'/group/' + props.groupId} className={styles.navLink}>Menu </Link>
                           </div>
-                          <div>
+                          {/* <div>
                             <Link href={`/boothList/${props.groupId}`} className={styles.navLink}>Booths</Link>
-                          </div>
+                          </div> */}
                           <div>
                             <a onClick={logout} style={{ cursor: "pointer" }} className={styles.navLink}>Logout</a> 
                           </div>
