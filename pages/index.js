@@ -30,9 +30,11 @@ export default function Home(props) {
                   </h1>
 
                   
-                  <h2>
-                    Log in or Sign up!
-                  </h2>
+                  <div className = {styles.welcomeMessage}>
+                    <p>Ready to conquer Cookie Season like a pro? </p>
+                    <p>Sign in or register to manage booth schedules, manage inventory, track orders and keep everything organized. </p>
+                    <p>Let's make this the best season ever! </p>
+                  </div>
               
               <div className={styles.button}>
                   <Link href="/login">
