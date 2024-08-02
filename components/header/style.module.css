@@ -55,38 +55,63 @@
   justify-content:space-between;
   align-items: center;
   text-align: center;
-  justify-content: center;
   padding-bottom: 20px;
   margin-left: -40px;
+  width: 500px;
 }
 
 .navLink {
 
   text-align: center;
   font-size: 20px;
-  padding: 18px;
+  padding: 14px;
   font-family: Kanvas File;
 }
 
 
-@media screen and (max-width: 478px) {
+@media  (max-width: 425px) {
   
-  .navLink {
-    text-align:center;
-    margin: -10px;
-    width: 150px;
-    text-wrap: balance;
-    
+  .header {
+    height:230px;
+  }
+
+  .headerContainer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .titleAndNav {
-    max-width: 400px;
+    margin-left: 0px;
+  }
+
+  .pageTitle {
+    margin-left: 0px;
+    margin-top: 15px;
+
+  }
+
+  .logoIcon {
+    max-width: 80px;
+    margin-left: 0px;
   }
 
 
+  .navLink {
+    font-size: 16px;
+    padding: 0px;
+    width: 100%;
+    
+  }
+  
+  .navContainer {
+    margin-left: 0px;
+    max-width: 290px;
+  }
+
 }
 
-@media screen and (max-width: 730px) {
+@media (min-width: 426px) and (max-width: 730px) {
 
   .header {
     height:230px;
@@ -115,13 +140,14 @@
 
 
   .navLink {
-    font-size: 17px;
+    font-size: 18px;
     width: 100%;
     
   }
   
   .navContainer {
     margin-left: 0px;
+    width: 400px;
   }
   
 }
