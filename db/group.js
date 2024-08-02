@@ -25,7 +25,7 @@ export async function createNewGroup(uId, uFirstName, uLastName, groupCode, grou
           userId: uId, 
           memberFirstName: uFirstName,
           memberLastName: uLastName,
-          memberRole: 'admin'
+          memberRole: 'Admin'
         } 
       } 
     },    

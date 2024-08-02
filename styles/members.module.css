@@ -11,7 +11,7 @@
 
 
 .mainContainer {
-    min-width: 200px;
+    min-width: 300px;
     min-height: 400px;
     display: flex;
     flex-direction: column;
@@ -36,16 +36,20 @@
     color: white;
     height: 50px;
     width: 230px;
-    margin-bottom: 30px;
+    margin-top: 5px;
     padding-right: 25px;
     padding-left: 25px;
-    border-radius: 15px;
-    
+    border-radius: 15px;    
+}
+
+.membersList {
+    display: flex;
+    justify-content: top;
+    flex-direction: column;
 }
 
 
 @media screen and (max-width: 520px) {
   
-
 
 }

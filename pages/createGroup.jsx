@@ -137,7 +137,7 @@ export default function CreateGroup(props) {
               
     
               <div className={styles.buttonContainer}>
-                <button className={styles.button}>Submit</button>
+                <button className={styles.button} style={{ cursor: "pointer" }}>Submit</button>
                 <button className={styles.button}>
                     <Link href="/dashboard" >Cancel</Link>
                 </button>

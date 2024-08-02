@@ -7,7 +7,7 @@ import Link from "next/link";
 import Head from 'next/head';
 import Header from "../../components/header";
 import Footer from "../../components/footer";
-
+import styles from "../../styles/members.module.css"
 
 
 export const getServerSideProps = withIronSessionSsr (
@@ -41,7 +41,7 @@ export const getServerSideProps = withIronSessionSsr (
 export default function GroupPage(props) {
   const router = useRouter();
   const menuType = "group"
-  const pageTitle = `${props.group.groupName} - Member List`
+  const pageTitle = `${props.group.groupName}`
 
   return (
     <div >
@@ -53,42 +53,39 @@ export default function GroupPage(props) {
 
       <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} pageTitle={pageTitle} groupId={props.group.id}/>
 
-      <main >
+      <main className={styles.main}>
 
-        <div>
-          <h1> PAGE UNDER CONSTRUCTION</h1>
-        </div>
+        <div className={styles.mainContainer}>
 
-        <div>
-          <Link href={`/group/${props.group.id}`}>
-            <h3>Back</h3>
-          </Link>
-        </div>
-      
+          <div>
+              <h1>Members</h1>
+          </div>
 
-       <div>
-          <h3>Group Members:</h3>
-          {props.group.groupMembers ? (
-            <>
-              {props.group.groupMembers.map((member, i) => (
-                <GroupMembers 
-                  key={i}
-                  groupId={props.group.id}
-                  memberId={member._id}
-                  userId={member.userId} 
-                  memberFirstName={member.memberFirstName} 
-                  memberLastName={member.memberLastName}
-                  memberRole={member.memberRole}
-                  id={member._id}>
-                </GroupMembers>
-              ))}
-            </>
-            ):( 
+
+          <div className={styles.membersList}>
+            {props.group.groupMembers ? (
               <>
+                {props.group.groupMembers.map((member, i) => (
+                  <GroupMembers 
+                    key={i}
+                    groupId={props.group.id}
+                    memberId={member._id}
+                    userId={member.userId} 
+                    memberFirstName={member.memberFirstName} 
+                    memberLastName={member.memberLastName}
+                    memberRole={member.memberRole}
+                    id={member._id}>
+                  </GroupMembers>
+                ))}
               </>
-          )}
-        </div>
-   
+              ):( 
+                <>
+                </>
+            )}
+          </div>
+
+        </div>  
+
       </main>
 
       <Footer/>
@@ -101,13 +98,13 @@ export default function GroupPage(props) {
 function GroupMembers({memberFirstName, memberLastName, groupId, memberId}) {
 
   return (
-    <div>
+
       <Link href={`/member?g=${groupId}&m=${memberId}`}>
-        <h3 style={{color: "blue"}}> --- {memberFirstName} {memberLastName} ---</h3>
+        <p className={styles.button}> {memberFirstName} {memberLastName}</p>
       </Link>
         
 
-    </div>  
+ 
     
   )
 }

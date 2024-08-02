@@ -42,20 +42,19 @@
 
 .button {
     display: flex;
-    font-size: 15px;
-    font-family: Kanvas File;
     font-weight: 100;
     justify-content: center;
+    font-family: Kanvas File;
     align-items: center;
     background-color: #f37d8c;
     color: white;
-    height: 35px;
+    height: 40px;
     width: 80px;
+    font-size: 15px; 
     margin-top: 30px;
     padding-right: 25px;
     padding-left: 25px;
     border-width: 0px;
-    margin: 10px;
     border-radius: 10px;
 }
 

@@ -6,6 +6,7 @@ import db from '../db'
 import Head from 'next/head';
 import Header from "../components/header";
 import Footer from "../components/footer";
+import styles from "../styles/memberDetails.module.css"
 
 
 
@@ -28,6 +29,13 @@ export const getServerSideProps = withIronSessionSsr (
     const memberId = query.m
 
     props.groupId = groupId
+
+    const group = await db.group.getGroupById(groupId)
+    const groupConverted = JSON.parse(JSON.stringify(group))
+    
+    if(group !== null){
+      props.group = groupConverted
+    }
 
     const member = await db.group.getMemberById(groupId, memberId)
     const memberDetails = JSON.parse(JSON.stringify(member))
@@ -54,6 +62,7 @@ export const getServerSideProps = withIronSessionSsr (
 export default function MemberPage(props) {
   const router = useRouter();
   const menuType = "group"
+  const pageTitle = `${props.group.groupName}`
 
   return (
     <div >
@@ -63,22 +72,28 @@ export default function MemberPage(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} groupId={props.groupId}/>
+      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} pageTitle={pageTitle}  groupId={props.groupId}/>
 
-      <main >
-        <div>
-          <h1 >
-            Member Details Page
-          </h1>
-        </div>
+      <main className={styles.main}>
 
-        <div>
-          <p> Member Name: {props.mbrDetails.memberFirstName} {props.mbrDetails.memberLastName}</p>
-          <p> Member Email: {props.mbrUserInfo.email}</p>
-          <p> Member Role: {props.mbrDetails.memberRole}</p>
+        <div className={styles.mainContainer}>
 
-        </div>
+          <div>
+            <h1 >
+              Member Details
+            </h1>
+          </div>
 
+          <div className={styles.memberInfo}>
+            <p> {props.mbrDetails.memberFirstName} {props.mbrDetails.memberLastName}</p>
+            <p> Role: {props.mbrDetails.memberRole}</p>
+            <p> {props.mbrUserInfo.email}</p>
+           
+
+          </div>
+
+        </div>       
+        
       </main>
 
       <Footer/>

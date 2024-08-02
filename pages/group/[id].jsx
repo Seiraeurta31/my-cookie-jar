@@ -101,24 +101,25 @@ export default function GroupPage(props) {
       <main className={styles.main}>
         
         <div className={styles.mainContainer}>
+
+            <h1>Menu</h1>
           
-          <div className={styles.button}>
-            <Link href={`/membersList/${props.group.id}`}>Group Member List</Link>
-          </div> 
+            <div className={styles.button}>
+              <Link href={`/membersList/${props.group.id}`}>Group Member List</Link>
+            </div> 
 
-          <div className={styles.button}>
-            <Link href={`/boothList/${props.group.id}`}>Troop Booth List</Link>
-          </div>   
+            <div className={styles.button}>
+              <Link href={`/boothList/${props.group.id}`}>Troop Booth List</Link>
+            </div>   
 
-          <div className={styles.button}>
-            <Link href={`/inventory/${props.group.id}`}>Cookie Inventory</Link>
-          </div> 
+            <div className={styles.button}>
+              <Link href={`/inventory/${props.group.id}`}>Cookie Inventory</Link>
+            </div> 
 
-          <div className={styles.button}>
-            <a onClick={leaveGroup} style={{ cursor: 'pointer', fontSize : 16, }}>Leave Group</a> 
-          </div>
-
-          
+            <div className={styles.button}>
+              <a onClick={leaveGroup} style={{ cursor: 'pointer', fontSize : 16, }}>Leave Group</a> 
+            </div>
+    
         </div>
 
 
