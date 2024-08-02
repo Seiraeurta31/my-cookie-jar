@@ -103,7 +103,7 @@ export default function Login(props) {
                 />
             </div> 
               
-              <button className={styles.button}>Sign In</button>
+              <button className={styles.button} style={{ cursor: "pointer" }}>Sign In</button>
 
             
             {error && <p>{error}</p>}

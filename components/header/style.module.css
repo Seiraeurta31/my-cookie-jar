@@ -106,7 +106,7 @@
   
   .navContainer {
     margin-left: 0px;
-    max-width: 290px;
+    max-width: 315px;
   }
 
 }
@@ -147,7 +147,7 @@
   
   .navContainer {
     margin-left: 0px;
-    width: 400px;
+    max-width: 410px;
   }
   
 }

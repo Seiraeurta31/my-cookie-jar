@@ -54,18 +54,18 @@
     display: flex;
     font-weight: 100;
     justify-content: center;
+    font-family: Kanvas File;
     align-items: center;
     background-color: #f37d8c;
     color: white;
-    font-size: 20px;
-    font-family: Kanvas File;
-    height: 50px;
-    width: 200px;
+    height: 40px;
+    width: 100px;
+    font-size: 15px; 
     margin-top: 30px;
     padding-right: 25px;
     padding-left: 25px;
     border-width: 0px;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 .mainContainer {

@@ -168,7 +168,7 @@ export default function Signup(props) {
             </div>
             
 
-            <button className={styles.button}>Submit</button>
+            <button className={styles.button} style={{ cursor: "pointer" }}>Submit</button>
 
             {error && <p>{error}</p>}
           </form>

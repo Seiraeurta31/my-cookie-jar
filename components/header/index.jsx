@@ -32,7 +32,7 @@ export default function Header(props) {
                           <Link href="/dashboard" className={styles.navLink}>Dashboard </Link>
                         </div>
                         <div>
-                          <Link href="/createGroup" className={styles.navLink}>New  Group </Link> 
+                          <Link href="/createGroup" className={styles.navLink}>Create  Group </Link> 
                         </div>
                         <div>
                           <Link href="/joinGroup" className={styles.navLink}>Join  Group </Link>
