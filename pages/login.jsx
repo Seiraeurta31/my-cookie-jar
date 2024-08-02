@@ -75,7 +75,7 @@ export default function Login(props) {
 
         <Image src="/cookieJarLogo.png" className={styles.logo} width="3000" height="1928"/>
         
-        <h1 className={styles.title}>Sign In</h1>
+        <h1 className={styles.title}>Account Log In</h1>
 
           <form onSubmit={handleLogin} className={styles.form}>
             
@@ -103,7 +103,7 @@ export default function Login(props) {
                 />
             </div> 
               
-              <button className={styles.button} style={{ cursor: "pointer" }}>Sign In</button>
+              <button className={styles.button} style={{ cursor: "pointer" }}>Log In</button>
 
             
             {error && <p>{error}</p>}
