@@ -4,6 +4,7 @@ import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../config/session";
 import db from '../db'
 import Head from 'next/head';
+import Link from "next/link";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import styles from "../styles/memberDetails.module.css"
@@ -87,7 +88,8 @@ export default function MemberPage(props) {
           <div className={styles.memberInfo}>
             <p> {props.mbrDetails.memberFirstName} {props.mbrDetails.memberLastName}</p>
             <p> Role: {props.mbrDetails.memberRole}</p>
-            <p> {props.mbrUserInfo.email}</p>
+
+            <a href={`mailto:${props.mbrUserInfo.email}`} style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }} className={styles.navLink}>{props.mbrUserInfo.email}</a> 
            
 
           </div>
@@ -100,4 +102,13 @@ export default function MemberPage(props) {
 
     </div>      
    );         
+}
+
+function sendEmail() {
+
+  return (
+    <a href={`mailto:ashleyfrank31@gmail.com`}>hi</a>
+
+  ) 
+
 }
