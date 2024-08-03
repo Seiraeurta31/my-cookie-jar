@@ -63,7 +63,7 @@ export default function GroupPage(props) {
         <div className={styles.mainContainer}>
 
           <Link href={`/boothForm?g=${props.group.id}`} className={styles.button}>
-            <h3> + New Booth</h3>
+            <p> + New Booth</p>
           </Link>
          
         </div>

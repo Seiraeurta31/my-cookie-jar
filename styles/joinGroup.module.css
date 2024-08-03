@@ -92,7 +92,26 @@
     height: 200px;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 425px) {
+
+    .button {
+ 
+        width: 100px;
+        font-size: 20px; 
+        margin-bottom: 30px;
+
+    }
+
+    .fieldContainer {
+        width: 200px;
+    }
+
+    .buttonContainer {
+        flex-direction:column;
+
+    
+    }
+
 
 }
   

@@ -18,7 +18,7 @@ export default function Header(props) {
               <div className={styles.headerContainer}>
 
                 <div>
-                    <Image src="/cookieJarLogo_Circle.png" className={styles.logoIcon} width="3000" height="1928"/>
+                    <Image alt="cookie jar logo" src="/cookieJarLogo_Circle.png" className={styles.logoIcon} width="120" height="125"/>
                 </div> 
 
                 <div className={styles.titleAndNav}>

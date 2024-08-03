@@ -60,7 +60,7 @@
     background-color: #f37d8c;
     color: white;
     height: 40px;
-    width: 100px;
+    width: 80px;
     font-size: 15px; 
     margin-top: 30px;
     padding-right: 25px;
@@ -89,7 +89,7 @@
     height: 200px;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 425px) {
     .mainContainer {
         max-width: 300px;
     }

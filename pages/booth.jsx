@@ -175,11 +175,12 @@ export default function BoothPage(props) {
             </div>
 
             <iframe
+              title="map of location"
               width="250"
               height="250"
               loading="lazy"
-              allowfullscreen
-              referrerpolicy="no-referrer-when-downgrade"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
               src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_API_KEY}&q=${props.booth.address}+${props.booth.city}+${props.booth.state}`}>
             </iframe>
 

@@ -47,7 +47,7 @@
 
 .button {
     display: flex;
-    font-size: 15px;
+    font-size: 20px;
     font-family: Kanvas File;
     font-weight: 100;
     justify-content: center;
@@ -55,7 +55,7 @@
     background-color: #f37d8c;
     color: white;
     height: 35px;
-    width: 80px;
+    width: 100px;
     margin-top: 30px;
     padding-right: 25px;
     padding-left: 25px;
@@ -118,12 +118,25 @@
     height: 200px;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 425px) {
 
     .formFieldSections {
         flex-direction: column;
 
     }
+
+
+    
+    .buttonContainer {
+        flex-direction: column;
+
+    }
+
+    .button {
+        width: 120px;
+        margin-bottom: 30px;
+    }    
+
 
 }
   

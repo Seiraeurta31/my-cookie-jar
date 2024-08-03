@@ -73,7 +73,7 @@ export default function Login(props) {
 
       <div className={styles.mainContainer}>
 
-        <Image src="/cookieJarLogo.png" className={styles.logo} width="3000" height="1928"/>
+        <Image alt="cookie jar logo" src="/cookieJarLogo.png" className={styles.logo} width="3000" height="1928"/>
         
         <h1 className={styles.title}>Account Log In</h1>
 
