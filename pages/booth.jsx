@@ -28,7 +28,7 @@ export const getServerSideProps = withIronSessionSsr (
     const groupId = query.g
     const boothId = query.b
 
-    console.log("boothId: ", boothId)
+    console.log("User Info: ", user)
 
     props.groupId = groupId
 
@@ -43,15 +43,19 @@ export const getServerSideProps = withIronSessionSsr (
         props:{},
       };
     }
-
-
     const boothDetails = JSON.parse(JSON.stringify(booth))
 
     if(boothDetails !== null){
       props.booth = boothDetails
     }
 
-    console.log("BOOTH DETAILS: ", boothDetails)
+
+    const boothAttendee = await db.booth.getRegisteredAttendee(user._id, boothId)
+    if(boothAttendee !== null){
+      props.boothAttendee = boothAttendee
+    }
+
+
     
     return { props };
   },
@@ -68,9 +72,13 @@ export default function BoothPage(props) {
 
   const groupId = props.groupId
   const userFirstName = props.user.firstName
+
   const userLastName = props.user.lastName
+  const userId = props.user._id
 
   const boothId = props.booth.id
+
+  
 
   async function deleteBooth(e) {
     e.preventDefault()
@@ -89,8 +97,26 @@ export default function BoothPage(props) {
     }  
   }
 
+
+  async function removeBoothSignUp(e) {
+    e.preventDefault()
+    const res = await fetch(`/api/booth/attendee`, {
+      method: 'DELETE',
+      headers: 
+      {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({userId, boothId})
+    })
+
+    // Call router.replace(router.asPath) if you receive a 200 status
+    if (res.status === 200) {
+      router.replace(router.asPath)
+    }  
+  }
+
   
-  async function boothSignUp(e) {
+  async function addBoothSignUp(e) {
     e.preventDefault()
     const res = await fetch(`/api/booth/attendee`, {
       method: 'POST',
@@ -98,7 +124,7 @@ export default function BoothPage(props) {
       {
         "content-type": "application/json",
       },
-      body: JSON.stringify({userFirstName, userLastName, groupId, boothId})
+      body: JSON.stringify({userId, userFirstName, userLastName, groupId, boothId})
     })
 
     // Call router.replace(router.asPath) if you receive a 200 status
@@ -137,8 +163,18 @@ export default function BoothPage(props) {
           <div className={styles.shiftSection }>
             <div className={styles.shiftSignUp}>
               <h3 style={{fontSize:"18px"}}> {props.booth.shifts} Shifts Available </h3>
-              <div className={styles.signUpButton}>
-                <a onClick={boothSignUp} style={{ cursor: 'pointer', fontSize : 16 }}>Sign Up</a> 
+              <div className={styles.registerButton}>
+
+                {props.boothAttendee ? (
+                  <>
+                  <a onClick={removeBoothSignUp} style={{ cursor: 'pointer', fontSize : 16 }}>Remove</a>
+                  </>
+                  ):( 
+                  <>
+                    <a onClick={addBoothSignUp} style={{ cursor: 'pointer', fontSize : 16 }}>Sign Up</a>
+                  </>
+                )}
+
             </div>
             </div>
             <div className={styles.scheduledMembers}>

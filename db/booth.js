@@ -105,17 +105,35 @@ export async function getBoothById(boothId) {
 }
 
 
-//GET: Get list of booth attendees
-export async function getBoothAttendees(boothId) {
+
+export async function getRegisteredAttendee(userId, boothId) {
 
   await dbConnect()
 
+  console.log("Get Registered Attendee TRIGGERED")
+  //Check for user, if none, return null, otherwise proceed to find drink by user.
+ const attendeeList = await getBoothAttendees(boothId)
+ if (!attendeeList) return null
 
-  const attendeeList = Booth.attendingMembers.findById(boothId)
-  if (!attendeeList) return null
+ const attendee = attendeeList.find(attendee => attendee.userId === userId)
+  if (!attendee) return null
 
-  return attendeeList.map(attendee => convertIdToString(attendee))
+  return attendee
 }
+
+
+//GET: Get list of booth attendees
+export async function getBoothAttendees(boothId) {
+
+    await dbConnect()
+  
+    //Validate user exists
+    const booth = await Booth.findById(boothId).lean()
+    if (!booth) return null
+  
+    //TO DO: Stringify data to convert to JSON to be read from database
+    return booth.attendingMembers.map(attendee => convertIdToString(attendee))
+  }
 
 
 //PUT: Update booth information
@@ -159,14 +177,14 @@ export async function updateBoothDetails(
 
 
 //Add member to booth attendee list
-export async function addBoothAttendee(firstName, lastName, groupMemberId, boothId) {
+export async function addBoothAttendee(userId, firstName, lastName, boothId) {
 
   await dbConnect()
 
   //If user exists, add drink to user Favorites
   const attendee = await Booth.findByIdAndUpdate(
     boothId,
-    { $addToSet: { attendingMembers: {memberId: groupMemberId, memberFirstName: firstName, memberLastName: lastName}} }, 
+    { $addToSet: { attendingMembers: {userId: userId, memberFirstName: firstName, memberLastName: lastName}} }, 
     { new: true } 
   )
   //If user was not found, return null
@@ -177,7 +195,7 @@ export async function addBoothAttendee(firstName, lastName, groupMemberId, booth
 
 
 //Remove member from booth attendee list
-export async function removeBoothAttendee(attendeeId, boothId) {
+export async function removeBoothAttendee(userId, boothId) {
 
   await dbConnect()
 
@@ -186,7 +204,7 @@ export async function removeBoothAttendee(attendeeId, boothId) {
     boothId,
     { $pull: 
       { 
-        attendingMembers: {_id: attendeeId } 
+        attendingMembers: {userId: userId } 
       } 
     },
     { new: true } 
