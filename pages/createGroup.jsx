@@ -92,8 +92,14 @@ export default function CreateGroup(props) {
         <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} menu={menuType} pageTitle={pageTitle}/>
   
         <main className={styles.main}>
+
   
           <div className={styles.mainContainer}>
+
+            <p className={styles.instructions}>
+              Enter the name and unique passcode you will use for your group. This will be the info you give to future users to join your group.
+            </p>
+
             <form
               onSubmit={handleCreateAccount}
             >
@@ -111,7 +117,7 @@ export default function CreateGroup(props) {
               
     
               <div className={styles.fieldContainer}>
-                <label htmlFor="groupCode">Group Code: </label>
+                <label htmlFor="groupCode">Passcode: </label>
                 <input
                   className={styles.inputBox}
                   type="text"
@@ -124,7 +130,7 @@ export default function CreateGroup(props) {
               
 
               <div className={styles.fieldContainer}>
-                <label htmlFor="confirm-code">Confirm Group Code: </label>
+                <label htmlFor="confirm-code">Confirm Passcode: </label>
                 <input
                   className={styles.inputBox}
                   type="confirm-code"
