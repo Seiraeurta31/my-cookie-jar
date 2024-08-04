@@ -89,8 +89,9 @@
 .numShift {
     display: flex;
     flex-direction: column;
-    background-color: rgb(227, 116, 116);
+    background-color: #077ea5;
     height: 40px;
+    color: white;
     width: 50px;
     justify-content: center;
     align-items: center;
@@ -101,6 +102,7 @@
 .infoItem {
     margin-top: 0px;
     margin-bottom: 0px;
+    margin-left: 10px;
 }
 
 .locationInfo {

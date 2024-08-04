@@ -230,7 +230,7 @@ export default function CreateGroup(props) {
                 <div className={styles.fieldContainer}>
                   <label htmlFor="state">State: </label>
                   <input
-                    placeholder="ex: FL"
+                    placeholder="ex: Florida"
                     className={styles.inputBox}
                     type="text"
                     name="state"

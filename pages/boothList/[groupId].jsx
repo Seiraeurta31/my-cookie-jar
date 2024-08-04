@@ -134,10 +134,11 @@ function GroupBooths({groupId, boothId, locationName, date, time, amPM, numShift
             <p className={styles.infoItem}>{time} {amPM}</p>
           </div>
           <div className={styles.shiftInfo}>
-              <p className={styles.infoItem}># of Shifts <br></br> Available</p>
             <div>
               <p style={{color: "white"}}className={styles.numShift}>{numShifts}</p>
-            </div>   
+            </div> 
+            <p className={styles.infoItem}> Shifts <br></br> Available</p>
+              
           </div>
           
         </div>
