@@ -63,7 +63,7 @@ export default function GroupPage(props) {
         <div className={styles.mainContainer}>
 
           <Link href={`/boothForm?g=${props.group.id}`} className={styles.button}>
-            <p> + New Booth</p>
+            <p> Add Booth</p>
           </Link>
          
         </div>
@@ -90,7 +90,10 @@ export default function GroupPage(props) {
               </>
               ):( 
               <>
-                <p >No group booths yet!</p>
+                <div className={styles.instructions}> 
+                  <p style={{fontSize:"20px", textAlign: "center"}}> No Booths Yet! </p>
+                  <p style={{textAlign: "center", textWrap: "balance", margin: "10px"}}> Open a booth listing by selecting the "Add Booth" button above. </p>
+              </div>
               </>
             )}
           </div>
