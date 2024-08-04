@@ -93,7 +93,7 @@ export default function GroupPage(props) {
                 <div className={styles.instructions}> 
                   <p style={{fontSize:"20px", textAlign: "center"}}> No Booths Yet! </p>
                   <p style={{textAlign: "center", textWrap: "balance", margin: "10px"}}> Open a booth listing by selecting the "Add Booth" button above. </p>
-              </div>
+                </div>
               </>
             )}
           </div>

@@ -133,12 +133,17 @@ export default function CreateGroup(props) {
           <form
             onSubmit={handleCreateAccount}
           >
+
+            <div className={styles.instructions}> 
+              <p style={{textAlign: "center", textWrap: "balance", margin: "10px"}}> Use the form below to enter the details for a new booth. </p>
+            </div>
             <div className={styles.formFieldSections}>
 
               <div className={styles.formFieldcolum}>
                 <div className={styles.fieldContainer}>
                   <label htmlFor="locationName">Location Name: </label>
                   <input
+                    placeholder="ex: Publix on Beach Blvd"
                     className={styles.inputBox}
                     type="text"
                     name="locationName"
@@ -148,8 +153,9 @@ export default function CreateGroup(props) {
                   />
                 </div>
                 <div className={styles.fieldContainer}>
-                  <label htmlFor="date">Day, Date (mm/dd): </label>
+                  <label htmlFor="date">Day, Date: </label>
                   <input
+                    placeholder="ex: Saturday, 3/26"
                     className={styles.inputBox}
                     type="text"
                     name="date"
@@ -161,6 +167,7 @@ export default function CreateGroup(props) {
                 <div className={styles.fieldContainer}>
                   <label htmlFor="time">Time Range: </label>
                   <input
+                    placeholder="ex: 12:00-2:00"
                     className={styles.inputBox}
                     type="text"
                     name="time"
@@ -172,6 +179,7 @@ export default function CreateGroup(props) {
                 <div className={styles.fieldContainer}>
                   <label htmlFor="amPM">am/pm: </label>
                   <input
+                    placeholder="ex: pm"
                     className={styles.inputBox}
                     type="text"
                     name="amPM"
@@ -183,6 +191,7 @@ export default function CreateGroup(props) {
                 <div className={styles.fieldContainer}>
                   <label htmlFor="shifts">Number of Shiifts: </label>
                   <input
+                    placeholder="ex: 2"
                     className={styles.inputBox}
                     type="text"
                     name="shifts"
@@ -197,6 +206,7 @@ export default function CreateGroup(props) {
                 <div className={styles.fieldContainer}>
                   <label htmlFor="address">Street Address: </label>
                   <input
+                    placeholder="ex: 12345 Hills Lane"
                     className={styles.inputBox}
                     type="text"
                     name="address"
@@ -208,6 +218,7 @@ export default function CreateGroup(props) {
                 <div className={styles.fieldContainer}>
                   <label htmlFor="city">City: </label>
                   <input
+                    placeholder="ex: Westview"
                     className={styles.inputBox}
                     type="text"
                     name="city"
@@ -219,6 +230,7 @@ export default function CreateGroup(props) {
                 <div className={styles.fieldContainer}>
                   <label htmlFor="state">State: </label>
                   <input
+                    placeholder="ex: FL"
                     className={styles.inputBox}
                     type="text"
                     name="state"
@@ -230,6 +242,7 @@ export default function CreateGroup(props) {
                 <div className={styles.fieldContainer}>
                   <label htmlFor="notes">Notes: </label>
                   <textarea
+                    placeholder="ex: Add any special details needed for this"
                     className={styles.notes}
                     rows="1" 
                     cols="50"
