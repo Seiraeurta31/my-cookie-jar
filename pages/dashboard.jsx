@@ -79,7 +79,11 @@ export default function Dashboard(props) {
             </>
             ):( 
               <>
-                <p >No user groups yet!</p>
+              <div className={styles.instructions}> 
+                <p style={{fontSize:"20px", textAlign: "center"}}> No Groups Yet! </p>
+                <p style={{textAlign: "center", textWrap: "balance"}}> From the main menu, select "Create Group" to form a new group, or "Join Group" to join an existing one </p>
+              </div>
+                
               </>
           )}
         </div>
