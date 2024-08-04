@@ -129,20 +129,20 @@ export default function BoothPage(props) {
         <div className={styles.mainContainer}>
 
           <div className={styles.detailsSection}>
-            <p className={styles.locationName}> {props.booth.locationName}</p>
+            <h2 className={styles.locationName}> {props.booth.locationName}</h2>
             <p className={styles.dateTime}> {props.booth.date}</p>
             <p className={styles.dateTime}> {props.booth.time}{props.booth.amPM}</p>
           </div>
 
           <div className={styles.shiftSection }>
             <div className={styles.shiftSignUp}>
-              <p> {props.booth.shifts} Shifts Available </p>
+              <h3 style={{fontSize:"18px"}}> {props.booth.shifts} Shifts Available </h3>
               <div className={styles.signUpButton}>
                 <a onClick={boothSignUp} style={{ cursor: 'pointer', fontSize : 16 }}>Sign Up</a> 
             </div>
             </div>
-            <div>
-              <p>Scheduled Members:</p>
+            <div className={styles.scheduledMembers}>
+              <h4 style={{textAlign: "center"}}>---Scheduled Members---</h4>
 
               {props.booth.attendingMembers.length ? (
               <>

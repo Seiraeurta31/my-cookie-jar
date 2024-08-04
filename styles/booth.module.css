@@ -68,9 +68,15 @@
 .shiftSignUp {
     display: flex;
     flex-direction: row;
-    justify-content: top;
+    justify-content: space-between;
     align-items: center;
 
+}
+
+.scheduledMembers {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 .signUpButton {
@@ -97,8 +103,20 @@
     align-items: center;
 }
 
+.shiftSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    width: 300px;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    border-color: #f8b1ba;
+    border-style: solid;
+    padding: 25px;
+}
 
-.notesSection, .locationSection, .shiftSection, .detailsSection {
+.notesSection, .locationSection, .detailsSection {
     display: flex;
     flex-direction: column;
     justify-content: top;
