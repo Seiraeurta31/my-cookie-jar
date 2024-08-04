@@ -36,17 +36,21 @@ export default function Home(props) {
                     <p>Let's make this the best season ever! </p>
                   </div>
               
-              <div className={styles.button}>
-                  <Link href="/login">
-                    <p>Login </p>
-                  </Link>
-              </div>
+              <div className={styles.buttonContainer}>
+                <div className={styles.button}>
+                    <Link href="/login">
+                      <p>Login </p>
+                    </Link>
+                </div>
 
-              <div className={styles.button}>
-                  <Link href="/signup">
-                    <p>Sign Up </p>
-                  </Link>
+                <div className={styles.button}>
+                    <Link href="/signup">
+                      <p>Sign Up </p>
+                    </Link>
+                </div>
+
               </div>
+              
 
           </div>
           
