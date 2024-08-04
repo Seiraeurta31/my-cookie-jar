@@ -28,8 +28,6 @@ export const getServerSideProps = withIronSessionSsr (
     const groupId = query.g
     const boothId = query.b
 
-    console.log("User Info: ", user)
-
     props.groupId = groupId
 
     const booth = await db.booth.getBoothById(boothId)
@@ -49,7 +47,6 @@ export const getServerSideProps = withIronSessionSsr (
       props.booth = boothDetails
     }
 
-
     const boothAttendee = await db.booth.getRegisteredAttendee(user._id, boothId)
     if(boothAttendee !== null){
       props.boothAttendee = boothAttendee
@@ -68,7 +65,11 @@ export const getServerSideProps = withIronSessionSsr (
 export default function BoothPage(props) {
   const router = useRouter();
   const menuType = "group"
-   const pageTitle = "Booth Details"
+  const pageTitle = "Booth Details"
+
+  const availableBoothSlots = (props.booth.shifts - props.booth.attendingMembers.length)
+
+  console.log("REMAINING BOOTH SLOTS: ", availableBoothSlots)
 
   const groupId = props.groupId
   const userFirstName = props.user.firstName
@@ -78,7 +79,7 @@ export default function BoothPage(props) {
 
   const boothId = props.booth.id
 
-  
+
 
   async function deleteBooth(e) {
     e.preventDefault()
@@ -162,12 +163,12 @@ export default function BoothPage(props) {
 
           <div className={styles.shiftSection }>
             <div className={styles.shiftSignUp}>
-              <h3 style={{fontSize:"18px"}}> {props.booth.shifts} Shifts Available </h3>
+              <h3 style={{fontSize:"18px"}}> {availableBoothSlots} Available Shifts </h3>
               <div className={styles.registerButton}>
 
                 {props.boothAttendee ? (
                   <>
-                  <a onClick={removeBoothSignUp} style={{ cursor: 'pointer', fontSize : 16 }}>Remove</a>
+                  <a onClick={removeBoothSignUp} style={{ cursor: 'pointer', fontSize : 15 }}>Cancel Sign Up</a>
                   </>
                   ):( 
                   <>
@@ -175,7 +176,7 @@ export default function BoothPage(props) {
                   </>
                 )}
 
-            </div>
+              </div>
             </div>
             <div className={styles.scheduledMembers}>
               <h4 style={{textAlign: "center"}}>---Scheduled Members---</h4>

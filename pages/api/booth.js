@@ -40,8 +40,6 @@ export default withIronSessionApiRoute(
             state,
             notes)
 
-          console.log("new booth: ", newBooth)
-
           if(newBooth == null){
             req.session.destroy()  
             return res.status(401).json({error: "Unable to create new booth"})

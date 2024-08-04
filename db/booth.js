@@ -15,17 +15,6 @@ export async function createNewBooth(
   state,
   notes) {
 
-  console.log(groupId, 
-    locationName, 
-    date, 
-    time,
-    amPM, 
-    shifts,
-    address,
-    city,
-    state,
-    notes)
-
   if (!(
     groupId &&
     locationName && 
@@ -109,8 +98,7 @@ export async function getBoothById(boothId) {
 export async function getRegisteredAttendee(userId, boothId) {
 
   await dbConnect()
-
-  console.log("Get Registered Attendee TRIGGERED")
+  
   //Check for user, if none, return null, otherwise proceed to find drink by user.
  const attendeeList = await getBoothAttendees(boothId)
  if (!attendeeList) return null

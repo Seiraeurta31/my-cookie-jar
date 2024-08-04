@@ -65,10 +65,8 @@ export default function GroupPage(props) {
   const pageTitle = `${props.group.groupName}`
 
   const groupId = props.group.id
-  console.log("groupId: ", groupId)
 
   const userId = props.user._id
-  console.log("user: ", userId)
 
   async function leaveGroup(e) {
     e.preventDefault()

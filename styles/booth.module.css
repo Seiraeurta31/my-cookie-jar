@@ -67,7 +67,7 @@
 
 .shiftSignUp {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
 
@@ -76,20 +76,20 @@
 .scheduledMembers {
     display: flex;
     flex-direction: column;
-    text-align: left;
+    text-align: center;
 }
 
 .registerButton {
     display: flex;
-    font-size: 12px; 
     font-weight: 100;
     justify-content: center;
     align-items: center;
     background-color: #f37d8c;
     color: white;
     height: 30px;
-    width: 80px;
-    margin-left: 20px;
+    width: 110px;
+    margin-left: 10px;
+    margin-bottom: 30px;
     font-family: Kanvas File;
     border-radius: 10px; 
     border-width: 0px; 
@@ -113,7 +113,7 @@
     border-radius: 15px;
     border-color: #f8b1ba;
     border-style: solid;
-    padding: 25px;
+    padding: 15px;
 }
 
 .notesSection, .locationSection, .detailsSection {
