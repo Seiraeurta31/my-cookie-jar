@@ -90,6 +90,10 @@ export default function CreateGroup(props) {
         <main className={styles.main}>  
 
           <div className={styles.mainContainer}>
+
+            <p className={styles.instructions}>
+              Enter the name and unique passcode of the group you wish to join.
+            </p>
   
             <form
               onSubmit={handleCreateAccount}
@@ -108,7 +112,7 @@ export default function CreateGroup(props) {
               </div>
               
               <div className={styles.fieldContainer}>
-                <label htmlFor="groupCode">Group Code: </label>
+                <label htmlFor="groupCode">Passcode: </label>
                 <input
                   className={styles.inputBox}
                   type="text"
