@@ -14,7 +14,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
+    margin: 20px;
 
 }
 
@@ -35,6 +35,7 @@
     background-color: rgba(255, 255, 255, 0.7);
     padding: 20px;
     margin: 40px;
+    margin-top: 10px;
     border-radius: 30px;
     border-color: #077ea5;
     border-style: solid;
@@ -72,9 +73,9 @@
     border-width: 3px;
     border-style: solid;
     height: 110px;
-    width: 350px;
-    padding-right: 15px;
-    padding-left: 15px;
+    width: 300px;
+    padding-right: 10px;
+    padding-left: 10px;
     margin-bottom: 30px;
 
 }
@@ -82,6 +83,7 @@
 .boothInfo {
     display: flex;
     flex-direction: row;
+    max-width: 300px;
     justify-content: space-around;
 }
 
@@ -90,9 +92,9 @@
     display: flex;
     flex-direction: column;
     background-color: #077ea5;
-    height: 40px;
-    color: white;
-    width: 50px;
+    height: 30px;
+    color: #ffffff;
+    width: 40px;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
@@ -109,9 +111,11 @@
     display: flex;
     align-items: left;
     color: #077ea5;
+    justify-content: space-between;
     font-family: Kanvas File;
+    font-size: 19px;
     flex-direction: column;
-    padding: 15px;
+    padding: 5px;
     margin-right: 20px;
 }
 

@@ -11,6 +11,7 @@ import styles from "../../styles/boothList.module.css"
 
 
 
+
 export const getServerSideProps = withIronSessionSsr (
   async function getServerSideProps({ req, params }) {
 
@@ -73,7 +74,9 @@ export default function GroupPage(props) {
 
             {props.group.groupBooths.length ? (
               <>
-                {props.group.groupBooths.map((booth, i) => (
+                {props.group.groupBooths.map((booth, i) => ( 
+                  
+
                   <GroupBooths 
                     key={i}
                     groupId={props.group.id}
@@ -82,8 +85,10 @@ export default function GroupPage(props) {
                     date={booth.date} 
                     time={booth.time} 
                     amPM={booth.amPM}
-                    numShifts={booth.numShifts}> 
+                    numShifts={booth.numShifts}
+                    attendeeCount={[booth.attendingMembers]}>
                   </GroupBooths>
+
                 ))}
               </>
               ):( 
@@ -112,16 +117,16 @@ export default function GroupPage(props) {
 }
 
 
-function GroupBooths({groupId, boothId, locationName, date, time, amPM, numShifts}) {
+function GroupBooths({groupId, boothId, locationName, date, time, amPM, numShifts, attendees}) {
 
   return (
     <div>
       <Link href={`/booth?g=${groupId}&b=${boothId}`}>
       <div className={styles.boothContainer}>
 
-        <div>
-          <p className={styles.infoName}>{locationName}</p>
-        </div>
+    
+       <p className={styles.infoName}>{locationName}</p>
+        
 
         <div className={styles.boothInfo}>
           <div className={styles.locationInfo}>
@@ -130,9 +135,9 @@ function GroupBooths({groupId, boothId, locationName, date, time, amPM, numShift
           </div>
           <div className={styles.shiftInfo}>
             <div>
-              <p style={{color: "white"}}className={styles.numShift}>{numShifts}</p>
+              <p className={styles.numShift}>{numShifts}</p>
             </div> 
-            <p className={styles.infoItem}> Shifts <br></br> Available</p>
+            <p className={styles.infoItem}> Girls<br></br> Allowed </p>
               
           </div>
           

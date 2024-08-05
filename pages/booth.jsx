@@ -69,8 +69,6 @@ export default function BoothPage(props) {
 
   const availableBoothSlots = (props.booth.shifts - props.booth.attendingMembers.length)
 
-  console.log("REMAINING BOOTH SLOTS: ", availableBoothSlots)
-
   const groupId = props.groupId
   const userFirstName = props.user.firstName
 
@@ -149,9 +147,7 @@ export default function BoothPage(props) {
 
       <main className={styles.main}>
 
-        <div className={styles.button}>
-          <a onClick={deleteBooth} style={{ cursor: 'pointer', fontSize : 16 }}>Delete Booth</a> 
-        </div>
+        
 
         <div className={styles.mainContainer}>
 
@@ -163,7 +159,7 @@ export default function BoothPage(props) {
 
           <div className={styles.shiftSection }>
             <div className={styles.shiftSignUp}>
-              <h3 style={{fontSize:"18px"}}> {availableBoothSlots} Available Shifts </h3>
+              <h3 style={{fontSize:"18px"}}> {availableBoothSlots} Spots Remaining </h3>
               <div className={styles.registerButton}>
 
                 {props.boothAttendee ? (
@@ -228,6 +224,10 @@ export default function BoothPage(props) {
             <p className={styles.notesHeader}> Important Notes:</p>
             <p> {props.booth.notes}</p>
           </div>
+
+          <div className={styles.button}>
+            <a onClick={deleteBooth} style={{ cursor: 'pointer', fontSize : 16 }}>Delete Booth</a> 
+         </div>
             
         </div >   
 
