@@ -54,7 +54,7 @@ export default function CreateGroup(props) {
         groupName,
         groupCode,
         "confirm-code": confirmCode,
-        ...{ [e.target.name]: e.target.value.trim() },
+        ...{ [e.target.name]: e.target.value},
       });
     }
     async function handleCreateAccount(e) {

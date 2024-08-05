@@ -29,6 +29,17 @@ export const getServerSideProps = withIronSessionSsr (
 
     const group = await db.group.getGroupById(params.groupId)
     const groupConverted = JSON.parse(JSON.stringify(group))
+    
+    const activeMember = await db.group.getMemberByUserId(groupConverted.id, user._id)
+    if (!activeMember) {
+        return {
+          redirect: {
+            permanent: false,
+            destination: "/dashboard",
+          },
+          props:{},
+        };
+    }
 
 
     if(group !== null){

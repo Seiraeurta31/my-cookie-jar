@@ -3,6 +3,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import db from '../db'
 import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../config/session";
 import styles from "../styles/newBooth.module.css";
@@ -31,6 +32,18 @@ export const getServerSideProps = withIronSessionSsr (
             props:{},
           };
       }
+
+      const activeMember = await db.group.getMemberByUserId(groupId, user._id)
+      if (!activeMember) {
+          return {
+            redirect: {
+              permanent: false,
+              destination: "/dashboard",
+            },
+            props:{},
+          };
+      }
+    
   
       return { props };
     },

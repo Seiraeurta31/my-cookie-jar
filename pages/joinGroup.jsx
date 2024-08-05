@@ -50,7 +50,7 @@ export default function CreateGroup(props) {
       setForm({
         groupName,
         groupCode,
-        ...{ [e.target.name]: e.target.value.trim() },
+        ...{ [e.target.name]: e.target.value },
       });
     }
     async function handleCreateAccount(e) {
