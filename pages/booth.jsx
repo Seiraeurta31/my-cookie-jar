@@ -30,7 +30,7 @@ export const getServerSideProps = withIronSessionSsr (
 
     props.groupId = groupId
 
-
+    //Check if user is a member of the group
     const activeMember = await db.group.getMemberByUserId(groupId, user._id)
     if (!activeMember) {
         return {

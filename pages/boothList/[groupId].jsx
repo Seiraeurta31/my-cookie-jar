@@ -41,7 +41,8 @@ export const getServerSideProps = withIronSessionSsr (
         };
     }
 
-
+    console.log("GROUP: ", group)
+    
     if(group !== null){
         props.group = groupConverted
       }
@@ -97,7 +98,8 @@ export default function GroupPage(props) {
                     time={booth.time} 
                     amPM={booth.amPM}
                     numShifts={booth.numShifts}
-                    attendeeCount={[booth.attendingMembers]}>
+                    registered={booth.registered ? booth.registered.length : 0}>
+
                   </GroupBooths>
 
                 ))}
@@ -111,14 +113,7 @@ export default function GroupPage(props) {
               </>
             )}
           </div>
-        </div>
-
-
-        
-
-  
-        
-   
+        </div>  
       </main>
 
       <Footer/>
@@ -127,8 +122,8 @@ export default function GroupPage(props) {
    );         
 }
 
-
-function GroupBooths({groupId, boothId, locationName, date, time, amPM, numShifts, attendees}) {
+//TO DO: Add Registered count to group booths info model
+function GroupBooths({groupId, boothId, locationName, date, time, amPM, numShifts, registered}) {
 
   return (
     <div>
@@ -146,7 +141,7 @@ function GroupBooths({groupId, boothId, locationName, date, time, amPM, numShift
           </div>
           <div className={styles.shiftInfo}>
             <div>
-              <p className={styles.numShift}>{numShifts}</p>
+              <p className={styles.numShift}>{numShifts - registered}</p>
             </div> 
             <p className={styles.infoItem}> Girls<br></br> Allowed </p>
               
